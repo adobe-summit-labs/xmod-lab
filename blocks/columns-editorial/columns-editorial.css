@@ -1,33 +1,45 @@
+/* Columns Editorial - Numbered editorial items (01, 02, 03) */
 .columns-editorial > div {
   display: flex;
   flex-direction: column;
+  gap: var(--gap-md);
+  border-top: 1px solid var(--accent-color);
+  padding: 32px 0;
+}
+
+/* number column */
+.columns-editorial > div > div:first-child {
+  font-family: var(--heading-font-family);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--accent-color);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* content column */
+.columns-editorial > div > div:last-child h3 {
+  margin-bottom: var(--gap-md);
+}
+
+.columns-editorial > div > div:last-child p {
+  color: var(--text-color-muted);
+  line-height: 1.6;
 }
 
 .columns-editorial img {
   width: 100%;
 }
 
-.columns-editorial > div > div {
-  order: 1;
-}
-
-.columns-editorial > div > .columns-editorial-img-col {
-  order: 0;
-}
-
-.columns-editorial > div > .columns-editorial-img-col img {
-  display: block;
-}
-
 @media (width >= 900px) {
   .columns-editorial > div {
-    align-items: center;
-    flex-direction: unset;
-    gap: 24px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: var(--gap-xl);
+    align-items: start;
   }
 
-  .columns-editorial > div > div {
-    flex: 1;
-    order: unset;
+  .columns-editorial > div > div:first-child {
+    font-size: 56px;
   }
 }

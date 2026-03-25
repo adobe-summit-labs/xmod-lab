@@ -1,3 +1,4 @@
+/* Ticker - Scrolling activity tag marquee */
 .ticker-container .ticker-wrapper {
   max-width: unset;
   padding: 0;
@@ -6,20 +7,28 @@
 .ticker {
   overflow: hidden;
   white-space: nowrap;
-  padding: 12px 0;
+  border-top: 1px solid var(--accent-color);
+  border-bottom: 1px solid var(--accent-color);
+  padding: 16px 0;
 }
 
 .ticker .ticker-track {
   display: inline-flex;
-  animation: ticker-scroll 20s linear infinite;
+  gap: 32px;
+  animation: ticker-scroll 40s linear infinite;
 }
 
 .ticker .ticker-track span {
   flex-shrink: 0;
-  font-size: var(--body-font-size-m);
+  font-family: var(--heading-font-family);
+  font-size: 24px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--dark-color);
+}
+
+/* separator dots */
+.ticker .ticker-track span.ticker-separator {
+  color: var(--accent-color);
 }
 
 @keyframes ticker-scroll {
@@ -29,5 +38,11 @@
 
   100% {
     transform: translateX(-50%);
+  }
+}
+
+@media (width >= 900px) {
+  .ticker .ticker-track span {
+    font-size: 32px;
   }
 }

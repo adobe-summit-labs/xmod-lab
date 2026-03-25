@@ -1,33 +1,30 @@
+/* Columns Gallery - Photo grid with 3-col top row and full-width bottom image */
 .columns-gallery > div {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-lg);
 }
 
 .columns-gallery img {
   width: 100%;
-}
-
-.columns-gallery > div > div {
-  order: 1;
-}
-
-.columns-gallery > div > .columns-gallery-img-col {
-  order: 0;
-}
-
-.columns-gallery > div > .columns-gallery-img-col img {
+  height: 280px;
+  object-fit: cover;
+  border-radius: 20px;
   display: block;
+}
+
+/* wide/full image row */
+.columns-gallery > div:last-child {
+  grid-template-columns: 1fr;
+}
+
+.columns-gallery > div:last-child img {
+  height: 360px;
+  margin-top: var(--gap-lg);
 }
 
 @media (width >= 900px) {
   .columns-gallery > div {
-    align-items: center;
-    flex-direction: unset;
-    gap: 24px;
-  }
-
-  .columns-gallery > div > div {
-    flex: 1;
-    order: unset;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
