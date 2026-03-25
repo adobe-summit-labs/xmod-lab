@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://gabrielwalt.github.io/wknd/community.html",
+  "path": "wknd/community",
+  "timestamp": "2026-03-25T20:03:41.787Z",
+  "title": "Community — WKND Adventures",
+  "template": "editorial-section-page",
+  "blocks": [
+    "hero-full",
+    "columns-featured",
+    "columns-featured"
+  ]
+}

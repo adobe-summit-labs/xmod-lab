@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "https://gabrielwalt.github.io/wknd/about.html",
+  "path": "wknd/about",
+  "timestamp": "2026-03-25T20:06:44.592Z",
+  "title": "About — WKND Adventures",
+  "template": "informational-page",
+  "blocks": [
+    "hero-full",
+    "columns-about",
+    "cards-feature",
+    "tabs-team",
+    "cards-article"
+  ]
+}

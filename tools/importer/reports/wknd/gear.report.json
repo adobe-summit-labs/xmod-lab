@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "url": "https://gabrielwalt.github.io/wknd/gear.html",
+  "path": "wknd/gear",
+  "timestamp": "2026-03-25T19:55:30.024Z",
+  "title": "Gear — WKND Adventures",
+  "template": "hub-landing-page",
+  "blocks": [
+    "columns-featured",
+    "tabs-activity",
+    "columns-editorial",
+    "cards-article",
+    "cards-article",
+    "cards-article",
+    "cards-article",
+    "cards-article"
+  ]
+}

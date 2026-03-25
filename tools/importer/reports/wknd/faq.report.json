@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "url": "https://gabrielwalt.github.io/wknd/faq.html",
+  "path": "wknd/faq",
+  "timestamp": "2026-03-25T20:06:48.903Z",
+  "title": "Questions — WKND Adventures",
+  "template": "informational-page",
+  "blocks": [
+    "hero-full",
+    "columns-promo",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "cards-article"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://gabrielwalt.github.io/wknd/adventures.html",
+  "path": "wknd/adventures",
+  "timestamp": "2026-03-25T19:55:17.888Z",
+  "title": "Adventures — WKND Adventures",
+  "template": "hub-landing-page",
+  "blocks": [
+    "hero-full",
+    "columns-featured",
+    "tabs-activity",
+    "columns-editorial",
+    "cards-article",
+    "columns-promo"
+  ]
+}

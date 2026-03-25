@@ -1,0 +1,462 @@
+{
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://gabrielwalt.github.io/wknd/index.html"
+      ],
+      "description": "Homepage with hero, featured content, activity browser, stories gallery, FAQ, and onboarding sections",
+      "blocks": [
+        {
+          "name": "hero-full",
+          "instances": ["section.hero-section.hero-section--full"]
+        },
+        {
+          "name": "columns-featured",
+          "instances": [".featured-article"]
+        },
+        {
+          "name": "tabs-activity",
+          "instances": [".tab-container.tab-container--wide"]
+        },
+        {
+          "name": "ticker",
+          "instances": [".ticker-strip"]
+        },
+        {
+          "name": "accordion-faq",
+          "instances": [".faq-list"]
+        },
+        {
+          "name": "columns-editorial",
+          "instances": [".editorial-index"]
+        },
+        {
+          "name": "columns-gallery",
+          "instances": [".inverse-section .grid-layout.desktop-3-column"]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero",
+          "selector": "section.hero-section.hero-section--full",
+          "style": "dark",
+          "blocks": ["hero-full"],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Featured Article",
+          "selector": "section.section.secondary-section:has(.featured-article)",
+          "style": "secondary",
+          "blocks": ["columns-featured"],
+          "defaultContent": []
+        },
+        {
+          "id": "section-3",
+          "name": "Browse by Activity",
+          "selector": "section.section:has(.tab-container)",
+          "style": null,
+          "blocks": ["tabs-activity"],
+          "defaultContent": [".section-heading h2"]
+        },
+        {
+          "id": "section-4",
+          "name": "Ticker Strip",
+          "selector": ".ticker-strip",
+          "style": "dark",
+          "blocks": ["ticker"],
+          "defaultContent": []
+        },
+        {
+          "id": "section-5",
+          "name": "Start Here",
+          "selector": "section.section.inverse-section:has(.hero-eyebrow)",
+          "style": "dark",
+          "blocks": [],
+          "defaultContent": [".hero-eyebrow", "h2.h2-heading", "p.paragraph-lg", ".button-group"]
+        },
+        {
+          "id": "section-6",
+          "name": "Quick Answers",
+          "selector": "section.section:has(.faq-list)",
+          "style": null,
+          "blocks": ["accordion-faq"],
+          "defaultContent": [".section-heading h2", ".section-heading .text-button"]
+        },
+        {
+          "id": "section-7",
+          "name": "How We Work",
+          "selector": "section.section.secondary-section:has(.editorial-index)",
+          "style": "secondary",
+          "blocks": ["columns-editorial"],
+          "defaultContent": [".section-heading h2"]
+        },
+        {
+          "id": "section-8",
+          "name": "In the Field",
+          "selector": "section.section.inverse-section:has(.gallery-img)",
+          "style": "dark",
+          "blocks": ["columns-gallery"],
+          "defaultContent": [".section-heading h2", ".section-heading .text-button", ".utility-margin-top-lg .gallery-img--wide"]
+        },
+        {
+          "id": "section-9",
+          "name": "CTA Banner",
+          "selector": "section.section.accent-section",
+          "style": "accent",
+          "blocks": [],
+          "defaultContent": ["h2.h2-heading", "p.paragraph-xl", ".button-group"]
+        }
+      ]
+    },
+    {
+      "name": "hub-landing-page",
+      "urls": [
+        "https://gabrielwalt.github.io/wknd/adventures.html",
+        "https://gabrielwalt.github.io/wknd/expeditions.html",
+        "https://gabrielwalt.github.io/wknd/destinations.html",
+        "https://gabrielwalt.github.io/wknd/gear.html"
+      ],
+      "description": "Category hub page with hero, featured spotlight, category cards/grid, educational content, and cross-promotion links",
+      "blocks": [
+        {
+          "name": "hero-full",
+          "instances": ["section.hero-section.hero-section--full"]
+        },
+        {
+          "name": "columns-featured",
+          "instances": [".featured-article"]
+        },
+        {
+          "name": "tabs-activity",
+          "instances": [".tab-container.tab-container--wide"]
+        },
+        {
+          "name": "columns-editorial",
+          "instances": [".editorial-index"]
+        },
+        {
+          "name": "cards-article",
+          "instances": [".grid-layout.desktop-3-column.grid-gap-lg:has(.article-card)"]
+        },
+        {
+          "name": "columns-promo",
+          "instances": [".grid-layout.grid-layout--2col"]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero",
+          "selector": "section.hero-section.hero-section--full",
+          "style": "dark",
+          "blocks": ["hero-full"],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Accent Banner",
+          "selector": "section.section.accent-section",
+          "style": "accent",
+          "blocks": [],
+          "defaultContent": ["h2.h2-heading", "p.paragraph-xl"]
+        },
+        {
+          "id": "section-3",
+          "name": "Featured Article",
+          "selector": "section.section.secondary-section:has(.featured-article)",
+          "style": "secondary",
+          "blocks": ["columns-featured"],
+          "defaultContent": []
+        },
+        {
+          "id": "section-4",
+          "name": "Browse by Activity",
+          "selector": "section.section:has(.tab-container)",
+          "style": null,
+          "blocks": ["tabs-activity"],
+          "defaultContent": ["h2.section-heading"]
+        },
+        {
+          "id": "section-5",
+          "name": "Choosing Your Adventure",
+          "selector": "section.section.secondary-section:has(.container--narrow):not(:has(.featured-article)):not(:has(.editorial-index))",
+          "style": "secondary",
+          "blocks": [],
+          "defaultContent": ["h2.h2-heading", "p.paragraph-lg"]
+        },
+        {
+          "id": "section-6",
+          "name": "Recent Reports",
+          "selector": "section.section:has(.grid-gap-lg > .article-card)",
+          "style": null,
+          "blocks": ["cards-article"],
+          "defaultContent": ["h2.section-heading"]
+        },
+        {
+          "id": "section-7",
+          "name": "Adventure by Skill Level",
+          "selector": "section.section.secondary-section:has(.editorial-index)",
+          "style": "secondary",
+          "blocks": ["columns-editorial", "columns-promo"],
+          "defaultContent": ["h2.section-heading"]
+        },
+        {
+          "id": "section-8",
+          "name": "Gear CTA",
+          "selector": "section.section.inverse-section",
+          "style": "dark",
+          "blocks": [],
+          "defaultContent": ["h2.h2-heading", "p.paragraph-lg", "a.button"]
+        }
+      ]
+    },
+    {
+      "name": "editorial-section-page",
+      "urls": [
+        "https://gabrielwalt.github.io/wknd/field-notes",
+        "https://gabrielwalt.github.io/wknd/community.html",
+        "https://gabrielwalt.github.io/wknd/sustainability.html"
+      ],
+      "description": "Editorial section page with hero, featured story, editorial philosophy, and engagement CTAs",
+      "blocks": [
+        {
+          "name": "hero-full",
+          "instances": ["section.hero-section"]
+        },
+        {
+          "name": "columns-featured",
+          "instances": [".featured-article"]
+        },
+        {
+          "name": "columns-promo",
+          "instances": [".grid-layout.grid-layout--2col"]
+        },
+        {
+          "name": "tabs-activity",
+          "instances": [".tab-container.tab-container--wide"]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero",
+          "selector": "section.hero-section",
+          "style": "dark",
+          "blocks": ["hero-full"],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Statement",
+          "selector": "section.section.inverse-section:first-of-type",
+          "style": "dark",
+          "blocks": [],
+          "defaultContent": ["h2.h2-heading", "p.paragraph-xl"]
+        },
+        {
+          "id": "section-3",
+          "name": "Featured Article",
+          "selector": "section.section.secondary-section:has(.featured-article)",
+          "style": "secondary",
+          "blocks": ["columns-featured"],
+          "defaultContent": []
+        },
+        {
+          "id": "section-4",
+          "name": "Editorial Content",
+          "selector": "section.section.inverse-section:has(.container--narrow)",
+          "style": "dark",
+          "blocks": [],
+          "defaultContent": ["h2.h2-heading", "p.paragraph-lg"]
+        },
+        {
+          "id": "section-5",
+          "name": "Promo Cards",
+          "selector": "section.section.secondary-section:has(.grid-layout--2col)",
+          "style": "secondary",
+          "blocks": ["columns-promo"],
+          "defaultContent": []
+        },
+        {
+          "id": "section-6",
+          "name": "Essential Reading",
+          "selector": "section.section:has(.tab-container)",
+          "style": null,
+          "blocks": ["tabs-activity"],
+          "defaultContent": ["h2.h2-heading"]
+        },
+        {
+          "id": "section-7",
+          "name": "CTA",
+          "selector": "section.section.inverse-section:last-of-type",
+          "style": "dark",
+          "blocks": [],
+          "defaultContent": ["h2.h2-heading", "p.paragraph-lg", "a.button"]
+        }
+      ]
+    },
+    {
+      "name": "informational-page",
+      "urls": [
+        "https://gabrielwalt.github.io/wknd/about.html",
+        "https://gabrielwalt.github.io/wknd/faq.html"
+      ],
+      "description": "Informational page with hero, structured content such as team profiles and FAQ categories",
+      "blocks": [
+        {
+          "name": "hero-full",
+          "instances": ["section.hero-section"]
+        },
+        {
+          "name": "columns-about",
+          "instances": [".grid-layout.grid-gap-xxl.tablet-1-column"]
+        },
+        {
+          "name": "cards-feature",
+          "instances": [".inverse-section .grid-layout.desktop-3-column.grid-gap-lg:has(.feature-card)"]
+        },
+        {
+          "name": "tabs-team",
+          "instances": ["section.section:has(.tab-menu)"]
+        },
+        {
+          "name": "columns-promo",
+          "instances": [".accent-section .grid-layout.tablet-1-column:has(.card)"]
+        },
+        {
+          "name": "accordion-faq",
+          "instances": [".faq-list"]
+        },
+        {
+          "name": "cards-article",
+          "instances": [".grid-layout.desktop-3-column.grid-gap-lg:has(.article-card)"]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero",
+          "selector": "section.hero-section",
+          "style": "dark",
+          "blocks": ["hero-full"],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Statement",
+          "selector": "section.section.accent-section:first-of-type",
+          "style": "accent",
+          "blocks": ["columns-promo"],
+          "defaultContent": ["h2.h2-heading", "p.paragraph-xl"]
+        },
+        {
+          "id": "section-3",
+          "name": "Content Body",
+          "selector": "section.section:not(.accent-section):not(.inverse-section):not(.secondary-section)",
+          "style": null,
+          "blocks": ["columns-about", "tabs-team", "accordion-faq", "cards-article"],
+          "defaultContent": ["h2.h2-heading", "p.paragraph-lg"]
+        },
+        {
+          "id": "section-4",
+          "name": "Dark Content",
+          "selector": "section.section.inverse-section",
+          "style": "dark",
+          "blocks": ["cards-feature"],
+          "defaultContent": ["h2.h2-heading", "p.paragraph-lg"]
+        },
+        {
+          "id": "section-5",
+          "name": "Secondary Content",
+          "selector": "section.section.secondary-section",
+          "style": "secondary",
+          "blocks": ["accordion-faq"],
+          "defaultContent": ["h2.h2-heading", "p.paragraph-lg"]
+        },
+        {
+          "id": "section-6",
+          "name": "CTA",
+          "selector": ["section.section.accent-section:last-of-type", "section.section.inverse-section:last-of-type"],
+          "style": "accent",
+          "blocks": [],
+          "defaultContent": ["h2.h2-heading", "p.paragraph-lg", ".button-group"]
+        }
+      ]
+    },
+    {
+      "name": "blog-article",
+      "urls": [
+        "https://gabrielwalt.github.io/wknd/blog/patagonia-trek.html",
+        "https://gabrielwalt.github.io/wknd/blog/kayaking-norway.html",
+        "https://gabrielwalt.github.io/wknd/blog/alpine-cycling.html",
+        "https://gabrielwalt.github.io/wknd/blog/yosemite-rock-climbing.html",
+        "https://gabrielwalt.github.io/wknd/blog/mountain-photography.html",
+        "https://gabrielwalt.github.io/wknd/blog/ultralight-backpacking.html"
+      ],
+      "description": "Long-form blog article with hero image, metadata tags, day-by-day narrative, inline images, author attribution, and related links",
+      "blocks": [
+        {
+          "name": "hero-article",
+          "instances": ["section.hero-section"]
+        },
+        {
+          "name": "columns-sidebar",
+          "instances": [".secondary-section .grid-layout.desktop-3-column.grid-align-center"]
+        },
+        {
+          "name": "columns-gallery",
+          "instances": [".inverse-section .grid-layout.desktop-3-column"]
+        },
+        {
+          "name": "cards-article",
+          "instances": ["section.section:last-of-type:not(.inverse-section) .grid-layout.desktop-3-column"]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Article Hero",
+          "selector": "section.hero-section",
+          "style": "dark",
+          "blocks": ["hero-article"],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Article Body",
+          "selector": "section.section.blog-article-section",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [".blog-content.blog-content-body"]
+        },
+        {
+          "id": "section-3",
+          "name": "Sidebar Summary",
+          "selector": "section.section.secondary-section",
+          "style": "secondary",
+          "blocks": ["columns-sidebar"],
+          "defaultContent": []
+        },
+        {
+          "id": "section-4",
+          "name": "In the Field Gallery",
+          "selector": "section.section.inverse-section",
+          "style": "dark",
+          "blocks": ["columns-gallery"],
+          "defaultContent": [".section-heading h2", ".section-heading .text-button", ".utility-margin-top-lg .gallery-img--wide"]
+        },
+        {
+          "id": "section-5",
+          "name": "More Stories",
+          "selector": "section.section:last-of-type:not(.inverse-section)",
+          "style": null,
+          "blocks": ["cards-article"],
+          "defaultContent": ["h2.section-heading"]
+        }
+      ]
+    }
+  ]
+}
