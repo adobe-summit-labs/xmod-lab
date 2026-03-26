@@ -46,4 +46,30 @@ export default async function decorate(block) {
   });
 
   block.prepend(tablist);
+
+  // Restructure card-like content in panels into individual card divs
+  block.querySelectorAll('.tabs-panel').forEach((panel) => {
+    const wrapper = panel.querySelector(':scope > div');
+    if (!wrapper) return;
+    // Only restructure if content looks like cards (images + headings)
+    if (!wrapper.querySelector('img') || !wrapper.querySelector('h3, h4, h5')) return;
+
+    const children = [...wrapper.children];
+    const cards = [];
+    let card = null;
+
+    children.forEach((child) => {
+      if (child.querySelector('img')) {
+        card = document.createElement('div');
+        card.className = 'tabs-card';
+        cards.push(card);
+      }
+      if (card) card.append(child);
+    });
+
+    if (cards.length > 1) {
+      wrapper.remove();
+      cards.forEach((c) => panel.append(c));
+    }
+  });
 }
