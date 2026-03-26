@@ -1,17 +1,20 @@
 /* stylelint-disable no-descending-specificity */
 
 /* ----------------------------------------------------------------
-   Footer — dark inverse with amber top border
+   Footer — dark inverse with accent top border
    ---------------------------------------------------------------- */
 footer {
   background-color: var(--dark-color);
   color: var(--background-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
   border-top: 4px solid var(--accent-color);
 }
 
 footer .footer > div {
   margin: auto;
   max-width: 1200px;
+  box-sizing: border-box;
 }
 
 footer p {
@@ -25,6 +28,18 @@ footer a:any-link {
 
 footer a:hover {
   color: var(--background-color);
+}
+
+/* Reset section styling inside footer (boilerplate fragment structure) */
+footer .section {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+footer .section > div {
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* ----------------------------------------------------------------
@@ -105,7 +120,7 @@ footer .footer-col:first-child p:last-child {
 }
 
 /* ----------------------------------------------------------------
-   Bottom bar
+   Bottom bar — copyright section
    ---------------------------------------------------------------- */
 footer .footer-bottom {
   padding: 24px;
@@ -125,10 +140,32 @@ footer .footer-bottom p {
   color: #999;
 }
 
+/* Bottom copyright section — boilerplate fragment structure (second section) */
+footer .section:last-child > div {
+  border-top: 1px solid #3d4f45;
+  padding: 32px 0 0;
+  margin-top: 48px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+footer .section:last-child p {
+  color: #999;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  margin: 0;
+}
+
 /* ----------------------------------------------------------------
    Desktop (≥ 900px)
    ---------------------------------------------------------------- */
 @media (width >= 900px) {
+  footer .footer > div {
+    padding: 64px 32px;
+  }
+
   footer .footer-top {
     padding: 64px 32px 48px;
     grid-template-columns: 1.2fr 1fr 1fr 1fr;

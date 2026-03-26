@@ -1,0 +1,199 @@
+/* Featured Article Block */
+.featured-article {
+  --fa-bg: var(--light-color);
+  --fa-text: var(--dark-color);
+  --fa-muted: var(--text-color-muted);
+  --fa-accent: var(--accent-color);
+  --fa-gap: var(--gap-2xl);
+  --fa-img-radius: var(--card-border-radius);
+  --fa-avatar-size: 56px;
+}
+
+/* Section-level background */
+.featured-article-container {
+  background: var(--light-color);
+  margin: 0 !important;
+  padding: var(--section-padding) 0 !important;
+}
+
+/* Row layout */
+.featured-article > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+}
+
+/* Image cell (cell 1) */
+.featured-article > div > div:nth-child(1) {
+  flex: 0 0 auto;
+}
+
+.featured-article > div > div:nth-child(1) picture {
+  display: block;
+  border-radius: var(--fa-img-radius);
+  overflow: hidden;
+}
+
+.featured-article > div > div:nth-child(1) img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Text cell (cell 2) - tag, heading, description */
+.featured-article > div > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tag line — orange pill badge */
+.featured-article > div > div:nth-child(2) > p:first-child {
+  display: inline-flex;
+  align-self: flex-start;
+  font-size: var(--tag-font-size);
+  font-family: var(--heading-font-family);
+  font-weight: 600;
+  letter-spacing: var(--tag-letter-spacing);
+  text-transform: none;
+  margin: 0 0 12px;
+  color: #fff;
+  background: var(--fa-accent);
+  padding: var(--tag-padding);
+  border-radius: 9999px;
+}
+
+/* Heading — natural case per source */
+.featured-article > div > div:nth-child(2) h2 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: normal;
+  text-transform: none;
+  margin: 0 0 12px;
+  color: var(--fa-text);
+}
+
+/* Description */
+.featured-article > div > div:nth-child(2) > p:nth-child(3) {
+  font-size: var(--body-font-size-m);
+  font-family: var(--body-font-family);
+  color: var(--fa-muted);
+  line-height: 1.6;
+  margin: 0 0 var(--gap-md);
+}
+
+/* Hide original avatar and byline cells (reassembled by JS) */
+.featured-article > div > div:nth-child(3),
+.featured-article > div > div:nth-child(4) {
+  display: none;
+}
+
+/* Footer area (assembled by JS) */
+.featured-article .fa-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+/* Byline row */
+.featured-article .fa-byline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.featured-article .fa-byline picture {
+  display: block;
+  width: var(--fa-avatar-size);
+  height: var(--fa-avatar-size);
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.featured-article .fa-byline img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.featured-article .fa-byline-info p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.featured-article .fa-byline-info p:first-child {
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  font-family: var(--body-font-family);
+  color: var(--fa-text);
+}
+
+.featured-article .fa-byline-info p:last-child {
+  font-size: var(--body-font-size-s);
+  color: var(--fa-muted);
+  font-family: var(--body-font-family);
+}
+
+/* CTA button — override global button reset, match source exactly */
+main .featured-article .fa-cta a.button:any-link,
+main .featured-article .fa-cta a:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fa-text);
+  color: #fff;
+  border: 2px solid var(--fa-text);
+  border-radius: var(--button-border-radius);
+  padding: var(--button-padding);
+  font-family: var(--button-font-family);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  text-transform: none;
+  letter-spacing: var(--button-letter-spacing);
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 3px 3px 0 0 var(--fa-accent);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+
+main .featured-article .fa-cta a.button:any-link:hover,
+main .featured-article .fa-cta a:any-link:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 0 var(--fa-accent);
+  text-decoration: none;
+}
+
+/* Desktop: 2-column grid layout */
+@media (width >= 900px) {
+  .featured-article > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--fa-gap);
+    align-items: stretch;
+  }
+
+  .featured-article > div > div:nth-child(1) {
+    min-width: 0;
+  }
+
+  .featured-article > div > div:nth-child(1) picture {
+    height: 100%;
+  }
+
+  .featured-article > div > div:nth-child(1) img {
+    height: 100%;
+    min-height: 300px;
+  }
+
+  .featured-article > div > div:nth-child(2) {
+    min-width: 0;
+    justify-content: flex-start;
+  }
+}

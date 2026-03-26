@@ -1,4 +1,4 @@
-/* Hero block — base (full-bleed overlay) + variant (hero-article) */
+/* Hero block — base (full-bleed overlay) + variants (hero-article, hero-centered) */
 
 /* Shared: full-bleed container */
 .hero-container .hero-wrapper {
@@ -7,13 +7,18 @@
 }
 
 /* ===== Base hero (full-bleed overlay with gradient) ===== */
+
+/* Set hero button shadow color — black on hero (over image) */
 .hero {
+  --btn-shadow: var(--dark-color);
+
   position: relative;
   display: flex;
   align-items: flex-end;
   min-height: min(55vh, 400px);
   padding: 48px 24px;
   overflow: hidden;
+  color: var(--text-on-dark);
 }
 
 .hero picture {
@@ -58,6 +63,12 @@
   margin-bottom: 24px;
 }
 
+.hero h1 {
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
 .hero p {
   color: var(--text-on-dark);
   font-size: 18px;
@@ -71,8 +82,19 @@
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 1.4px;
+  text-transform: uppercase;
   color: var(--accent-color);
   margin-bottom: var(--gap-md);
+}
+
+/* lead paragraph — after h1 */
+.hero > div > h1 + p {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgb(255 255 255 / 85%);
+  max-width: 608px;
+  margin-bottom: 24px;
 }
 
 /* button group */
@@ -81,31 +103,72 @@
   margin-right: var(--gap-md);
 }
 
-/* accent button on hero — black offset shadow */
-.hero a.button.accent {
-  box-shadow: 3px 3px 0 var(--dark-color);
+.hero .button-wrapper:last-child {
+  margin-right: 0;
 }
 
-.hero a.button.accent:hover {
-  transform: translateY(-2px);
-  box-shadow: 5px 5px 0 var(--dark-color);
+/*
+ * Hero buttons — must override the global reset (main a.button:any-link)
+ * which strips padding, border-radius, box-shadow, font-size, etc.
+ * Specificity of reset: 0,2,1 — we use main .hero a.button:any-link (0,3,1)
+ */
+main .hero a.button:any-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--button-border-radius);
+  padding: var(--button-padding);
+  font-family: var(--button-font-family);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  text-transform: uppercase;
+  letter-spacing: var(--button-letter-spacing);
+  line-height: 1.25;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 0 var(--btn-shadow, var(--dark-color));
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.hero a.button.accent:active {
+main .hero a.button:any-link:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  text-decoration: none;
+}
+
+main .hero a.button:any-link:active {
   transform: translateY(0);
-  box-shadow: 0 0 0 var(--dark-color);
+  box-shadow: 0 0 0 var(--btn-shadow, var(--dark-color));
 }
 
-/* ghost button on hero — white outline */
-.hero a.button.secondary {
-  border-color: var(--background-color);
+/* accent / primary button on hero — accent bg, dark text */
+.hero a.button.accent,
+main .hero a.button.primary:any-link {
+  background: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  color: var(--dark-color);
+}
+
+main .hero a.button.primary:any-link:hover,
+.hero a.button.accent:hover {
+  filter: brightness(0.9);
+}
+
+/* ghost / secondary button on hero — white outline */
+.hero a.button.secondary,
+main .hero a.button.secondary:any-link {
+  background: transparent;
+  border: 2px solid rgb(255 255 255 / 50%);
   color: var(--background-color);
   box-shadow: none;
 }
 
-.hero a.button.secondary:hover {
+.hero a.button.secondary:hover,
+main .hero a.button.secondary:any-link:hover {
+  border-color: var(--background-color);
   background-color: var(--accent-color);
-  border-color: var(--accent-color);
   color: var(--dark-color);
 }
 
@@ -151,6 +214,7 @@
   font-size: inherit;
   font-weight: inherit;
   letter-spacing: inherit;
+  text-transform: none;
   color: var(--text-on-dark);
   margin-bottom: var(--gap-xl);
 }

@@ -1,0 +1,109 @@
+.footer-links-wrapper {
+  padding: 0 !important;
+}
+
+.footer-links {
+  --footer-text: rgb(153, 153, 153);
+  --footer-heading: rgb(153, 153, 153);
+  --footer-logo-text: #fff;
+  --footer-gap: var(--gap-xl);
+}
+
+/* Grid container created by JS */
+.footer-links .footer-links-grid {
+  display: grid;
+  gap: var(--footer-gap);
+}
+
+/* Logo row: icon + text side by side */
+.footer-links .footer-links-grid > div:first-child p:first-child {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+  color: var(--footer-logo-text);
+  font-family: var(--heading-font-family);
+  font-size: var(--tag-font-size);
+  font-weight: 700;
+  letter-spacing: var(--tag-letter-spacing);
+  line-height: 1.2;
+  margin: 0 0 var(--gap-md);
+}
+
+.footer-links .footer-links-grid > div:first-child p:first-child .icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.footer-links .footer-links-grid > div:first-child p:first-child .icon img,
+.footer-links .footer-links-grid > div:first-child p:first-child .icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* Tagline paragraph (second p in first column) */
+.footer-links .footer-links-grid > div:first-child p + p {
+  color: var(--footer-text);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  line-height: 1.6;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Column headings use Syncopate */
+.footer-links h4 {
+  font-family: var(--heading-font-family);
+  color: var(--footer-heading);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  line-height: 1.1;
+  margin: 0 0 var(--gap-md);
+}
+
+.footer-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links li {
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links a {
+  display: block;
+  color: var(--footer-text);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  text-decoration: none;
+  line-height: 1.6;
+  padding: var(--gap-sm) 0;
+}
+
+.footer-links a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer-links p {
+  color: var(--footer-text);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (width >= 600px) {
+  .footer-links .footer-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .footer-links .footer-links-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

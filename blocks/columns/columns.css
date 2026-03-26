@@ -1,6 +1,6 @@
 /* stylelint-disable no-descending-specificity -- consolidated variant file */
 
-/* Columns block — base + variants (about, editorial, featured, promo, sidebar) */
+/* Columns block — base + variants (about, numbered, featured, promo, sidebar) */
 
 /* ===== Base columns ===== */
 .columns > div {

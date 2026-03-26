@@ -1,14 +1,40 @@
 /* stylelint-disable no-descending-specificity -- consolidated variant file */
 
-/* Tabs block — base (activity) + variant (tabs-team) */
+/* Tabs block — base (activity) + variant (tabs-team)
+ * Merged: wknd-import tabs structure + boilerplate tabbed-cards visual polish
+ * Class names match wknd-import JS expectations.
+ */
 
-/* ===== Base tabs (activity browser) ===== */
+/* --- Local design tokens (from boilerplate, mapped to wknd-import tokens) --- */
+.tabs {
+  --tabs-accent: var(--accent-color, rgb(232, 101, 26));
+  --tabs-text: var(--dark-color, rgb(15, 26, 20));
+  --tabs-muted: var(--text-color-muted, rgb(122, 138, 128));
+  --tabs-inactive: var(--border-color, rgb(200, 194, 184));
+  --tabs-card-radius: var(--card-border-radius, 20px);
+  --tabs-gap: var(--gap-lg, 16px);
+}
+
+/* ===== Section heading above the block (boilerplate refinement) ===== */
+.section.tabs-container > .default-content-wrapper {
+  margin-bottom: 32px;
+}
+
+.section.tabs-container > .default-content-wrapper h2 {
+  margin: 0 0 12px;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl, 40px);
+  font-weight: 700;
+  color: var(--tabs-text);
+}
+
+/* ===== Tab navigation ===== */
 .tabs .tabs-list {
   display: flex;
-  gap: var(--gap-lg);
+  gap: 0;
   max-width: 100%;
   overflow-x: auto;
-  border-top: 2px solid var(--dark-color);
+  border-top: 2px solid var(--tabs-text);
   padding-top: 12px;
   margin-bottom: var(--gap-lg);
 }
@@ -19,56 +45,63 @@
   border: none;
   border-bottom: 4px solid transparent;
   border-radius: 0;
-  padding: 8px 4px;
+  padding: 8px 32px 8px 0;
   background: none;
   font-family: var(--heading-font-family);
   font-size: 16px;
   font-weight: 700;
-  color: var(--border-color);
+  color: var(--tabs-inactive);
   cursor: pointer;
-  transition: color var(--transition-fast), border-color var(--transition-fast);
-  line-height: 1.2;
+  letter-spacing: -0.2px;
+  line-height: 1.1;
   white-space: nowrap;
   box-shadow: none;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .tabs .tabs-list button p {
   margin: 0;
 }
 
+/* Active tab: dark text + accent underline */
 .tabs .tabs-list button[aria-selected='true'] {
-  color: var(--dark-color);
-  border-bottom-color: var(--accent-color);
+  color: var(--tabs-text);
+  border-bottom-color: var(--tabs-accent);
 }
 
-/* inactive hover: Gray-500, not black */
+/* Inactive hover: muted, not black (boilerplate refinement) */
 .tabs .tabs-list button:hover {
-  color: var(--text-color-muted);
+  color: var(--tabs-muted);
 }
 
-/* active tab stays black on hover */
+/* Active tab stays dark on hover */
 .tabs .tabs-list button[aria-selected='true']:hover {
-  color: var(--dark-color);
+  color: var(--tabs-text);
 }
 
+/* ===== Tab panes ===== */
 .tabs .tabs-panel {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--gap-lg);
+  gap: var(--tabs-gap);
   padding: 0;
   border: none;
   overflow: visible;
+  margin-top: 48px;
 }
 
 .tabs .tabs-panel[aria-hidden='true'] {
   display: none;
 }
 
-/* article cards inside tabs — same hover pattern as cards-article */
+/* ===== Article cards inside tabs ===== */
 .tabs .tabs-panel > div {
+  display: block;
   border: 1px solid var(--border-color-light);
-  border-radius: var(--card-border-radius);
+  border-radius: var(--tabs-card-radius);
   overflow: hidden;
+  text-decoration: none;
+  color: var(--tabs-text);
   background: var(--background-color);
   transition: var(--card-hover-transition);
 }
@@ -77,9 +110,10 @@
   background-color: var(--cream-color);
   border-color: var(--border-color);
   box-shadow: var(--card-hover-shadow);
+  text-decoration: none;
 }
 
-/* card image — handle both <picture> and <p><a><img> structures */
+/* Card image — handle both <picture> and <p><a><img> structures */
 .tabs .tabs-panel > div > p:first-child {
   margin: 0;
   line-height: 0;
@@ -100,58 +134,66 @@
   display: block;
 }
 
-/* card body — content below image */
+/* Card body — content below image */
 .tabs .tabs-panel > div > p:nth-child(2),
 .tabs .tabs-panel > div > h4,
 .tabs .tabs-panel > div > p:nth-child(n+3) {
   padding: 0 16px;
 }
 
-/* tag pill — second paragraph (after image) */
+/* Tag pill — second paragraph (after image) */
 .tabs .tabs-panel > div > p:nth-child(2) {
   display: inline-block;
   margin: 16px 16px 8px;
   padding: 0;
   font-family: var(--heading-font-family);
-  font-size: var(--tag-font-size);
+  font-size: var(--tag-font-size, 12px);
   font-weight: 600;
-  letter-spacing: var(--tag-letter-spacing);
-  background-color: var(--accent-color);
+  letter-spacing: var(--tag-letter-spacing, 0.6px);
+  background-color: var(--tabs-accent);
   color: var(--background-color);
-  border-radius: var(--button-border-radius);
+  border-radius: var(--button-border-radius, 9999px);
+  line-height: 1.6;
 }
 
 .tabs .tabs-panel > div > p:nth-child(2) a {
   display: block;
-  padding: var(--tag-padding);
+  padding: var(--tag-padding, 4px 12px);
   color: var(--background-color);
   text-decoration: none;
 }
 
-/* card title */
+/* Card title */
 .tabs .tabs-panel > div > h4 {
   margin: 4px 16px 8px;
   padding: 0;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  line-height: 1.1;
 }
 
 .tabs .tabs-panel > div > h4 a {
-  color: var(--dark-color);
+  color: var(--tabs-text);
   text-decoration: none;
 }
 
-/* card description */
+/* Card description */
 .tabs .tabs-panel > div > p:last-child {
   margin: 0 16px 16px;
   padding: 0;
-  color: var(--text-color-muted);
+  color: var(--tabs-muted);
   font-size: 14px;
+  line-height: 1.3;
 }
 
 .tabs .tabs-panel > div > p:last-child a {
-  color: var(--text-color-muted);
+  color: var(--tabs-muted);
   text-decoration: none;
 }
 
+/* ===== Responsive: tab buttons + card grid ===== */
 @media (width >= 600px) {
   .tabs .tabs-list button {
     font-size: 18px;
@@ -180,6 +222,7 @@
 /* panel — override grid for profile layout */
 .tabs.tabs-team .tabs-panel {
   display: block;
+  margin-top: 0;
 }
 
 .tabs.tabs-team .tabs-panel[aria-hidden='true'] {
@@ -188,7 +231,7 @@
 
 /* bio and role paragraphs */
 .tabs.tabs-team .tabs-panel p {
-  color: var(--text-color-muted);
+  color: var(--tabs-muted);
   font-size: 18px;
   line-height: 1.6;
 }
@@ -223,7 +266,7 @@
   width: 128px;
   height: 128px;
   border-radius: 50%;
-  border: 3px solid var(--accent-color);
+  border: 3px solid var(--tabs-accent);
   object-fit: cover;
 }
 
@@ -235,7 +278,7 @@
 /* profile role */
 .tabs.tabs-team .tabs-panel em {
   font-style: normal;
-  color: var(--text-color-muted);
+  color: var(--tabs-muted);
   font-size: 14px;
 }
 

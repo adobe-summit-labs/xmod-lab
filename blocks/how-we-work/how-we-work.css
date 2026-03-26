@@ -1,0 +1,69 @@
+/* how-we-work block */
+
+/* Section-level overrides — restore top padding even when first section */
+main > .section.how-we-work-container {
+  padding: var(--section-padding) 0;
+}
+
+/* Both wrappers in this section share the narrow width */
+.how-we-work-container .default-content-wrapper,
+.how-we-work-container .how-we-work-wrapper {
+  max-width: var(--container-narrow-max-width);
+  margin: 0 auto;
+  padding: var(--container-padding);
+}
+
+/* Heading above the block */
+.how-we-work-container .default-content-wrapper h2 {
+  margin-bottom: var(--gap-xl);
+  letter-spacing: normal;
+}
+
+/* Each step row */
+.how-we-work > div {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--gap-2xl);
+  align-items: start;
+  padding: var(--gap-xl) 0;
+  border-top: 1px solid var(--accent-color);
+}
+
+.how-we-work > div:last-child {
+  border-bottom: 1px solid var(--accent-color);
+}
+
+/* Number cell */
+.how-we-work > div > div:first-child p {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: var(--accent-color);
+  margin: 0;
+}
+
+/* Step heading */
+.how-we-work > div > div:last-child h3 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: normal;
+  margin: 0 0 12px;
+  color: var(--dark-color);
+}
+
+/* Step description */
+.how-we-work > div > div:last-child p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+  color: var(--text-color-muted);
+  margin: 0 0 var(--gap-md);
+}
+
+.how-we-work > div > div:last-child p:last-child {
+  margin-bottom: 0;
+}
