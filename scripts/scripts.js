@@ -157,6 +157,119 @@ async function loadEager(doc) {
 }
 
 /**
+ * Post-decoration: fix button variants and group adjacent buttons.
+ * Runs after all sections/blocks are loaded.
+ * @param {Element} main The main element
+ */
+function decorateButtonVariants(main) {
+  // 1. In dark and accent sections, make the second consecutive button secondary
+  main.querySelectorAll(':scope > .section.dark, :scope > .section.accent').forEach((section) => {
+    section.querySelectorAll('.default-content-wrapper').forEach((wrapper) => {
+      const btnWrappers = [...wrapper.querySelectorAll(':scope > p.button-wrapper')];
+      for (let i = 1; i < btnWrappers.length; i += 1) {
+        if (btnWrappers[i].previousElementSibling === btnWrappers[i - 1]) {
+          const btn = btnWrappers[i].querySelector('a.button.primary');
+          if (btn) {
+            btn.classList.remove('primary');
+            btn.classList.add('secondary');
+          }
+        }
+      }
+    });
+  });
+
+  // 2. Convert specific buttons to text-links
+  main.querySelectorAll('a.button').forEach((btn) => {
+    const text = btn.textContent.trim();
+    if (text === 'Full FAQ' || text === 'Field Notes') {
+      btn.classList.remove('button', 'primary', 'secondary');
+      btn.classList.add('text-link');
+      const wrapper = btn.closest('p.button-wrapper');
+      if (wrapper) wrapper.classList.remove('button-wrapper');
+    }
+  });
+
+  // 3. Group adjacent button-wrappers into a flex container
+  main.querySelectorAll('p.button-wrapper').forEach((wrapper) => {
+    if (wrapper.parentElement.classList.contains('button-group')) return;
+    const next = wrapper.nextElementSibling;
+    if (next && next.classList.contains('button-wrapper')) {
+      const group = document.createElement('div');
+      group.className = 'button-group';
+      wrapper.parentNode.insertBefore(group, wrapper);
+      group.append(wrapper);
+      let sibling = group.nextElementSibling;
+      while (sibling && sibling.classList.contains('button-wrapper')) {
+        const nextSibling = sibling.nextElementSibling;
+        group.append(sibling);
+        sibling = nextSibling;
+      }
+    }
+  });
+}
+
+/**
+ * Split the dark section into visual subsections so that
+ * Quick Answers gets a white background and How We Work gets a light background.
+ * Uses MutationObserver to wait for blocks that may load asynchronously.
+ * @param {Element} main The main element
+ */
+function splitDarkSection(main) {
+  const darkSection = main.querySelector(':scope > .section.dark.accordion-faq-container');
+  if (!darkSection) return;
+
+  function doSplit() {
+    // Find the headings
+    const allDCW = darkSection.querySelectorAll('.default-content-wrapper');
+    let qaHeadingDCW = null;
+    let hwwHeadingDCW = null;
+    allDCW.forEach((dcw) => {
+      const h2 = dcw.querySelector('h2');
+      if (!h2) return;
+      if (h2.textContent.includes('Quick Answers')) qaHeadingDCW = dcw;
+      if (h2.textContent.includes('How We Work')) hwwHeadingDCW = dcw;
+    });
+
+    const accWrapper = darkSection.querySelector('.accordion-faq-wrapper');
+    const colsWrapper = darkSection.querySelector('.columns-wrapper');
+
+    // Wait until both wrappers exist
+    if (!accWrapper || !colsWrapper) return false;
+
+    // Create "Quick Answers" subsection
+    if (qaHeadingDCW && accWrapper) {
+      const qaSubsection = document.createElement('div');
+      qaSubsection.className = 'subsection subsection-default';
+      darkSection.insertBefore(qaSubsection, qaHeadingDCW);
+      qaSubsection.append(qaHeadingDCW);
+      qaSubsection.append(accWrapper);
+    }
+
+    // Create "How We Work" subsection
+    if (hwwHeadingDCW && colsWrapper) {
+      const hwwSubsection = document.createElement('div');
+      hwwSubsection.className = 'subsection subsection-secondary';
+      darkSection.insertBefore(hwwSubsection, hwwHeadingDCW);
+      hwwSubsection.append(hwwHeadingDCW);
+      hwwSubsection.append(colsWrapper);
+    }
+    return true;
+  }
+
+  // Try immediately
+  if (doSplit()) return;
+
+  // If blocks haven't loaded yet, observe for changes
+  const observer = new MutationObserver(() => {
+    if (doSplit()) observer.disconnect();
+  });
+  observer.observe(darkSection, { childList: true, subtree: true });
+
+  // Safety timeout — disconnect after 10 seconds
+  setTimeout(() => observer.disconnect(), 10000);
+}
+
+/**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
@@ -165,6 +278,10 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+
+  // Post-load decorations
+  decorateButtonVariants(main);
+  splitDarkSection(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
