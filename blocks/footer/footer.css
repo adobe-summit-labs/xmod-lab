@@ -97,7 +97,7 @@ footer .footer-logo-text {
 }
 
 /* Tagline below brand */
-footer .footer-top > div:first-child p:last-child {
+footer .footer-col:first-child p:last-child {
   font-size: var(--body-font-size-s);
   color: #999;
   line-height: 1.5;

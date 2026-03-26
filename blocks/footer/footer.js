@@ -21,11 +21,52 @@ export default async function decorate(block) {
     sections[sections.length - 1].classList.add('footer-bottom');
   }
 
-  // Restructure brand column: add logo icon
+  // Restructure footer-top into column grid
   const footerTop = footer.querySelector('.footer-top');
-  const firstCol = footerTop?.querySelector(':scope > div:first-child');
-  if (firstCol) {
-    const brandLink = firstCol.querySelector('a');
+  if (footerTop) {
+    const wrapper = footerTop.querySelector('.default-content-wrapper');
+    if (wrapper) {
+      const children = [...wrapper.children];
+      const columns = [];
+
+      // Column 1: brand link + tagline paragraph
+      const col1 = document.createElement('div');
+      col1.className = 'footer-col';
+
+      // Find the brand link paragraph and the tagline paragraph
+      const brandP = children.find((el) => el.tagName === 'P' && el.querySelector('a'));
+      const taglineP = children.find(
+        (el) => el.tagName === 'P' && !el.querySelector('a') && el.textContent.trim().length > 0,
+      );
+      if (brandP) col1.append(brandP);
+      if (taglineP) col1.append(taglineP);
+      columns.push(col1);
+
+      // Remaining h4 + ul pairs each get their own column
+      const remaining = children.filter((el) => el !== brandP && el !== taglineP);
+      let currentCol = null;
+      remaining.forEach((el) => {
+        if (el.tagName === 'H4') {
+          if (currentCol) columns.push(currentCol);
+          currentCol = document.createElement('div');
+          currentCol.className = 'footer-col';
+          currentCol.append(el);
+        } else if (currentCol) {
+          currentCol.append(el);
+        }
+      });
+      if (currentCol) columns.push(currentCol);
+
+      // Replace wrapper with columns
+      wrapper.remove();
+      columns.forEach((col) => footerTop.append(col));
+    }
+  }
+
+  // Restructure brand column: add logo icon
+  const brandCol = footer.querySelector('.footer-col:first-child');
+  if (brandCol) {
+    const brandLink = brandCol.querySelector('a');
     if (brandLink) {
       brandLink.className = 'footer-brand-link';
       brandLink.innerHTML = `<span class="footer-logo-icon" aria-hidden="true">
@@ -34,8 +75,10 @@ export default async function decorate(block) {
         </svg>
       </span><span class="footer-logo-text">WKND<br>Adventures</span>`;
       // Remove button-wrapper styling
-      const wrapper = brandLink.closest('.button-container');
-      if (wrapper) wrapper.className = '';
+      const btnWrapper = brandLink.closest('.button-wrapper');
+      if (btnWrapper) btnWrapper.className = '';
+      const btnContainer = brandLink.closest('.button-container');
+      if (btnContainer) btnContainer.className = '';
     }
   }
 

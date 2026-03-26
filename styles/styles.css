@@ -557,7 +557,9 @@ main .section.highlight {
   margin-top: -8px;
 }
 
-/* Button group — side-by-side buttons */
+/* ----------------------------------------------------------------
+   Button group — side-by-side buttons
+   ---------------------------------------------------------------- */
 .button-group {
   display: flex;
   flex-wrap: wrap;
@@ -569,7 +571,9 @@ main .section.highlight {
   margin: 0;
 }
 
-/* Text link style — for "Full FAQ", "Field Notes" etc. */
+/* ----------------------------------------------------------------
+   Text link style — for "Full FAQ", "Field Notes" etc.
+   ---------------------------------------------------------------- */
 a.text-link {
   display: inline-block;
   font-family: var(--heading-font-family);
@@ -594,45 +598,86 @@ main > .section.dark a.text-link {
   color: var(--background-color);
 }
 
-/* Subsection overrides — visually break out of parent dark section */
-.subsection {
-  margin: 0 calc(-1 * max((100vw - 1200px) / 2, 24px));
-  padding: 48px max((100vw - 1200px) / 2, 24px);
+/* ----------------------------------------------------------------
+   Subsection overrides — visually break out of dark section
+   ---------------------------------------------------------------- */
+
+/* Override section > div constraint for subsections */
+main > .section > .subsection {
+  max-width: none;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 48px 24px;
+  box-sizing: border-box;
 }
 
+main > .section > .subsection > * {
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Default (white) subsection — Quick Answers */
 .subsection-default {
   background-color: var(--background-color);
 }
 
-.subsection-default h2 {
-  color: var(--heading-color, var(--text-color)) !important;
+/* Use high specificity to override .section.dark color inheritance */
+main > .section.dark .subsection-default h1,
+main > .section.dark .subsection-default h2,
+main > .section.dark .subsection-default h3,
+main > .section.dark .subsection-default h4,
+main > .section.dark .subsection-default h5,
+main > .section.dark .subsection-default h6 {
+  color: var(--dark-color);
 }
 
-.subsection-default p {
-  color: var(--text-color) !important;
+main > .section.dark .subsection-default p,
+main > .section.dark .subsection-default li,
+main > .section.dark .subsection-default summary,
+main > .section.dark .subsection-default summary p,
+main > .section.dark .subsection-default .accordion-faq-item-body p {
+  color: var(--text-color);
 }
 
-.subsection-default a.button.primary {
-  border-color: var(--dark-color) !important;
-  background-color: var(--dark-color) !important;
-  color: var(--background-color) !important;
-  box-shadow: 3px 3px 0 var(--accent-color) !important;
+main > .section.dark .subsection-default a.button.primary {
+  border-color: var(--dark-color);
+  background-color: var(--dark-color);
+  color: var(--background-color);
+  box-shadow: 3px 3px 0 var(--accent-color);
 }
 
-.subsection-default a:any-link:not(.button) {
-  color: var(--accent-color) !important;
+main > .section.dark .subsection-default a.text-link {
+  color: var(--accent-color);
 }
 
+main > .section.dark .subsection-default a:any-link:not(.button):not(.text-link) {
+  color: var(--accent-color);
+}
+
+/* Focus ring reset for light subsections */
+main > .section.dark .subsection-default *:focus-visible,
+main > .section.dark .subsection-secondary *:focus-visible {
+  outline-color: var(--dark-color);
+}
+
+/* Secondary (cream) subsection — How We Work */
 .subsection-secondary {
   background-color: var(--light-color);
 }
 
-.subsection-secondary h2 {
-  color: var(--heading-color, var(--text-color)) !important;
+main > .section.dark .subsection-secondary h1,
+main > .section.dark .subsection-secondary h2,
+main > .section.dark .subsection-secondary h3,
+main > .section.dark .subsection-secondary h4,
+main > .section.dark .subsection-secondary h5,
+main > .section.dark .subsection-secondary h6 {
+  color: var(--dark-color);
 }
 
-.subsection-secondary p {
-  color: var(--text-color) !important;
+main > .section.dark .subsection-secondary p,
+main > .section.dark .subsection-secondary li {
+  color: var(--text-color);
 }
 
 /* Quick Answers heading + FAQ link side by side */
@@ -645,9 +690,8 @@ main > .section.dark a.text-link {
 }
 
 @media (width >= 900px) {
-  .subsection {
-    margin: 0 calc(-1 * max((100vw - 1200px) / 2, 32px));
-    padding: 64px max((100vw - 1200px) / 2, 32px);
+  main > .section > .subsection {
+    padding: 64px 32px;
   }
 }
 

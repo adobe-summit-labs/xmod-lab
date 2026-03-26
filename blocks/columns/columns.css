@@ -195,6 +195,22 @@
   object-fit: cover;
 }
 
+/* author avatar — when wrapped in picture element (EDS) */
+.columns.columns-featured > div > div:not(.columns-img-col) > p:nth-last-child(2) > picture {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.columns.columns-featured > div > div:not(.columns-img-col) > p:nth-last-child(2) > picture > img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color-light);
+  object-fit: cover;
+}
+
 /* button paragraph (last p in content column) — align right */
 .columns.columns-featured > div > div:not(.columns-img-col) > p:last-child {
   text-align: right;
