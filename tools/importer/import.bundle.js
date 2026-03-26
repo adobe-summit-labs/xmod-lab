@@ -632,7 +632,7 @@ var CustomImportScript = (() => {
         { id: "section-4", name: "Ticker Strip", selector: ".ticker-strip", style: "dark", blocks: ["ticker"], defaultContent: [] },
         { id: "section-5", name: "Start Here", selector: "section.section.inverse-section:has(.hero-eyebrow)", style: "dark, narrow", blocks: [], defaultContent: [".hero-eyebrow", "h2.h2-heading", "p.paragraph-lg", ".button-group"] },
         { id: "section-6", name: "Quick Answers", selector: "section.section:has(.faq-list)", style: null, blocks: ["accordion-faq"], defaultContent: [".section-heading h2", ".section-heading .text-button"] },
-        { id: "section-7", name: "How We Work", selector: "section.section.secondary-section:has(.editorial-index)", style: "secondary", blocks: ["columns-numbered"], defaultContent: [".section-heading h2"] },
+        { id: "section-7", name: "How We Work", selector: "section.section.secondary-section:has(.editorial-index)", style: "secondary, narrow", blocks: ["columns-numbered"], defaultContent: [".section-heading h2"] },
         { id: "section-8", name: "In the Field", selector: "section.section.inverse-section:has(.gallery-img)", style: "dark", blocks: ["columns-gallery"], defaultContent: [".section-heading h2", ".section-heading .text-button", ".utility-margin-top-lg .gallery-img--wide"] },
         { id: "section-9", name: "CTA Banner", selector: "section.section.accent-section", style: "accent", blocks: [], defaultContent: ["h2.h2-heading", "p.paragraph-xl", ".button-group"] }
       ]
