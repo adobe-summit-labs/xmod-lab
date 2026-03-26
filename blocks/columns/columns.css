@@ -71,12 +71,15 @@
   }
 }
 
-/* ===== Columns Editorial variant ===== */
+/* ===== Columns Numbered variant ===== */
 .columns.columns-numbered > div {
   gap: var(--gap-md);
   border-top: 1px solid var(--accent-color);
-  border-bottom: 1px solid var(--accent-color);
   padding: var(--gap-xl) 0;
+}
+
+.columns.columns-numbered > div:last-child {
+  border-bottom: 1px solid var(--accent-color);
 }
 
 /* number column */
@@ -117,20 +120,41 @@
   gap: var(--gap-lg);
 }
 
-.columns.columns-featured > div > .columns-img-col img {
-  height: auto;
-  min-height: 20rem;
-  object-fit: cover;
-  border-radius: var(--card-border-radius);
-}
-
-.columns.columns-featured > div > div {
+.columns.columns-featured > div > div:not(.columns-img-col) {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* tag pills */
+/* featured image — constrained height with cover */
+.columns.columns-featured > div > .columns-img-col {
+  overflow: hidden;
+  border-radius: var(--card-border-radius);
+  max-height: 20rem;
+}
+
+.columns.columns-featured > div > .columns-img-col img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* tag pill — first paragraph in content column */
+.columns.columns-featured > div > div:not(.columns-img-col) > p:first-child {
+  display: inline-block;
+  font-family: var(--heading-font-family);
+  font-size: var(--tag-font-size);
+  font-weight: 600;
+  letter-spacing: var(--tag-letter-spacing);
+  background-color: var(--accent-color);
+  color: var(--background-color);
+  padding: var(--tag-padding);
+  border-radius: var(--button-border-radius);
+  width: fit-content;
+}
+
+/* also support em tag pills */
 .columns.columns-featured em {
   display: inline-block;
   font-style: normal;
@@ -149,23 +173,21 @@
   margin-top: var(--gap-sm);
 }
 
-.columns.columns-featured p {
+.columns.columns-featured > div > div:not(.columns-img-col) > p {
   color: var(--text-color-muted);
 }
 
-/* author byline + button footer bar */
-.columns.columns-featured > div > div:last-of-type > div:last-child {
+/* author byline paragraph (second-to-last p in content column) */
+.columns.columns-featured > div > div:not(.columns-img-col) > p:nth-last-child(2) {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: var(--gap-sm);
   flex-wrap: wrap;
-  gap: var(--gap-md);
   margin-top: var(--gap-sm);
 }
 
-/* author avatar */
-.columns.columns-featured img[alt*="avatar"],
-.columns.columns-featured img[width="56"] {
+/* author avatar — small image inside byline paragraph */
+.columns.columns-featured > div > div:not(.columns-img-col) > p:nth-last-child(2) > img {
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -173,7 +195,38 @@
   object-fit: cover;
 }
 
-/* read button — inherits global primary shadow */
+/* button paragraph (last p in content column) — align right */
+.columns.columns-featured > div > div:not(.columns-img-col) > p:last-child {
+  text-align: right;
+  margin-top: var(--gap-sm);
+}
+
+/* style link as accent button when not decorated by EDS */
+.columns.columns-featured > div > div:not(.columns-img-col) > p:last-child > a:any-link {
+  display: inline-block;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 28px;
+  background-color: var(--accent-color);
+  color: var(--background-color);
+  border-radius: var(--button-border-radius);
+  box-shadow: 3px 3px 0 var(--dark-color);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.columns.columns-featured > div > div:not(.columns-img-col) > p:last-child > a:any-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 5px 5px 0 var(--dark-color);
+}
+
+.columns.columns-featured > div > div:not(.columns-img-col) > p:last-child > a:any-link:active {
+  transform: translateY(0);
+  box-shadow: 0 0 0 var(--dark-color);
+}
 
 @media (width >= 900px) {
   .columns.columns-featured > div {
@@ -187,8 +240,8 @@
     order: unset;
   }
 
-  .columns.columns-featured > div > .columns-img-col img {
-    min-height: 400px;
+  .columns.columns-featured > div > .columns-img-col {
+    max-height: 400px;
   }
 }
 

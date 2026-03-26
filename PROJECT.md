@@ -204,6 +204,39 @@ node /home/node/.excat-marketplace/excat/skills/excat-content-import/scripts/run
 
 ---
 
+## Block JS — DOM Restructuring Notes
+
+### hero.js
+The hero block restructures the EDS table DOM into a full-bleed background image layout:
+- **Input:** 2-row table → `block > div(row) > div(cell) > p > img` (image row) + `block > div(row) > div(cell) > [content]` (content row)
+- **Output:** `block > picture > img` (absolute-positioned background) + `block > div` (content overlay with z-index)
+- The JS extracts `<img>` from the first row, wraps it in a new `<picture>`, then calls `block.replaceChildren(picture, contentCell)`.
+- Images arrive inside `<p>` tags (not `<picture>`) because EDS only auto-wraps direct-div-child images in `<picture>`.
+
+### columns.js
+Detects image-only columns and adds `columns-img-col` class:
+- **Primary check:** `col.querySelector('picture')` — for images that EDS has wrapped in `<picture>`
+- **Fallback check:** `col.querySelector(':scope > p > img')` — for images inside `<p>` tags (typical from imports)
+- Without this fallback, image columns don't get the `columns-img-col` class, breaking featured/about/sidebar layouts.
+
+---
+
+## Block CSS — Variant Implementation Notes
+
+### columns-numbered
+- Uses `border-top` on all items + `border-bottom` only on `:last-child` to avoid double borders between adjacent items.
+- Number column: 48px (mobile) / 56px (desktop) Syncopate font, amber color.
+- Desktop grid: `80px 1fr`.
+
+### columns-featured
+- Image column uses `overflow: hidden` + `max-height` (20rem mobile, 400px desktop) with `object-fit: cover` to constrain images that are inside `<p>` wrappers.
+- Tag pill targets `p:first-child` in content column (imported content uses `<p>Water</p>` not `<em>Water</em>`). Also supports `em` for future content corrections.
+- Avatar targets `p:nth-last-child(2) > img` (positional, since imported content lacks `alt="avatar"` or `width="56"` attributes).
+- "Read the Story" link is styled as an accent button via block CSS since imported content lacks `<strong>` wrapper for EDS button decoration.
+- Footer layout: byline paragraph uses flex, button paragraph uses `text-align: right`.
+
+---
+
 ## Known Issues / Notes
 
 - **Header/footer 404:** Nav content not yet migrated. Header/footer blocks error on every page — expected.
@@ -212,3 +245,6 @@ node /home/node/.excat-marketplace/excat/skills/excat-content-import/scripts/run
 - **Consolidated CSS specificity:** Merged variant CSS files use `/* stylelint-disable no-descending-specificity */` because variant selectors naturally follow base selectors with different specificity chains.
 - **`moveInstrumentation`:** This function does not exist in this project's `scripts.js`. Do NOT import it in block JS files.
 - **Blog pages all use same block set:** All 6 blog articles share identical block structure.
+- **EDS image wrapping:** Images inside `<p>` tags don't get `<picture>` wrappers from EDS. Block JS must handle both `<picture>` and bare `<img>` in `<p>` patterns. See AGENTS.md "EDS Image Handling" section.
+- **Button decoration requires `<strong>`/`<em>` wrapper:** Plain `<a>` links in `<p>` tags don't get `.button` class from EDS. Import parsers should wrap CTA links in `<strong>` (primary) or `<em>` (secondary) for proper button decoration. Otherwise, block CSS must style links as buttons directly.
+- **CSS selectors must match EDS DOM:** Original site DOM selectors (e.g., `img[alt*="avatar"]`, `em` for tags) may not match imported content structure. Use positional selectors (`p:first-child`, `p:nth-last-child(2) > img`) as fallbacks.
