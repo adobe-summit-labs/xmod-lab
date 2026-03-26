@@ -115,80 +115,55 @@ Primary (black + amber shadow), Ghost (outline + amber shadow), Accent (amber + 
 
 ---
 
-## Pages (16 total, 10 templates)
+## Pages (16 total)
 
-### Homepage (import-homepage.js)
-| Page | Sections | Blocks |
-|------|----------|--------|
-| `index` | 9 (dark, secondary, dark, dark, secondary, dark, accent + 2 unstyled) | hero, columns-featured, tabs, ticker, columns-numbered, gallery, accordion-faq |
+### Landing pages (import-homepage.js)
+| Page | Blocks |
+|------|--------|
+| `index` | hero, columns-featured, tabs, ticker, columns-numbered, gallery, accordion-faq |
 
-### Hub landing — Adventures (import-hub-landing-page.js)
-| Page | Sections | Blocks |
-|------|----------|--------|
-| `adventures` | 8 (dark, accent, secondary, secondary, secondary, dark + 2 unstyled) | hero, columns-featured, tabs, columns-numbered, cards-article, columns-promo |
+### Hub/landing pages (import-hub-landing-page.js)
+| Page | Blocks |
+|------|--------|
+| `adventures` | hero, columns-featured, tabs, columns-numbered, cards-article, columns-promo |
+| `expeditions` | hero, columns-numbered, tabs, cards-article, columns-promo |
+| `destinations` | hero, columns-featured, columns-numbered, cards-article, columns-promo |
+| `gear` | hero, columns-featured, tabs, columns-numbered, cards-article |
 
-### Destinations (import-destinations-page.js)
-| Page | Sections | Blocks |
-|------|----------|--------|
-| `destinations` | 9 (dark, accent, secondary, secondary, accent, dark, dark + 2 unstyled) | hero, cards-article, columns-numbered (×2), tabs, columns-promo |
+### Editorial/section pages (import-editorial-section-page.js)
+| Page | Blocks |
+|------|--------|
+| `field-notes` | hero, columns-featured, tabs, columns-promo |
+| `community` | hero, columns-featured |
+| `sustainability` | hero, columns-numbered, columns-featured |
 
-### Expeditions & Gear (import-expedition-gear-page.js)
-| Page | Sections | Blocks |
-|------|----------|--------|
-| `expeditions` | 9 (dark, accent, secondary, secondary, secondary, dark, accent + 2 unstyled) | hero, columns-featured, tabs (regular), tabs (wide), columns-numbered, cards-feature |
-| `gear` | 9 (dark, accent, secondary, secondary, secondary, dark, accent + 2 unstyled) | hero, columns-featured, tabs (regular), tabs (wide), columns-numbered, cards-feature |
-
-### Editorial section — Field Notes (import-editorial-section-page.js)
-| Page | Sections | Blocks |
-|------|----------|--------|
-| `field-notes` | 7 (dark, dark, secondary, dark, secondary, dark + 1 unstyled) | hero, columns-featured, tabs, columns-promo, columns-numbered |
-
-### Community (import-community-page.js)
-| Page | Sections | Blocks |
-|------|----------|--------|
-| `community` | 9 (dark, dark, secondary, secondary, dark, accent, dark + 2 unstyled) | hero, columns-featured, columns-numbered, cards-article, columns-promo, accordion-faq |
-
-### Sustainability (import-sustainability-page.js)
-| Page | Sections | Blocks |
-|------|----------|--------|
-| `sustainability` | 10 (dark, secondary, secondary, secondary, secondary, accent, dark, accent + 2 unstyled) | hero, columns-numbered, columns-featured, tabs-team, cards-feature, cards-article |
-
-### About (import-about-page.js)
-| Page | Sections | Blocks |
-|------|----------|--------|
-| `about` | 9 (dark, accent, dark, secondary, dark, accent + 3 unstyled) | hero, columns-about, cards-feature, tabs-team, cards-article |
-
-### FAQ (import-faq-page.js)
-| Page | Sections | Blocks |
-|------|----------|--------|
-| `faq` | 9 (dark, accent, secondary, secondary, secondary, dark + 3 unstyled) | hero, columns-promo, accordion-faq, cards-article |
+### Informational pages (import-informational-page.js)
+| Page | Blocks |
+|------|--------|
+| `about` | hero, columns-about, cards-feature, tabs-team, cards-article |
+| `faq` | hero, accordion-faq, columns-promo, cards-article |
 
 ### Blog articles (import-blog-article.js)
-| Page | Sections | Blocks |
-|------|----------|--------|
-| `blog/patagonia-trek` | 5 (dark, secondary, dark + 2 unstyled) | hero-article, columns-sidebar, gallery, cards-article |
-| `blog/alpine-cycling` | 5 | same as above |
-| `blog/kayaking-norway` | 5 | same as above |
-| `blog/mountain-photography` | 5 | same as above |
-| `blog/ultralight-backpacking` | 5 | same as above |
-| `blog/yosemite-rock-climbing` | 5 | same as above |
+| Page | Blocks |
+|------|--------|
+| `blog/patagonia-trek` | hero-article, columns-sidebar, gallery, cards-article |
+| `blog/alpine-cycling` | hero-article, columns-sidebar, gallery, cards-article |
+| `blog/kayaking-norway` | hero-article, columns-sidebar, gallery, cards-article |
+| `blog/mountain-photography` | hero-article, columns-sidebar, gallery, cards-article |
+| `blog/ultralight-backpacking` | hero-article, columns-sidebar, gallery, cards-article |
+| `blog/yosemite-rock-climbing` | hero-article, columns-sidebar, gallery, cards-article |
 
 ---
 
 ## Import Infrastructure
 
-### Import Scripts (tools/importer/) — 10 scripts, 1:1 with templates
+### Import Scripts (tools/importer/)
 | Script | Template | Pages |
 |--------|----------|-------|
 | `import-homepage.js` | homepage | index |
-| `import-hub-landing-page.js` | hub-landing-page | adventures |
-| `import-destinations-page.js` | destinations-page | destinations |
-| `import-expedition-gear-page.js` | expedition-gear-page | expeditions, gear |
-| `import-editorial-section-page.js` | editorial-section-page | field-notes |
-| `import-community-page.js` | community-page | community |
-| `import-sustainability-page.js` | sustainability-page | sustainability |
-| `import-about-page.js` | about-page | about |
-| `import-faq-page.js` | faq-page | faq |
+| `import-hub-landing-page.js` | hub-landing-page | adventures, expeditions, destinations, gear |
+| `import-editorial-section-page.js` | editorial-section-page | field-notes, community, sustainability |
+| `import-informational-page.js` | informational-page | about, faq |
 | `import-blog-article.js` | blog-article | 6 blog posts |
 
 ### Parsers (tools/importer/parsers/) — 14 files
@@ -265,7 +240,7 @@ Detects image-only columns and adds `columns-img-col` class:
 ## Known Issues / Notes
 
 - **Header/footer content files:** Nav and footer content lives at `/workspace/nav.plain.html` and `/workspace/footer.plain.html` (workspace root, NOT in `/content/`). The AEM CLI serves `.plain.html` from the workspace root at `/{name}.plain.html`.
-- **Hero selector:** Original source uses `section.hero-section.hero-section--full` on adventures and `section.hero-section` (without `--full`) on destinations/expeditions/gear. Dedicated templates for each page group use the correct hero selector.
+- **Hero selector:** Original source uses `section.hero-section.hero-section--full` on some pages and `section.hero-section` on others. Import scripts now use both selectors as fallback: `['section.hero-section.hero-section--full', 'section.hero-section']`.
 - **Bundle files in lint:** `.bundle.js` files are generated by esbuild and excluded from eslint via `.eslintignore`.
 - **Consolidated CSS specificity:** Merged variant CSS files use `/* stylelint-disable no-descending-specificity */` because variant selectors naturally follow base selectors with different specificity chains.
 - **`moveInstrumentation`:** This function does not exist in this project's `scripts.js`. Do NOT import it in block JS files.
