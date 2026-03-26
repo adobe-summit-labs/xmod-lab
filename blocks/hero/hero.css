@@ -20,7 +20,8 @@ main > .hero-container {
 
   position: relative;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   min-height: min(65vh, 400px);
   padding: 48px 24px;
   overflow: hidden;
@@ -57,6 +58,7 @@ main > .hero-container {
   max-width: var(--container-max-width);
   width: 100%;
   margin: 0 auto;
+  text-align: center;
 }
 
 .hero h1,
@@ -80,6 +82,7 @@ main > .hero-container {
   font-size: 18px;
   line-height: 1.6;
   max-width: 608px;
+  margin-inline: auto;
 }
 
 /* eyebrow text (first p before h1) */
@@ -99,10 +102,15 @@ main > .hero-container {
   line-height: 1.6;
   color: rgb(255 255 255 / 85%);
   max-width: 608px;
+  margin-inline: auto;
   margin-bottom: 24px;
 }
 
 /* button group */
+.hero .button-group {
+  justify-content: center;
+}
+
 .hero .button-wrapper {
   display: inline-block;
   margin-right: var(--gap-md);
