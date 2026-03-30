@@ -2,13 +2,12 @@
   "status": "success",
   "url": "https://gabrielwalt.github.io/wknd/blog/mountain-photography.html",
   "path": "wknd/blog/mountain-photography",
-  "timestamp": "2026-03-26T11:03:17.871Z",
+  "timestamp": "2026-03-26T17:45:17.222Z",
   "title": "The Camera on Your Back — WKND Adventures",
-  "template": "blog-article",
   "blocks": [
     "hero-article",
     "columns-sidebar",
-    "columns-gallery",
-    "cards-article"
+    "cards-article",
+    "columns-gallery"
   ]
 }

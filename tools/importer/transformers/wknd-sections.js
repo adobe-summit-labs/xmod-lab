@@ -2,47 +2,83 @@
 /* global WebImporter */
 
 /**
- * Transformer: WKND sections.
- * Adds section breaks (<hr>) and Section Metadata blocks from template sections.
- * Runs in afterTransform only. Uses payload.template.sections.
- * Selectors from captured DOM (migration-work/cleaned.html).
+ * Transformer: WKND sections (generic).
+ * Detects section boundaries and styles from CSS classes on the source page.
+ * No template dependency — works on any page.
+ *
+ * Runs in beforeTransform: inserts <hr> section breaks and Section Metadata blocks.
  */
-const TransformHook = { beforeTransform: 'beforeTransform', afterTransform: 'afterTransform' };
+
+// Map source CSS classes to EDS section styles
+const STYLE_MAP = {
+  'inverse-section': 'dark',
+  'secondary-section': 'secondary',
+  'accent-section': 'accent',
+  'hero-section': 'dark',
+};
+
+// Map child element classes to compound style modifiers
+const COMPOUND_MAP = {
+  'container--narrow': 'narrow',
+};
+
+/**
+ * Derive the EDS section style from a source <section> element's CSS classes.
+ * Returns null if no style applies, or a string like "dark" or "secondary, narrow".
+ */
+function detectSectionStyle(sectionEl) {
+  const classes = sectionEl.className || '';
+
+  // Find base style from section's own classes
+  let style = null;
+  for (const [cssClass, edsStyle] of Object.entries(STYLE_MAP)) {
+    if (classes.includes(cssClass)) {
+      style = edsStyle;
+      break; // first match wins (most specific class should be listed first in STYLE_MAP)
+    }
+  }
+
+  if (!style) return null;
+
+  // Check for compound modifiers from child elements
+  const compounds = [];
+  for (const [childClass, modifier] of Object.entries(COMPOUND_MAP)) {
+    if (sectionEl.querySelector(`.${childClass}`)) {
+      compounds.push(modifier);
+    }
+  }
+
+  if (compounds.length > 0) {
+    return `${style}, ${compounds.join(', ')}`;
+  }
+
+  return style;
+}
 
 export default function transform(hookName, element, payload) {
-  if (hookName === TransformHook.beforeTransform) {
-    const { template } = payload;
-    if (!template || !template.sections || template.sections.length < 2) return;
+  if (hookName !== 'beforeTransform') return;
 
-    const sections = template.sections;
+  const sections = element.querySelectorAll('section');
+  if (sections.length === 0) return;
 
-    // Process in reverse order to avoid DOM position shifts
-    for (let i = sections.length - 1; i >= 0; i--) {
-      const section = sections[i];
-      const selectors = Array.isArray(section.selector) ? section.selector : [section.selector];
+  // Process in reverse order to avoid DOM position shifts when inserting nodes
+  for (let i = sections.length - 1; i >= 0; i--) {
+    const sectionEl = sections[i];
+    const style = detectSectionStyle(sectionEl);
 
-      let sectionEl = null;
-      for (const sel of selectors) {
-        sectionEl = element.querySelector(sel);
-        if (sectionEl) break;
-      }
+    // Add Section Metadata block if section has a style
+    if (style) {
+      const metaBlock = WebImporter.Blocks.createBlock(document, {
+        name: 'Section Metadata',
+        cells: { style },
+      });
+      sectionEl.after(metaBlock);
+    }
 
-      if (!sectionEl) continue;
-
-      // Add Section Metadata block if section has a style
-      if (section.style) {
-        const metaBlock = WebImporter.Blocks.createBlock(document, {
-          name: 'Section Metadata',
-          cells: { style: section.style },
-        });
-        sectionEl.after(metaBlock);
-      }
-
-      // Add <hr> before non-first sections
-      if (i > 0) {
-        const hr = document.createElement('hr');
-        sectionEl.before(hr);
-      }
+    // Add <hr> before non-first sections
+    if (i > 0) {
+      const hr = document.createElement('hr');
+      sectionEl.before(hr);
     }
   }
 }

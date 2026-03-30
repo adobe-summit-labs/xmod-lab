@@ -2,13 +2,12 @@
   "status": "success",
   "url": "https://gabrielwalt.github.io/wknd/blog/yosemite-rock-climbing.html",
   "path": "wknd/blog/yosemite-rock-climbing",
-  "timestamp": "2026-03-26T11:03:13.041Z",
+  "timestamp": "2026-03-26T17:45:10.976Z",
   "title": "First Light on the Valley — WKND Adventures",
-  "template": "blog-article",
   "blocks": [
     "hero-article",
     "columns-sidebar",
-    "columns-gallery",
-    "cards-article"
+    "cards-article",
+    "columns-gallery"
   ]
 }

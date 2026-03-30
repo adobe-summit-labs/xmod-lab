@@ -2,17 +2,16 @@
   "status": "success",
   "url": "https://gabrielwalt.github.io/wknd/community.html",
   "path": "wknd/community",
-  "timestamp": "2026-03-26T11:32:17.311Z",
+  "timestamp": "2026-03-26T17:44:24.977Z",
   "title": "Community — WKND Adventures",
-  "template": "community-page",
   "blocks": [
     "hero",
     "columns-featured",
     "columns-featured",
     "columns-numbered",
-    "cards-article",
-    "cards-article",
     "columns-promo",
+    "cards-article",
+    "cards-article",
     "accordion-faq"
   ]
 }

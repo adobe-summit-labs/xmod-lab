@@ -2,13 +2,12 @@
   "status": "success",
   "url": "https://gabrielwalt.github.io/wknd/blog/alpine-cycling.html",
   "path": "wknd/blog/alpine-cycling",
-  "timestamp": "2026-03-26T11:03:08.529Z",
+  "timestamp": "2026-03-26T17:45:06.425Z",
   "title": "Six Days Through the High Alps — WKND Adventures",
-  "template": "blog-article",
   "blocks": [
     "hero-article",
     "columns-sidebar",
-    "columns-gallery",
-    "cards-article"
+    "cards-article",
+    "columns-gallery"
   ]
 }

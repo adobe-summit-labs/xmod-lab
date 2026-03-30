@@ -2,13 +2,12 @@
   "status": "success",
   "url": "https://gabrielwalt.github.io/wknd/blog/ultralight-backpacking.html",
   "path": "wknd/blog/ultralight-backpacking",
-  "timestamp": "2026-03-26T11:03:21.742Z",
+  "timestamp": "2026-03-26T17:45:22.004Z",
   "title": "Sub-10 lb: What to Cut, What to Keep — WKND Adventures",
-  "template": "blog-article",
   "blocks": [
     "hero-article",
     "columns-sidebar",
-    "columns-gallery",
-    "cards-article"
+    "cards-article",
+    "columns-gallery"
   ]
 }

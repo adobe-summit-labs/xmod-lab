@@ -2,20 +2,15 @@
   "status": "success",
   "url": "https://gabrielwalt.github.io/wknd/sustainability.html",
   "path": "wknd/sustainability",
-  "timestamp": "2026-03-26T11:32:20.315Z",
+  "timestamp": "2026-03-26T17:44:28.745Z",
   "title": "Wild Ethics — WKND Adventures",
-  "template": "sustainability-page",
   "blocks": [
     "hero",
-    "columns-numbered",
+    "tabs",
     "columns-featured",
-    "tabs-team",
+    "columns-numbered",
+    "columns-about",
     "cards-feature",
-    "cards-article",
-    "cards-article",
-    "cards-article",
-    "cards-article",
-    "cards-article",
     "cards-article"
   ]
 }
