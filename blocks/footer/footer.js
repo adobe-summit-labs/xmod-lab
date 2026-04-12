@@ -21,19 +21,23 @@ export default async function decorate(block) {
     sections[sections.length - 1].classList.add('footer-bottom');
   }
 
-  // Restructure footer-top into column grid
+  // Restructure footer-top: label columns and inject brand logo
   const footerTop = footer.querySelector('.footer-top');
   if (footerTop) {
+    // EDS creates rows as direct children: div > div (row > cell)
+    // or a single .default-content-wrapper with all content flat
     const wrapper = footerTop.querySelector('.default-content-wrapper');
+    const rows = wrapper
+      ? null
+      : [...footerTop.querySelectorAll(':scope > div > div')];
+
     if (wrapper) {
+      // Flat structure: group content into columns
       const children = [...wrapper.children];
       const columns = [];
 
-      // Column 1: brand link + tagline paragraph
       const col1 = document.createElement('div');
       col1.className = 'footer-col';
-
-      // Find the brand link paragraph and the tagline paragraph
       const brandP = children.find((el) => el.tagName === 'P' && el.querySelector('a'));
       const taglineP = children.find(
         (el) => el.tagName === 'P' && !el.querySelector('a') && el.textContent.trim().length > 0,
@@ -42,7 +46,6 @@ export default async function decorate(block) {
       if (taglineP) col1.append(taglineP);
       columns.push(col1);
 
-      // Remaining h4 + ul pairs each get their own column
       const remaining = children.filter((el) => el !== brandP && el !== taglineP);
       let currentCol = null;
       remaining.forEach((el) => {
@@ -57,14 +60,28 @@ export default async function decorate(block) {
       });
       if (currentCol) columns.push(currentCol);
 
-      // Replace wrapper with columns
       wrapper.remove();
       columns.forEach((col) => footerTop.append(col));
+    } else if (rows && rows.length > 0) {
+      // Row/cell structure: each row's inner div is a column
+      rows.forEach((cell, i) => {
+        cell.classList.add('footer-col');
+        if (i === 0) cell.classList.add('footer-col-brand');
+      });
+      // Flatten: move cells directly into footer-top, remove row wrappers
+      const rowWrappers = [...footerTop.querySelectorAll(':scope > div')];
+      rowWrappers.forEach((row) => {
+        const cell = row.querySelector('.footer-col');
+        if (cell) {
+          footerTop.append(cell);
+          row.remove();
+        }
+      });
     }
   }
 
-  // Restructure brand column: add logo icon
-  const brandCol = footer.querySelector('.footer-col:first-child');
+  // Restructure brand column: add logo icon + strip button classes
+  const brandCol = footer.querySelector('.footer-col-brand') || footer.querySelector('.footer-col:first-child');
   if (brandCol) {
     const brandLink = brandCol.querySelector('a');
     if (brandLink) {
@@ -74,7 +91,6 @@ export default async function decorate(block) {
           <path d="M28,0H5C2.24,0,0,2.24,0,5v23c0,2.76,2.24,5,5,5h23c2.76,0,5-2.24,5-5V5c0-2.76-2.24-5-5-5ZM29,17c-6.63,0-12,5.37-12,12h-1c0-6.63-5.37-12-12-12v-1c6.63,0,12-5.37,12-12h1c0,6.63,5.37,12,12,12v1Z" fill="currentColor"/>
         </svg>
       </span><span class="footer-logo-text">WKND<br>Adventures</span>`;
-      // Remove button-wrapper styling
       const btnWrapper = brandLink.closest('.button-wrapper');
       if (btnWrapper) btnWrapper.className = '';
       const btnContainer = brandLink.closest('.button-container');

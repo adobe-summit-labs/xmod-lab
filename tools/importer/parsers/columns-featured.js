@@ -16,30 +16,13 @@ export default function parse(element, { document }) {
   const heading = element.querySelector('h2, .h2-heading');
   const description = element.querySelector('.paragraph-lg');
 
-  // Build byline: avatar + name + meta
-  const avatar = element.querySelector('.avatar img');
-  const bylineName = element.querySelector('.article-byline-name');
-  const bylineMeta = element.querySelector('.article-byline-meta');
-
   const contentCol = [];
   if (tag) contentCol.push(tag);
   if (heading) contentCol.push(heading);
   if (description) contentCol.push(description);
 
-  // Combine byline into a paragraph
-  if (avatar || bylineName || bylineMeta) {
-    const bylineP = document.createElement('p');
-    if (avatar) bylineP.append(avatar);
-    if (bylineName) bylineP.append(document.createTextNode(' ' + bylineName.textContent));
-    if (bylineMeta) {
-      bylineP.append(document.createElement('br'));
-      bylineP.append(document.createTextNode(bylineMeta.textContent));
-    }
-    contentCol.push(bylineP);
-  }
-
   // CTA button
-  const ctaLink = element.querySelector('.featured-article-footer > a, .article-byline + a');
+  const ctaLink = element.querySelector('.featured-article-footer > a, .featured-article-footer .button, a.button');
   if (ctaLink) {
     const label = ctaLink.querySelector('.button-label');
     if (label) ctaLink.textContent = label.textContent.trim();

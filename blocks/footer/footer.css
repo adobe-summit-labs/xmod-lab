@@ -9,12 +9,14 @@ footer {
   font-family: var(--body-font-family);
   font-size: 14px;
   border-top: 4px solid var(--accent-color);
+  padding: 64px 0;
 }
 
 footer .footer > div {
   margin: auto;
   max-width: 1200px;
   box-sizing: border-box;
+  padding: 0 16px;
 }
 
 footer p {
@@ -43,19 +45,20 @@ footer .section > div {
 }
 
 /* ----------------------------------------------------------------
-   Top section — 4-column grid
+   Top section — 4-column grid (mobile: stacked, tablet: 2-col, desktop: 4-col)
    ---------------------------------------------------------------- */
 footer .footer-top {
-  padding: 48px 24px 32px;
+  padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--gap-xl);
+  gap: 32px;
+  margin-bottom: 48px;
 }
 
 /* Column headings */
 footer h4 {
   font-family: var(--heading-font-family);
-  font-size: var(--body-font-size-s);
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.7px;
   color: #999;
@@ -70,21 +73,26 @@ footer ul {
 }
 
 footer li {
-  padding: 6px 0;
+  padding: 0;
 }
 
 footer li a {
-  font-size: var(--body-font-size-s);
+  display: block;
+  padding: 8px 0;
+  font-size: 14px;
   color: #999;
+  transition: color 0.15s ease;
 }
 
-/* Brand column */
+/* ----------------------------------------------------------------
+   Brand column
+   ---------------------------------------------------------------- */
 footer .footer-brand-link {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   color: var(--background-color);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 footer .footer-brand-link:hover {
@@ -110,31 +118,35 @@ footer .footer-logo-text {
 }
 
 /* Tagline below brand */
+footer .footer-col-brand p:last-child,
 footer .footer-col:first-child p:last-child {
-  font-size: var(--body-font-size-s);
+  font-size: 14px;
   color: #999;
-  line-height: 1.5;
-  margin-top: 4px;
+  line-height: 1.6;
 }
 
 /* ----------------------------------------------------------------
    Bottom bar — copyright section
    ---------------------------------------------------------------- */
 footer .footer-bottom {
-  padding: 24px;
-  border-top: 1px solid #3d4f45;
+  padding: 0;
+  border-top: 0;
 }
 
 footer .footer-bottom .default-content-wrapper {
   max-width: 1200px;
   margin: auto;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border-top: 1px solid #3d4f45;
+  padding-top: 32px;
 }
 
 footer .footer-bottom p {
-  font-size: var(--body-font-size-s);
+  font-size: 14px;
   color: #999;
 }
 
@@ -142,11 +154,11 @@ footer .footer-bottom p {
 footer .section:last-child > div {
   border-top: 1px solid #3d4f45;
   padding: 32px 0 0;
-  margin-top: 48px;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  flex-flow: row wrap;
+  gap: 16px;
 }
 
 footer .section:last-child p {
@@ -157,26 +169,36 @@ footer .section:last-child p {
 }
 
 /* ----------------------------------------------------------------
-   Desktop (≥ 900px)
+   Tablet (≥ 600px) — 2-column grid
+   ---------------------------------------------------------------- */
+@media (width >= 600px) {
+  footer .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 48px;
+  }
+
+  footer .footer-col-brand,
+  footer .footer-col:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ----------------------------------------------------------------
+   Desktop (≥ 900px) — 4-column grid
    ---------------------------------------------------------------- */
 @media (width >= 900px) {
   footer .footer > div {
-    padding: 64px 32px;
+    padding: 0 24px;
+    margin: 0 40px;
   }
 
   footer .footer-top {
-    padding: 64px 32px 48px;
     grid-template-columns: 1.2fr 1fr 1fr 1fr;
-    gap: var(--gap-3xl);
+    gap: 32px;
   }
 
-  footer .footer-bottom {
-    padding: 32px;
-  }
-
-  footer .footer-bottom .default-content-wrapper {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0;
+  footer .footer-col-brand,
+  footer .footer-col:first-child {
+    grid-column: auto;
   }
 }

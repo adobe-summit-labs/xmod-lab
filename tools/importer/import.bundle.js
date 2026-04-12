@@ -130,24 +130,11 @@ var CustomImportScript = (() => {
     const tag = element.querySelector(".tag");
     const heading = element.querySelector("h2, .h2-heading");
     const description = element.querySelector(".paragraph-lg");
-    const avatar = element.querySelector(".avatar img");
-    const bylineName = element.querySelector(".article-byline-name");
-    const bylineMeta = element.querySelector(".article-byline-meta");
     const contentCol = [];
     if (tag) contentCol.push(tag);
     if (heading) contentCol.push(heading);
     if (description) contentCol.push(description);
-    if (avatar || bylineName || bylineMeta) {
-      const bylineP = document2.createElement("p");
-      if (avatar) bylineP.append(avatar);
-      if (bylineName) bylineP.append(document2.createTextNode(" " + bylineName.textContent));
-      if (bylineMeta) {
-        bylineP.append(document2.createElement("br"));
-        bylineP.append(document2.createTextNode(bylineMeta.textContent));
-      }
-      contentCol.push(bylineP);
-    }
-    const ctaLink = element.querySelector(".featured-article-footer > a, .article-byline + a");
+    const ctaLink = element.querySelector(".featured-article-footer > a, .featured-article-footer .button, a.button");
     if (ctaLink) {
       const label = ctaLink.querySelector(".button-label");
       if (label) ctaLink.textContent = label.textContent.trim();
