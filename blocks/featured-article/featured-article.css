@@ -38,35 +38,17 @@
 .featured-article > div > div:not(.featured-article-img-col) {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--gap-xs);
 }
 
-/* tag pill — first paragraph in content column */
-.featured-article > div > div:not(.featured-article-img-col) > p:first-child {
-  display: inline-block;
-  font-family: var(--heading-font-family);
-  font-size: var(--tag-font-size);
-  font-weight: 600;
-  letter-spacing: var(--tag-letter-spacing);
-  background-color: var(--accent-color);
-  color: var(--background-color);
-  padding: var(--tag-padding);
-  border-radius: var(--button-border-radius);
+/* tag pill — uses .tag-pill utility from styles.css */
+.featured-article .tag-pill {
   width: fit-content;
 }
 
 /* also support em tag pills */
 .featured-article em {
-  display: inline-block;
   font-style: normal;
-  font-family: var(--heading-font-family);
-  font-size: var(--tag-font-size);
-  font-weight: 600;
-  letter-spacing: var(--tag-letter-spacing);
-  background-color: var(--accent-color);
-  color: var(--background-color);
-  padding: var(--tag-padding);
-  border-radius: var(--button-border-radius);
   margin-right: var(--gap-sm);
 }
 
@@ -81,7 +63,7 @@
 /* button paragraph — separator line + right-aligned on desktop */
 .featured-article > div > div:not(.featured-article-img-col) > p:last-child {
   margin-top: var(--gap-sm);
-  padding-top: 12px;
+  padding-top: var(--gap-xs);
   border-top: 1px solid var(--border-color-light);
 }
 
@@ -91,11 +73,11 @@
   align-items: center;
   justify-content: center;
   font-family: var(--heading-font-family);
-  font-size: 14px;
+  font-size: var(--body-font-size-s);
   font-weight: 700;
   letter-spacing: 0.98px;
   text-decoration: none;
-  padding: 12px 32px;
+  padding: var(--gap-xs) var(--gap-xl);
   background-color: var(--dark-color);
   color: var(--background-color);
   border-radius: var(--button-border-radius);

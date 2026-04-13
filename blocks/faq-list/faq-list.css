@@ -10,9 +10,9 @@
   --faq-border-color: var(--border-color-light, #ddd8cf);
   --faq-accent-color: var(--accent-color, #e8651a);
   --faq-hover-bg: var(--light-color, #f0ece4);
-  --faq-question-padding: 16px 24px;
-  --faq-answer-padding: 0 24px 16px;
-  --faq-heading-margin-bottom: 32px;
+  --faq-question-padding: var(--gap-md) var(--gap-lg);
+  --faq-answer-padding: 0 var(--gap-lg) var(--gap-md);
+  --faq-heading-margin-bottom: var(--gap-xl);
 
   max-width: var(--faq-max-width);
   margin: 0 auto;
@@ -27,7 +27,7 @@
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
-  gap: 16px 24px;
+  gap: var(--gap-md) var(--gap-lg);
   margin-bottom: var(--faq-heading-margin-bottom);
 }
 
@@ -42,12 +42,12 @@
 
 .faq-list > div:first-child a {
   font-family: var(--heading-font-family);
-  font-size: 14px;
+  font-size: var(--body-font-size-s);
   font-weight: 700;
-  letter-spacing: 0.84px;
+  letter-spacing: var(--text-link-letter-spacing);
   text-decoration: underline;
   text-decoration-thickness: 1.5px;
-  text-underline-offset: 3px;
+  text-underline-offset: var(--text-link-underline-offset);
   white-space: nowrap;
   color: var(--text-color);
 }
@@ -58,7 +58,7 @@
   align-items: baseline;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 16px 24px;
+  gap: var(--gap-md) var(--gap-lg);
   max-width: var(--faq-max-width, 768px);
   margin: 0 auto var(--faq-heading-margin-bottom, 32px);
 }
@@ -75,12 +75,12 @@
 
 .faq-list-container > .default-content-wrapper a {
   font-family: var(--heading-font-family);
-  font-size: 14px;
+  font-size: var(--body-font-size-s);
   font-weight: 700;
-  letter-spacing: 0.84px;
+  letter-spacing: var(--text-link-letter-spacing);
   text-decoration: underline;
   text-decoration-thickness: 1.5px;
-  text-underline-offset: 3px;
+  text-underline-offset: var(--text-link-underline-offset);
   white-space: nowrap;
   color: var(--text-color);
 }
@@ -99,9 +99,9 @@
   padding: 0;
   margin: 0;
   font-family: var(--heading-font-family);
-  font-size: 14px;
+  font-size: var(--body-font-size-s);
   font-weight: 700;
-  letter-spacing: 0.84px;
+  letter-spacing: var(--text-link-letter-spacing);
   color: var(--text-color);
 }
 
@@ -116,7 +116,7 @@
   border: 1px solid var(--faq-border-color);
   border-radius: 16px;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: var(--gap-xs);
   transition: border-color 0.15s ease;
 }
 

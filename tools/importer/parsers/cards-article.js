@@ -30,9 +30,18 @@ export default function parse(element, { document }) {
     }
 
     const title = card.querySelector('h3, h5');
+    const href = card.getAttribute('href');
     if (title) {
       const h3 = document.createElement('h3');
-      h3.textContent = title.textContent.trim();
+      // If the card is a link, make the title a link (no separate "Read More")
+      if (href) {
+        const a = document.createElement('a');
+        a.href = href;
+        a.textContent = title.textContent.trim();
+        h3.appendChild(a);
+      } else {
+        h3.textContent = title.textContent.trim();
+      }
       col2.appendChild(h3);
     }
 
@@ -53,17 +62,6 @@ export default function parse(element, { document }) {
         authorP.innerHTML = `<em>${utilityText}</em>`;
         col2.appendChild(authorP);
       }
-    }
-
-    // If the card is a link, wrap in an anchor
-    const href = card.getAttribute('href');
-    if (href) {
-      const linkP = document.createElement('p');
-      const a = document.createElement('a');
-      a.href = href;
-      a.textContent = 'Read More';
-      linkP.appendChild(a);
-      col2.appendChild(linkP);
     }
 
     cells.push([col1, col2]);

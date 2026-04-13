@@ -15,4 +15,14 @@ export default function decorate(block) {
       block.replaceChildren(contentCell);
     }
   }
+
+  // Tag pills: eyebrow p and em-wrapped tags
+  const contentDiv = block.querySelector(':scope > div');
+  if (contentDiv) {
+    const firstP = contentDiv.querySelector(':scope > p:first-child');
+    if (firstP && !firstP.querySelector('a, img')) firstP.classList.add('tag-pill');
+    contentDiv.querySelectorAll('em').forEach((em) => {
+      if (!em.querySelector('a')) em.classList.add('tag-pill');
+    });
+  }
 }

@@ -12,6 +12,8 @@ export default function decorate(block) {
         div.className = 'cards-card-image';
       } else {
         div.className = 'cards-card-body';
+        const tag = div.querySelector(':scope > p:first-child');
+        if (tag && !tag.querySelector('a, img')) tag.classList.add('tag-pill');
       }
     });
     ul.append(li);

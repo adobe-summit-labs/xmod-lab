@@ -221,7 +221,7 @@ var CustomImportScript = (() => {
       const row = [];
       cards.forEach((card) => {
         const col = document2.createElement("div");
-        const eyebrow = card.querySelector(".hero-eyebrow");
+        const eyebrow = card.querySelector(".tag, .hero-eyebrow");
         if (eyebrow) {
           const p = document2.createElement("p");
           p.innerHTML = `<em>${eyebrow.textContent.trim()}</em>`;
@@ -545,9 +545,17 @@ var CustomImportScript = (() => {
         col2.appendChild(tagP);
       }
       const title = card.querySelector("h3, h5");
+      const href = card.getAttribute("href");
       if (title) {
         const h3 = document2.createElement("h3");
-        h3.textContent = title.textContent.trim();
+        if (href) {
+          const a = document2.createElement("a");
+          a.href = href;
+          a.textContent = title.textContent.trim();
+          h3.appendChild(a);
+        } else {
+          h3.textContent = title.textContent.trim();
+        }
         col2.appendChild(h3);
       }
       const desc = card.querySelector(".paragraph-sm");
@@ -565,15 +573,6 @@ var CustomImportScript = (() => {
           authorP.innerHTML = `<em>${utilityText}</em>`;
           col2.appendChild(authorP);
         }
-      }
-      const href = card.getAttribute("href");
-      if (href) {
-        const linkP = document2.createElement("p");
-        const a = document2.createElement("a");
-        a.href = href;
-        a.textContent = "Read More";
-        linkP.appendChild(a);
-        col2.appendChild(linkP);
       }
       cells.push([col1, col2]);
     });
@@ -631,19 +630,36 @@ var CustomImportScript = (() => {
         "iframe"
       ]);
       element.querySelectorAll(".button-group").forEach((group) => {
-        const links = group.querySelectorAll("a");
         const { document: document2 } = payload;
-        const fragment = document2.createDocumentFragment();
-        links.forEach((link, i) => {
-          const label = link.querySelector(".button-label");
-          if (label) link.textContent = label.textContent.trim();
-          const p = document2.createElement("p");
-          const wrapper = document2.createElement(i === 0 ? "strong" : "em");
-          wrapper.appendChild(link.cloneNode(true));
-          p.appendChild(wrapper);
-          fragment.appendChild(p);
-        });
-        group.replaceWith(fragment);
+        const labels = group.querySelectorAll(".button-label");
+        if (labels.length > 0) {
+          [...labels].forEach((label, i) => {
+            const link = label.closest("a");
+            const text = label.textContent.trim();
+            const href = link ? link.getAttribute("href") || "" : "";
+            const isGhost = link && link.classList.contains("button--ghost");
+            const a = document2.createElement("a");
+            a.href = href;
+            a.textContent = text;
+            const p = document2.createElement("p");
+            const wrapper = document2.createElement(isGhost ? "em" : i === 0 ? "strong" : "em");
+            wrapper.appendChild(a);
+            p.appendChild(wrapper);
+            group.before(p);
+          });
+        } else {
+          [...group.querySelectorAll("a")].forEach((link, i) => {
+            const a = document2.createElement("a");
+            a.href = link.getAttribute("href") || "";
+            a.textContent = link.textContent.trim();
+            const p = document2.createElement("p");
+            const wrapper = document2.createElement(i === 0 ? "strong" : "em");
+            wrapper.appendChild(a);
+            p.appendChild(wrapper);
+            group.before(p);
+          });
+        }
+        group.remove();
       });
     }
     if (hookName === TransformHook.afterTransform) {

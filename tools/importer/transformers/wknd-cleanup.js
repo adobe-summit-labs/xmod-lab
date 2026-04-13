@@ -22,21 +22,44 @@ export default function transform(hookName, element, payload) {
     ]);
 
     // Split .button-group links into separate <p><strong><a> wrappers
-    // so EDS decorates each link as a button
+    // so EDS decorates each link as a button.
+    // The import DOM may merge adjacent <a> tags, so use .button-label spans
+    // as the reliable indicator of individual buttons.
     element.querySelectorAll('.button-group').forEach((group) => {
-      const links = group.querySelectorAll('a');
       const { document } = payload;
-      const fragment = document.createDocumentFragment();
-      links.forEach((link, i) => {
-        const label = link.querySelector('.button-label');
-        if (label) link.textContent = label.textContent.trim();
-        const p = document.createElement('p');
-        const wrapper = document.createElement(i === 0 ? 'strong' : 'em');
-        wrapper.appendChild(link.cloneNode(true));
-        p.appendChild(wrapper);
-        fragment.appendChild(p);
-      });
-      group.replaceWith(fragment);
+      const labels = group.querySelectorAll('.button-label');
+
+      if (labels.length > 0) {
+        // Each .button-label is inside a separate <a> — extract text + href from parent
+        [...labels].forEach((label, i) => {
+          const link = label.closest('a');
+          const text = label.textContent.trim();
+          const href = link ? link.getAttribute('href') || '' : '';
+          const isGhost = link && link.classList.contains('button--ghost');
+
+          const a = document.createElement('a');
+          a.href = href;
+          a.textContent = text;
+          const p = document.createElement('p');
+          const wrapper = document.createElement(isGhost ? 'em' : (i === 0 ? 'strong' : 'em'));
+          wrapper.appendChild(a);
+          p.appendChild(wrapper);
+          group.before(p);
+        });
+      } else {
+        // Fallback: process all <a> tags directly
+        [...group.querySelectorAll('a')].forEach((link, i) => {
+          const a = document.createElement('a');
+          a.href = link.getAttribute('href') || '';
+          a.textContent = link.textContent.trim();
+          const p = document.createElement('p');
+          const wrapper = document.createElement(i === 0 ? 'strong' : 'em');
+          wrapper.appendChild(a);
+          p.appendChild(wrapper);
+          group.before(p);
+        });
+      }
+      group.remove();
     });
   }
   if (hookName === TransformHook.afterTransform) {

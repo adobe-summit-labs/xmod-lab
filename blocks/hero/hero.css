@@ -23,7 +23,7 @@ main > .hero-container {
   align-items: center;
   justify-content: flex-start;
   min-height: min(65vh, 400px);
-  padding: 48px 24px;
+  padding: var(--gap-2xl) var(--gap-lg);
   overflow: hidden;
   color: var(--text-on-dark);
 }
@@ -68,7 +68,7 @@ main > .hero-container {
 .hero h5,
 .hero h6 {
   color: var(--background-color);
-  margin-bottom: 24px;
+  margin-bottom: var(--gap-lg);
   text-shadow: 0 1px 3px rgb(0 0 0 / 35%);
 }
 
@@ -81,23 +81,14 @@ main > .hero-container {
 
 .hero p {
   color: var(--text-on-dark);
-  font-size: 18px;
+  font-size: var(--body-font-size-m);
   line-height: 1.6;
   max-width: 608px;
   text-shadow: 0 1px 3px rgb(0 0 0 / 35%);
 }
 
-/* eyebrow pill (first p before h1) */
-.hero > div > p:first-child {
-  display: inline-flex;
-  font-family: var(--heading-font-family);
-  font-size: var(--tag-font-size);
-  font-weight: 600;
-  letter-spacing: var(--tag-letter-spacing);
-  color: var(--background-color);
-  background-color: var(--accent-color);
-  padding: var(--tag-padding);
-  border-radius: var(--button-border-radius);
+/* eyebrow pill — uses .tag-pill utility, adds hero-specific overrides */
+.hero .tag-pill {
   margin-bottom: var(--gap-md);
   text-shadow: none;
 }
@@ -107,9 +98,9 @@ main > .hero-container {
   font-size: 20px;
   font-weight: 400;
   line-height: 1.6;
-  color: rgb(255 255 255 / 85%);
+  color: var(--text-on-dark);
   max-width: 608px;
-  margin-bottom: 24px;
+  margin-bottom: var(--gap-lg);
 }
 
 /* button group — higher specificity to override .section.dark .button-group centering */
@@ -188,7 +179,7 @@ main .hero a.button.secondary:any-link:hover {
 @media (width >= 600px) {
   .hero {
     min-height: min(65vh, 500px);
-    padding: 64px 24px;
+    padding: var(--gap-3xl) var(--gap-lg);
   }
 
   .hero p {
@@ -199,11 +190,11 @@ main .hero a.button.secondary:any-link:hover {
 @media (width >= 900px) {
   .hero {
     min-height: 65vh;
-    padding: 64px 32px;
+    padding: var(--gap-3xl) var(--gap-xl);
   }
 
   .hero h1 {
-    font-size: 56px;
+    font-size: var(--heading-font-size-xxl);
     letter-spacing: -1.12px;
   }
 }
@@ -236,7 +227,7 @@ main .hero a.button.secondary:any-link:hover {
   font-size: var(--body-font-size-s);
 }
 
-/* tag line — "Expedition · Americas · Hiking" */
+/* tag line — "Expedition · Americas · Hiking" (non-pill, text-only) */
 .hero.article > div > p:nth-child(2) {
   font-family: var(--heading-font-family);
   font-size: var(--tag-font-size);
@@ -246,17 +237,9 @@ main .hero a.button.secondary:any-link:hover {
   margin-bottom: var(--gap-md);
 }
 
-/* tag pills if em-wrapped */
-.hero.article em {
-  display: inline-block;
+/* em-wrapped tag pills — uses .tag-pill utility, adds hero article overrides */
+.hero.article .tag-pill {
   font-style: normal;
-  font-family: var(--heading-font-family);
-  font-size: var(--tag-font-size);
-  font-weight: 600;
-  background-color: var(--accent-color);
-  color: var(--background-color);
-  padding: var(--tag-padding);
-  border-radius: var(--button-border-radius);
   margin-right: var(--gap-sm);
   margin-bottom: var(--gap-md);
 }

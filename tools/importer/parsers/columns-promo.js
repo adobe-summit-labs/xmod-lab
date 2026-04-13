@@ -17,7 +17,7 @@ export default function parse(element, { document }) {
     cards.forEach((card) => {
       const col = document.createElement('div');
 
-      const eyebrow = card.querySelector('.hero-eyebrow');
+      const eyebrow = card.querySelector('.tag, .hero-eyebrow');
       if (eyebrow) {
         const p = document.createElement('p');
         p.innerHTML = `<em>${eyebrow.textContent.trim()}</em>`;

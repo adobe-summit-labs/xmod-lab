@@ -34,14 +34,14 @@
 
 /* content column — align heading top with number top */
 .editorial-index > div > div:last-child h3 {
-  font-size: 24px;
+  font-size: var(--heading-font-size-m);
   line-height: 1.1;
-  margin: 0 0 12px;
+  margin: 0 0 var(--gap-xs);
 }
 
 .editorial-index > div > div:last-child p {
   color: var(--text-color-muted);
-  font-size: 18px;
+  font-size: var(--body-font-size-m);
   line-height: 1.6;
 }
 

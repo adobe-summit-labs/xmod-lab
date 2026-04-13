@@ -246,15 +246,7 @@ function decorateTabSections(main) {
       indicator.style.right = `${listRect.width - (btnRect.left - listRect.left + tablist.scrollLeft + btnRect.width)}px`;
     }
 
-    function selectTab(button) {
-      // On first interaction, activate the JS indicator and disable CSS box-shadow
-      if (!tablist.classList.contains('tabs-animated')) {
-        tablist.classList.add('tabs-animated');
-        const prev = tablist.querySelector('[aria-selected="true"]');
-        if (prev) moveIndicator(prev);
-        requestAnimationFrame(() => { indicator.style.transition = 'left 0.3s ease, right 0.3s ease'; });
-      }
-
+    function activatePanels(button) {
       tabsContainer.querySelectorAll('[role=tabpanel]').forEach((panel) => {
         panel.setAttribute('aria-hidden', 'true');
       });
@@ -269,7 +261,24 @@ function decorateTabSections(main) {
       const panelId = button.getAttribute('aria-controls');
       const panel = tabsContainer.querySelector(`#${panelId}`);
       if (panel) panel.setAttribute('aria-hidden', 'false');
+    }
 
+    function selectTab(button) {
+      // On first interaction, snap indicator to current tab, enable transition, then animate
+      if (!tablist.classList.contains('tabs-animated')) {
+        tablist.classList.add('tabs-animated');
+        const prev = tablist.querySelector('[aria-selected="true"]');
+        if (prev) moveIndicator(prev);
+        // Wait one frame so the snap paints, then enable transition and move
+        requestAnimationFrame(() => {
+          indicator.style.transition = 'left 0.3s ease, right 0.3s ease';
+          activatePanels(button);
+          moveIndicator(button);
+        });
+        return;
+      }
+
+      activatePanels(button);
       moveIndicator(button);
     }
 

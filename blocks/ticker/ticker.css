@@ -16,13 +16,13 @@ main > .section.ticker-container {
   white-space: nowrap;
   border-top: 1px solid var(--accent-color);
   border-bottom: 1px solid var(--accent-color);
-  padding: 16px 0;
+  padding: var(--gap-md) 0;
 }
 
 .ticker .ticker-track {
   display: inline-flex;
   align-items: center;
-  gap: 32px;
+  gap: var(--gap-xl);
   white-space: nowrap;
   animation: ticker-scroll 40s linear infinite;
   width: max-content;
@@ -31,7 +31,7 @@ main > .section.ticker-container {
 .ticker .ticker-track span {
   flex-shrink: 0;
   font-family: var(--heading-font-family);
-  font-size: 24px;
+  font-size: var(--heading-font-size-m);
   font-weight: 700;
   letter-spacing: -0.48px;
   line-height: 32px;

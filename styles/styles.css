@@ -41,6 +41,7 @@
   --container-max-width: 1200px;
   --container-narrow-max-width: 768px;
   --container-padding: 0 24px;
+  --gap-xs: 12px;
   --gap-sm: 8px;
   --gap-md: 16px;
   --gap-lg: 24px;
@@ -70,8 +71,11 @@
   --transition-fast: 0.15s;
   --transition-normal: 0.3s ease;
 
-  /* card shared patterns */
+  /* border radii */
+  --border-radius-sm: 8px;
   --card-border-radius: 20px;
+
+  /* card shared patterns */
   --card-hover-shadow: 0 4px 20px rgb(0 0 0 / 8%);
   --card-hover-transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
 
@@ -79,6 +83,17 @@
   --tag-padding: 5px 8px 3px;
   --tag-font-size: 10.4px;
   --tag-letter-spacing: 0.52px;
+
+  /* text link (Syncopate underlined link pattern) */
+  --text-link-letter-spacing: 0.84px;
+  --text-link-underline-offset: 3px;
+
+  /* brand */
+  --logo-icon-size: 32px;
+  --brand-letter-spacing: 0.6px;
+
+  /* footer */
+  --footer-link-color: #999;
 
   /* dark section / overlay text */
   --text-on-dark: rgb(255 255 255 / 85%);
@@ -172,7 +187,7 @@ h4,
 h5,
 h6 {
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: var(--gap-xs);
   font-family: var(--heading-font-family);
   font-weight: 700;
   line-height: 1.1;
@@ -203,7 +218,7 @@ ul,
 pre,
 blockquote {
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: var(--gap-md);
 }
 
 p {
@@ -221,7 +236,7 @@ main .section > div > *:last-child {
 
 /* Button wrappers (CTA links) get 24px top margin for breathing room */
 main .default-content-wrapper p.button-wrapper {
-  margin-top: 24px;
+  margin-top: var(--gap-lg);
   margin-bottom: 0;
 }
 
@@ -234,17 +249,17 @@ main .default-content-wrapper p.button-wrapper + p.button-wrapper {
    but NOT when following an eyebrow (first p in container) */
 main .default-content-wrapper p + p + h2,
 main .default-content-wrapper p + p + h3 {
-  margin-top: 48px;
+  margin-top: var(--gap-2xl);
 }
 
 main .default-content-wrapper p + p + h4,
 main .default-content-wrapper p + p + h5 {
-  margin-top: 32px;
+  margin-top: var(--gap-xl);
 }
 
 /* Section heading row: 32px below before content */
 main .section > div > h2:first-child {
-  margin-bottom: 32px;
+  margin-bottom: var(--gap-xl);
 }
 
 code,
@@ -253,8 +268,8 @@ pre {
 }
 
 pre {
-  padding: 16px;
-  border-radius: 8px;
+  padding: var(--gap-md);
+  border-radius: var(--border-radius-sm);
   background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
@@ -263,15 +278,15 @@ pre {
 /* blockquote — amber left border, italic */
 blockquote {
   border-left: 4px solid var(--accent-color);
-  margin: 24px 0;
-  padding: 16px 24px;
+  margin: var(--gap-lg) 0;
+  padding: var(--gap-md) var(--gap-lg);
   font-style: italic;
   font-size: 20px;
   line-height: 1.6;
 }
 
 blockquote p {
-  margin-bottom: 8px;
+  margin-bottom: var(--gap-sm);
   color: var(--text-color-subtle);
 }
 
@@ -309,6 +324,20 @@ main img {
   width: 100%;
 }
 
+/* --- TAG PILL: shared eyebrow / category label --- */
+
+.tag-pill {
+  display: inline-block;
+  font-family: var(--heading-font-family);
+  font-size: var(--tag-font-size);
+  font-weight: 600;
+  letter-spacing: var(--tag-letter-spacing);
+  background-color: var(--accent-color);
+  color: var(--background-color);
+  padding: var(--tag-padding);
+  border-radius: var(--button-border-radius);
+}
+
 /* --- LINKS --- */
 
 a:any-link {
@@ -334,7 +363,7 @@ a:hover {
 /* Button wrappers — display consecutive buttons as a row */
 main p.button-wrapper {
   display: inline-flex;
-  margin: 0 16px 0 0;
+  margin: 0 var(--gap-md) 0 0;
 }
 
 main p.button-wrapper:last-child {
@@ -412,7 +441,7 @@ a.button.accent {
 /* button groups — stack on mobile */
 @media (width < 600px) {
   .button-wrapper + .button-wrapper {
-    margin-top: 8px;
+    margin-top: var(--gap-sm);
   }
 
   .button-wrapper + .button-wrapper a.button,
@@ -488,7 +517,7 @@ main > .section.dark a.button.primary {
 main > .section.dark a.button.secondary {
   border-color: rgb(255 255 255 / 50%);
   background-color: transparent;
-  color: rgb(255 255 255);
+  color: var(--background-color);
 }
 
 main > .section.dark a.button.secondary:hover {
@@ -507,7 +536,7 @@ main > .section.accent {
   background-color: var(--accent-color);
   color: var(--dark-color);
 
-  --btn-shadow: #fff;
+  --btn-shadow: var(--background-color);
 }
 
 main > .section.accent h1,
@@ -566,6 +595,8 @@ main > .section.center .button-wrapper {
 
 /* --- EYEBROW PILL: first p before h2 in dark/accent sections --- */
 
+/* Same visual as .tag-pill but applied positionally (no JS class) */
+
 main .section.dark > div > p:first-child,
 main .section.accent > div > p:first-child {
   display: inline-flex;
@@ -585,12 +616,12 @@ main .section.accent > div > p:first-child {
 
 /* Body paragraphs in dark/narrow sections */
 main .section.dark.narrow p {
-  font-size: 18px;
+  font-size: var(--body-font-size-m);
   line-height: 1.6;
 }
 
 main .section.dark.narrow h2 {
-  margin-bottom: 24px;
+  margin-bottom: var(--gap-lg);
 }
 
 /* --- ARTICLE BODY --- */
@@ -613,8 +644,8 @@ main .section.dark.narrow h2 {
 .button-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin: 12px 0;
+  gap: var(--gap-xs);
+  margin: var(--gap-xs) 0;
 }
 
 

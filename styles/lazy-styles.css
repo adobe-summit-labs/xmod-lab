@@ -14,16 +14,16 @@
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding: var(--section-padding);
-  padding-inline: 24px;
+  padding-inline: var(--gap-lg);
 }
 
 /* Section heading above tabs */
 .tabs-container > .default-content-wrapper {
-  margin-bottom: 32px;
+  margin-bottom: var(--gap-xl);
 }
 
 .tabs-container > .default-content-wrapper h2 {
-  margin: 0 0 12px;
+  margin: 0 0 var(--gap-xs);
   font-family: var(--heading-font-family);
   font-size: var(--heading-font-size-xl, 40px);
   font-weight: 700;
@@ -38,7 +38,7 @@
   max-width: 100%;
   overflow-x: auto;
   border-top: 2px solid var(--tabs-text);
-  padding-top: 12px;
+  padding-top: var(--gap-xs);
   padding-bottom: 4px;
   margin-bottom: var(--gap-lg);
 }
@@ -48,7 +48,7 @@
   margin: 0;
   border: none;
   border-radius: 0;
-  padding: 8px 32px 8px 0;
+  padding: var(--gap-sm) var(--gap-xl) var(--gap-sm) 0;
   background: none;
   font-family: var(--heading-font-family);
   font-size: 16px;
@@ -104,7 +104,7 @@
 /* --- Tab panels (each is a section) --- */
 .tabs-container .tabs-panel {
   padding: 0;
-  margin-top: 16px;
+  margin-top: var(--gap-md);
 }
 
 .tabs-container .tabs-panel[aria-hidden='true'] {
@@ -118,7 +118,7 @@
 
 @media (width >= 600px) {
   .tabs-container .tabs-list button {
-    font-size: 18px;
+    font-size: var(--body-font-size-m);
   }
 }
 
