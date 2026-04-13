@@ -670,34 +670,43 @@ var CustomImportScript = (() => {
         const { document: document2 } = payload;
         const labels = group.querySelectorAll(".button-label");
         if (labels.length > 0) {
-          const isSingle = labels.length === 1;
+          const count = labels.length;
           [...labels].forEach((label, i) => {
             const link = label.closest("a");
             const text = label.textContent.trim();
             const href = link ? link.getAttribute("href") || "" : "";
             const isGhost = link && link.classList.contains("button--ghost");
-            const isPrimary = !isGhost && !isSingle && i === 0;
             const a = document2.createElement("a");
             a.href = href;
             a.textContent = text;
             const p = document2.createElement("p");
-            const wrapper = document2.createElement(isPrimary ? "strong" : "em");
-            wrapper.appendChild(a);
-            p.appendChild(wrapper);
+            if (!isGhost && (count === 1 || i === 0)) {
+              const strong = document2.createElement("strong");
+              strong.appendChild(a);
+              p.appendChild(strong);
+            } else {
+              const em = document2.createElement("em");
+              em.appendChild(a);
+              p.appendChild(em);
+            }
             group.before(p);
           });
         } else {
           const links = [...group.querySelectorAll("a")];
-          const isSingle = links.length === 1;
           links.forEach((link, i) => {
             const a = document2.createElement("a");
             a.href = link.getAttribute("href") || "";
             a.textContent = link.textContent.trim();
             const p = document2.createElement("p");
-            const isPrimary = !isSingle && i === 0;
-            const wrapper = document2.createElement(isPrimary ? "strong" : "em");
-            wrapper.appendChild(a);
-            p.appendChild(wrapper);
+            if (links.length === 1 || i === 0) {
+              const strong = document2.createElement("strong");
+              strong.appendChild(a);
+              p.appendChild(strong);
+            } else {
+              const em = document2.createElement("em");
+              em.appendChild(a);
+              p.appendChild(em);
+            }
             group.before(p);
           });
         }
@@ -790,7 +799,7 @@ var CustomImportScript = (() => {
     { name: "ticker", selectors: [".ticker-strip"], parser: parse11 },
     // Columns — detect by semantic content class, scoped to .grid-layout containers
     { name: "columns-pullquote", selectors: [".grid-layout:has(.pull-quote)"], parser: parse7 },
-    { name: "columns-promo", selectors: [".grid-layout--2col"], parser: parse6 },
+    { name: "columns-promo", selectors: [".grid-layout--2col:has(.card)"], parser: parse6 },
     { name: "columns-about", selectors: [".tablet-1-column:not(:has(.card))"], parser: parse8 },
     // Cards — .article-card = image cards, .card-body (no images) = feature cards
     { name: "cards-article", selectors: [".grid-layout:has(.article-card)"], parser: parse13 },

@@ -45,7 +45,7 @@ const BLOCK_REGISTRY = [
 
   // Columns — detect by semantic content class, scoped to .grid-layout containers
   { name: 'columns-pullquote', selectors: ['.grid-layout:has(.pull-quote)'], parser: columnsPullquoteParser },
-  { name: 'columns-promo', selectors: ['.grid-layout--2col'], parser: columnsPromoParser },
+  { name: 'columns-promo', selectors: ['.grid-layout--2col:has(.card)'], parser: columnsPromoParser },
   { name: 'columns-about', selectors: ['.tablet-1-column:not(:has(.card))'], parser: columnsAboutParser },
 
   // Cards — .article-card = image cards, .card-body (no images) = feature cards

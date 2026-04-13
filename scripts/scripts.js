@@ -154,6 +154,13 @@ export function decorateMain(main) {
   decorateBlocks(main);
   decorateButtons(main);
   decorateButtonVariants(main);
+
+  // Tag pills: first <p> in dark/accent sections (eyebrow labels)
+  main.querySelectorAll(':scope > .section.dark > div > p:first-child, :scope > .section.accent > div > p:first-child').forEach((p) => {
+    if (!p.querySelector('a, img') && !p.classList.contains('button-wrapper')) {
+      p.classList.add('tag-pill');
+    }
+  });
 }
 
 /**

@@ -593,24 +593,8 @@ main > .section.center .button-wrapper {
   margin: 4px 8px;
 }
 
-/* --- EYEBROW PILL: first p before h2 in dark/accent sections --- */
-
-/* Same visual as .tag-pill but applied positionally (no JS class) */
-
-main .section.dark > div > p:first-child,
-main .section.accent > div > p:first-child {
-  display: inline-flex;
-  font-family: var(--heading-font-family);
-  font-size: var(--tag-font-size);
-  font-weight: 600;
-  letter-spacing: var(--tag-letter-spacing);
-  background-color: var(--accent-color);
-  color: var(--background-color);
-  padding: var(--tag-padding);
-  border-radius: var(--button-border-radius);
-}
-
-main .section.accent > div > p:first-child {
+/* Accent section: tag pill uses dark bg instead of accent */
+main .section.accent .tag-pill {
   background-color: var(--dark-color);
 }
 

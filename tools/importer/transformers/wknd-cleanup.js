@@ -37,37 +37,49 @@ export default function transform(hookName, element, payload) {
 
       if (labels.length > 0) {
         // Each .button-label is inside a separate <a> — extract text + href from parent
-        const isSingle = labels.length === 1;
+        const count = labels.length;
         [...labels].forEach((label, i) => {
           const link = label.closest('a');
           const text = label.textContent.trim();
           const href = link ? link.getAttribute('href') || '' : '';
           const isGhost = link && link.classList.contains('button--ghost');
-          // Single-button groups default to secondary; multi-button: first is primary
-          const isPrimary = !isGhost && !isSingle && i === 0;
 
           const a = document.createElement('a');
           a.href = href;
           a.textContent = text;
           const p = document.createElement('p');
-          const wrapper = document.createElement(isPrimary ? 'strong' : 'em');
-          wrapper.appendChild(a);
-          p.appendChild(wrapper);
+
+          if (!isGhost && (count === 1 || i === 0)) {
+            // Multi-button: first is primary
+            const strong = document.createElement('strong');
+            strong.appendChild(a);
+            p.appendChild(strong);
+          } else {
+            // Multi-button: subsequent are secondary
+            const em = document.createElement('em');
+            em.appendChild(a);
+            p.appendChild(em);
+          }
           group.before(p);
         });
       } else {
         // Fallback: process all <a> tags directly
         const links = [...group.querySelectorAll('a')];
-        const isSingle = links.length === 1;
         links.forEach((link, i) => {
           const a = document.createElement('a');
           a.href = link.getAttribute('href') || '';
           a.textContent = link.textContent.trim();
           const p = document.createElement('p');
-          const isPrimary = !isSingle && i === 0;
-          const wrapper = document.createElement(isPrimary ? 'strong' : 'em');
-          wrapper.appendChild(a);
-          p.appendChild(wrapper);
+
+          if (links.length === 1 || i === 0) {
+            const strong = document.createElement('strong');
+            strong.appendChild(a);
+            p.appendChild(strong);
+          } else {
+            const em = document.createElement('em');
+            em.appendChild(a);
+            p.appendChild(em);
+          }
           group.before(p);
         });
       }
