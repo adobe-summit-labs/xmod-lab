@@ -52,14 +52,12 @@ export default function decorate(block) {
     // decorate item label
     const label = row.children[0];
     const summary = document.createElement('summary');
-    summary.className = 'faq-list-item-label';
     summary.append(...label.childNodes);
     // decorate item body
     const body = row.children[1];
     body.className = 'faq-list-item-body';
     // decorate item
     const details = document.createElement('details');
-    details.className = 'faq-list-item';
     details.append(summary, body);
     row.replaceWith(details);
 

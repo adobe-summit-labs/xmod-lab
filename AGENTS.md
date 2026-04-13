@@ -197,11 +197,23 @@ See `PROJECT.md` for full project state (blocks, variants, pages, design tokens,
 This project uses a mix of **standalone blocks** and **consolidated block families** with CSS variants.
 - 12 block folders total: `hero`, `cards`, `columns`, `featured-article`, `editorial-index`, `gallery`, `faq-list`, `ticker`, `team-profile`, `header`, `footer`, `fragment`
 - **Standalone blocks** (own folder, no variants): `featured-article`, `editorial-index`, `gallery`, `faq-list`, `ticker`, `team-profile`
+- **CSS-only blocks** (no JS file): `editorial-index`, `gallery`. EDS loads CSS by block name automatically; a JS file is only needed if the block requires DOM restructuring. An empty/no-op `decorate()` function is unnecessary overhead.
+- **Utility blocks** (not used in content but imported by other blocks): `fragment` — exports `loadFragment()` which `header.js` and `footer.js` depend on to load nav/footer fragments. **Never delete `blocks/fragment/`** even though no content page uses it directly.
 - **Block families with variants**: `hero (article)`, `cards (cards-article, cards-feature)`, `columns (columns-promo, columns-pullquote, columns-about)`
 - **Tabs** is a **section style** (not a block). Consecutive sections with `style: tabs` are grouped into a tabbed container by `decorateTabSections()` in `scripts.js`. Any block can be placed inside a tab panel since each panel is a full section. CSS is in `styles/lazy-styles.css`.
 - The `hero` block base is the full-bleed overlay hero. `hero (article)` is the blog article variant.
 - Variant names for columns/cards start with the base block name: `columns (columns-promo)`, `cards (cards-article)`
 - EDS loads `blocks/{base-name}/{base-name}.js` regardless of which variant is used
+
+### Before Removing or Deleting Code
+
+**"Unused in content" does not mean "safe to delete."** Before removing any block, JS file, CSS rule, or class assignment:
+
+1. **Trace JS import dependencies.** A block folder may export functions that other blocks import. Run `grep -r "from.*blockname" blocks/` to check. Example: `blocks/fragment/fragment.js` has zero content usage but `header.js` and `footer.js` both import `loadFragment` from it — deleting it breaks the entire site.
+2. **Check for auto-blocking.** `scripts.js` `buildAutoBlocks()` may dynamically create blocks not present in any `.plain.html` file.
+3. **Check CSS class consumers before removing JS class assignments.** A class set in JS (e.g., `faq-list-item-body`) may be the only selector target in the corresponding CSS. Search the CSS file before removing.
+4. **Run the linter after every structural deletion** (`npm run lint`). ESLint will catch broken imports immediately.
+5. **Verify preview** after deletions — navigate to at least the homepage, one blog article, and the about page (which exercises tabs, team-profile, gallery, and header/footer).
 
 ### CSS Patterns
 
@@ -263,7 +275,7 @@ The WKND design uses a **3px / 5px / 0px** offset shadow pattern for all button 
 - Hover: `transform: translateY(-2px); box-shadow: 5px 5px 0 {shadow-color}`
 - Active: `transform: translateY(0); box-shadow: 0 0 0 {shadow-color}`
 
-Shadow colors vary by variant: Primary uses `var(--accent-color)`, Accent uses `var(--dark-color)`, Ghost uses `var(--accent-color)`.
+Shadow colors vary by variant: Primary uses `var(--accent-color)`, Ghost uses `var(--accent-color)`. In accent sections, `--btn-shadow` overrides to `#fff`.
 
 ### Adjacent Item Border Pattern
 

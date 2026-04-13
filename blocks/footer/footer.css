@@ -157,23 +157,6 @@ footer .footer-bottom p {
   color: #999;
 }
 
-/* Bottom copyright section — boilerplate fragment structure (second section) */
-footer .section:last-child > div {
-  border-top: 1px solid #3d4f45;
-  padding: 32px 0 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-flow: row wrap;
-  gap: 16px;
-}
-
-footer .section:last-child p {
-  color: #999;
-  font-family: var(--body-font-family);
-  font-size: 14px;
-  margin: 0;
-}
 
 /* ----------------------------------------------------------------
    Tablet (≥ 600px) — 2-column grid

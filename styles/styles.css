@@ -18,8 +18,6 @@
   --forest-color: #1a3a2e;
   --border-color: #c8c2b8;
   --border-color-light: #ddd8cf;
-  --overlay-color: rgb(255 255 255 / 85%);
-  --muted-color: #7a8a80;
 
   /* fonts */
   --body-font-family: 'Instrument Sans', instrument-sans-fallback, sans-serif;
@@ -347,8 +345,7 @@ p.button-wrapper {
 }
 
 /* Decorated buttons (via p.button-wrapper > a.button) */
-a.button:any-link,
-button.button {
+a.button:any-link {
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
@@ -372,98 +369,49 @@ button.button {
   transition: var(--button-transition);
 }
 
-a.button:hover,
-button.button:hover {
+a.button:hover {
   transform: translate(-2px, -2px);
   box-shadow: 5px 5px 0 0 var(--btn-shadow, var(--accent-color));
   text-decoration: none;
 }
 
-a.button:active,
-button.button:active {
+a.button:active {
   transform: translate(0, 0);
   box-shadow: 0 0 0 0 var(--btn-shadow, var(--accent-color));
 }
 
-a.button[aria-disabled="true"],
-button.button:disabled {
+a.button:disabled {
   cursor: not-allowed;
   pointer-events: none;
   opacity: 0.5;
 }
 
 /* Primary: dark bg, white text */
-a.button.primary,
-button.button.primary {
+a.button.primary {
   border-color: var(--dark-color);
   background-color: var(--dark-color);
   color: var(--background-color);
 }
 
 /* Secondary/Ghost: transparent bg, border matches context */
-a.button.secondary,
-button.button.secondary {
+a.button.secondary {
   border-color: var(--dark-color);
   background-color: transparent;
   color: var(--dark-color);
 }
 
-a.button.secondary:hover,
-button.button.secondary:hover {
+a.button.secondary:hover {
   background-color: var(--dark-color);
   color: var(--background-color);
 }
 
 /* Accent: orange bg, dark text (hero) */
-a.button.accent,
-button.button.accent {
+a.button.accent {
   border-color: var(--accent-color);
   background-color: var(--accent-color);
   color: var(--dark-color);
 }
 
-/* Text button — underlined Syncopate link, no background */
-a.button.text,
-button.button.text {
-  border: none;
-  border-radius: 0;
-  padding: 0;
-  background-color: transparent;
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  box-shadow: none;
-}
-
-a.button.text:hover,
-button.button.text:hover {
-  opacity: 0.65;
-  transform: none;
-  box-shadow: none;
-  text-decoration: underline;
-}
-
-a.button.text:active,
-button.button.text:active {
-  opacity: 0.5;
-  transform: none;
-  box-shadow: none;
-}
-
-/* Text button / heading-link (boilerplate pattern — Syncopate link beside headings) */
-main .section a.text-button,
-main .section .heading-link a {
-  font-family: var(--heading-font-family);
-  font-size: 14px;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  transition: opacity 0.15s ease;
-}
-
-main .section a.text-button:hover,
-main .section .heading-link a:hover {
-  opacity: 0.65;
-}
 
 /* button groups — stack on mobile */
 @media (width < 600px) {
@@ -674,31 +622,6 @@ main .section.dark.narrow h2 {
 
 main .default-content-wrapper .button-group p.button-wrapper {
   margin: 0;
-}
-
-/* --- TEXT LINK STYLE --- */
-
-a.text-link {
-  display: inline-block;
-  font-family: var(--heading-font-family);
-  font-size: var(--body-font-size-s);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  color: var(--accent-color);
-  padding: 0;
-  background: none;
-  border: none;
-  box-shadow: none;
-}
-
-a.text-link:hover {
-  text-decoration: underline;
-}
-
-/* In dark sections, text-links should be white */
-main > .section.dark a.text-link {
-  color: var(--background-color);
 }
 
 /* --- REDUCED MOTION — ACCESSIBILITY --- */

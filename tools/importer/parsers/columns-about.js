@@ -4,7 +4,7 @@
 /**
  * Parser for columns-about variant.
  * Base: columns. Source: https://wknd-adventures.com/about.html
- * Selector: .grid-layout.grid-gap-xxl.tablet-1-column
+ * Selector: .grid-layout.grid-gap-xl.tablet-1-column
  * Generated: 2026-03-25
  */
 export default function parse(element, { document }) {
@@ -28,10 +28,12 @@ export default function parse(element, { document }) {
     });
   }
 
-  // Column 2: image
+  // Column 2: image (may be a bare <img> or a <div> wrapping an <img>)
   const col2 = document.createElement('div');
   if (children[1]) {
-    const img = children[1].querySelector('img');
+    const img = children[1].tagName === 'IMG'
+      ? children[1]
+      : children[1].querySelector('img');
     if (img) {
       col2.appendChild(img.cloneNode(true));
     }

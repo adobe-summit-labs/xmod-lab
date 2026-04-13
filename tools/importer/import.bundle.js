@@ -326,7 +326,7 @@ var CustomImportScript = (() => {
     }
     const col2 = document2.createElement("div");
     if (children[1]) {
-      const img = children[1].querySelector("img");
+      const img = children[1].tagName === "IMG" ? children[1] : children[1].querySelector("img");
       if (img) {
         col2.appendChild(img.cloneNode(true));
       }
@@ -583,7 +583,7 @@ var CustomImportScript = (() => {
   // tools/importer/parsers/cards-feature.js
   function parse14(element, { document: document2 }) {
     const cells = [];
-    const cards = element.querySelectorAll(".feature-card");
+    const cards = element.querySelectorAll(".card.card-body");
     cards.forEach((card) => {
       const row = document2.createElement("div");
       const heading = card.querySelector("h3");
@@ -726,12 +726,12 @@ var CustomImportScript = (() => {
     // Columns variants
     { name: "columns-promo", selectors: [".grid-layout.grid-layout--2col", ".accent-section .grid-layout.tablet-1-column:has(.card)"], parser: parse6 },
     { name: "columns-pullquote", selectors: [".secondary-section .grid-layout.desktop-3-column.grid-align-center"], parser: parse7 },
-    { name: "columns-about", selectors: [".grid-layout.grid-gap-xxl.tablet-1-column"], parser: parse8 },
+    { name: "columns-about", selectors: [".grid-layout.grid-gap-xl.tablet-1-column"], parser: parse8 },
     // Cards — before columns-gallery to prevent false matches on .desktop-3-column grids
-    { name: "cards-feature", selectors: [".grid-layout.desktop-3-column.grid-gap-lg:has(.feature-card)"], parser: parse14 },
+    { name: "cards-feature", selectors: [".grid-layout.desktop-3-column.grid-gap-lg:has(.card.card-body)"], parser: parse14 },
     { name: "cards-article", selectors: [".grid-layout.desktop-3-column:has(.article-card)"], parser: parse13 },
     // Gallery must come after cards to avoid matching card grids
-    { name: "gallery", selectors: [".inverse-section .grid-layout.desktop-3-column:not(:has(.article-card)):not(:has(.feature-card))"], parser: parse4 },
+    { name: "gallery", selectors: [".inverse-section .grid-layout.desktop-3-column:not(:has(.article-card)):not(:has(.card.card-body))"], parser: parse4 },
     // Standalone blocks
     { name: "ticker", selectors: [".ticker-strip"], parser: parse11 },
     { name: "faq-list", selectors: [".faq-list"], parser: parse12 }

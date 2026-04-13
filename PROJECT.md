@@ -1,29 +1,28 @@
 # WKND Adventures — Project State
 
 **Original site:** https://wknd-adventures.com/
-**Local preview:** http://localhost:3000/content/wknd/{page}
+**Local preview:** http://localhost:3000/content/{page}
 
 ---
 
-## Blocks (12 total) + 1 Section Style
+## Blocks (11 total) + 1 Section Style
 
 Mix of standalone blocks and block families with CSS variants.
 
 | Block | Variants | CSS Notes |
 |-------|----------|-----------|
 | `hero` | `article` | Full-bleed overlay hero. Base (no variant) = landing pages with eyebrow, gradient overlay, CTA buttons. `article` = blog posts with breadcrumbs, tag pills, author avatar. |
-| `cards` | `cards-article`, `cards-feature` | `cards-article` = image+body grid with hover effects. `cards-feature` = glass text-only cards (dark section). Shared internal classes: `cards-card-image`, `cards-card-body`. |
-| `columns` | `columns-about`, `columns-promo`, `columns-pullquote` | 3 variants in one file. `columns-promo` uses `:has()` for narrow container. `columns-pullquote` has pull-quote dark panel. Shared internal class: `columns-img-col`. |
+| `cards` | `cards-article`, `cards-feature` | `cards-article` = image+body grid with hover effects. `cards-feature` = glass text-only cards (dark section). Shared internal classes: `cards-card-image`, `cards-card-body`. **Note:** `cards-feature` has CSS+parser but is not yet used in any content page. |
+| `columns` | `columns-about`, `columns-promo`, `columns-pullquote` | 3 variants in one file. `columns-promo` uses `:has()` for narrow container. `columns-pullquote` has pull-quote dark panel. Shared internal class: `columns-img-col`. **Note:** `columns-about` has CSS+parser but is not yet used in any content page. |
 | `featured-article` | _(none)_ | Standalone block. Image + content side-by-side with tag pill, CTA button. Internal class: `featured-article-img-col`. |
-| `editorial-index` | _(none)_ | Standalone block. Numbered items with large accent numbers. Grid layout: number + content. |
+| `editorial-index` | _(none)_ | CSS-only block. Numbered items with large accent numbers. Grid layout: number + content. |
 | `tabs` | _(section style)_ | **Not a block** — section style in `lazy-styles.css`. Consecutive sections with `style: tabs` are grouped into a tabbed container by `decorateTabSections()` in `scripts.js`. Each panel is a full section that can contain any blocks. |
 | `team-profile` | _(none)_ | Standalone block. Circular avatar + name/role + bio. Typically nested inside `tabs` on team pages. |
-| `gallery` | _(none)_ | Standalone block. Photo grid. |
+| `gallery` | _(none)_ | CSS-only block. Photo grid. |
 | `faq-list` | _(none)_ | Uses native `<details>/<summary>` with animated open/close. |
 | `ticker` | _(none)_ | Horizontal scrolling tag ticker. |
 | `header` | _(none)_ | Sticky nav bar with megamenu (3 panels: Explore, Stories, Info). Desktop hover+click, mobile hamburger. |
 | `footer` | _(none)_ | Dark 4-column layout: brand+tagline, Explore links, Recent Stories links, Info links + bottom bar. |
-| `fragment` | _(none)_ | EDS boilerplate fragment loader. |
 
 ### Block variant CSS selectors
 
@@ -96,6 +95,18 @@ Usage counts: dark (20), secondary (11), accent (9).
 | `--container-narrow-max-width` | 768px |
 | `--container-padding` | 0 24px |
 | `--section-padding` | 48px 0 (mobile), 64px 0 (desktop) |
+| `--gap-sm` | 8px |
+| `--gap-md` | 16px |
+| `--gap-lg` | 24px |
+| `--gap-xl` | 32px |
+| `--gap-2xl` | 48px |
+| `--gap-3xl` | 64px |
+
+### Links
+| Token | Value |
+|-------|-------|
+| `--link-color` | #e8651a |
+| `--link-hover-color` | #c9530e |
 
 ### Shared Component Tokens
 | Token | Value | Usage |
@@ -114,7 +125,7 @@ Usage counts: dark (20), secondary (11), accent (9).
 | `--transition-normal` | `0.3s ease` | Standard transitions (transform, accordion) |
 
 ### Buttons
-Primary (black + amber shadow), Ghost (outline + amber shadow), Accent (amber + black shadow). All use offset `box-shadow` with hover lift and active press-down transitions.
+Primary (black + amber shadow), Ghost (outline + amber shadow), Accent (amber + white shadow). In accent sections, `--btn-shadow` overrides to `#fff`. All use offset `box-shadow` with hover lift and active press-down transitions.
 
 ---
 
@@ -123,28 +134,28 @@ Primary (black + amber shadow), Ghost (outline + amber shadow), Accent (amber + 
 ### Landing pages
 | Page | Blocks |
 |------|--------|
-| `index` | hero, featured-article, tabs, ticker, editorial-index, gallery, faq-list |
+| `index` | hero, featured-article, cards-article, ticker, faq-list, editorial-index, gallery, tabs |
 
 ### Hub/landing pages
 | Page | Blocks |
 |------|--------|
-| `adventures` | hero, featured-article, tabs, editorial-index, cards-article, columns-promo |
-| `expeditions` | hero, editorial-index, tabs, cards-article, columns-promo |
-| `destinations` | hero, featured-article, editorial-index, cards-article, columns-promo |
-| `gear` | hero, featured-article, tabs, editorial-index, cards-article |
+| `adventures` | hero, featured-article, cards-article, editorial-index, columns-promo, tabs |
+| `expeditions` | hero, cards-article, editorial-index, tabs |
+| `destinations` | hero, featured-article, cards-article, gallery |
+| `gear` | hero, featured-article, cards-article, editorial-index, columns-promo, gallery, tabs |
 
 ### Editorial/section pages
 | Page | Blocks |
 |------|--------|
-| `field-notes` | hero, featured-article, tabs, columns-promo |
-| `community` | hero, featured-article |
-| `sustainability` | hero, editorial-index, featured-article |
+| `field-notes` | hero, featured-article, cards-article |
+| `community` | hero, featured-article, editorial-index, cards-article, faq-list |
+| `sustainability` | hero, editorial-index, featured-article, cards-article, gallery, tabs |
 
 ### Informational pages
 | Page | Blocks |
 |------|--------|
-| `about` | hero, columns-about, cards-feature, tabs (with nested team-profile), cards-article |
-| `faq` | hero, faq-list, columns-promo, cards-article |
+| `about` | hero, gallery, tabs (with nested team-profile), cards-article |
+| `faq` | hero, faq-list, cards-article |
 
 ### Blog articles
 | Page | Blocks |
@@ -255,3 +266,6 @@ Tabs are handled by `decorateTabSections()` in `scripts.js`, not by a block. Con
 - **EDS image wrapping:** Images inside `<p>` tags don't get `<picture>` wrappers from EDS. Block JS must handle both `<picture>` and bare `<img>` in `<p>` patterns. See AGENTS.md "EDS Image Handling" section.
 - **Button decoration requires `<strong>`/`<em>` wrapper:** Plain `<a>` links in `<p>` tags don't get `.button` class from EDS. Import parsers should wrap CTA links in `<strong>` (primary) or `<em>` (secondary) for proper button decoration. Otherwise, block CSS must style links as buttons directly.
 - **CSS selectors must match EDS DOM:** Original site DOM selectors (e.g., `img[alt*="avatar"]`, `em` for tags) may not match imported content structure. Use positional selectors (`p:first-child`, `p:nth-last-child(2) > img`) as fallbacks.
+- **Reserved but unused variants:** `columns-about` and `cards-feature` have full CSS, import parsers, and BLOCK_REGISTRY entries, but no content page currently uses them. They are kept intentionally for the about page and potential future use. Do not remove them.
+- **Fragment block is a utility, not a content block:** `blocks/fragment/fragment.js` exports `loadFragment()` which `header.js` and `footer.js` depend on. It has zero content usage but must never be deleted. See AGENTS.md "Before Removing or Deleting Code".
+- **Content files live at `/content/{page}.plain.html`**, NOT at `/content/wknd/{page}`. The preview URL pattern is `http://localhost:3000/content/{page}`.

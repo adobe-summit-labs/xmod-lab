@@ -12,10 +12,7 @@ export default function decorate(block) {
       picture.append(img);
       block.replaceChildren(picture, contentCell);
     } else {
-      block.classList.add('no-image');
       block.replaceChildren(contentCell);
     }
-  } else if (rows.length === 1) {
-    block.classList.add('no-image');
   }
 }

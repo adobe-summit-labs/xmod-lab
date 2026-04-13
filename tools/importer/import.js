@@ -46,14 +46,14 @@ const BLOCK_REGISTRY = [
   // Columns variants
   { name: 'columns-promo', selectors: ['.grid-layout.grid-layout--2col', '.accent-section .grid-layout.tablet-1-column:has(.card)'], parser: columnsPromoParser },
   { name: 'columns-pullquote', selectors: ['.secondary-section .grid-layout.desktop-3-column.grid-align-center'], parser: columnsPullquoteParser },
-  { name: 'columns-about', selectors: ['.grid-layout.grid-gap-xxl.tablet-1-column'], parser: columnsAboutParser },
+  { name: 'columns-about', selectors: ['.grid-layout.grid-gap-xl.tablet-1-column'], parser: columnsAboutParser },
 
   // Cards — before columns-gallery to prevent false matches on .desktop-3-column grids
-  { name: 'cards-feature', selectors: ['.grid-layout.desktop-3-column.grid-gap-lg:has(.feature-card)'], parser: cardsFeatureParser },
+  { name: 'cards-feature', selectors: ['.grid-layout.desktop-3-column.grid-gap-lg:has(.card.card-body)'], parser: cardsFeatureParser },
   { name: 'cards-article', selectors: ['.grid-layout.desktop-3-column:has(.article-card)'], parser: cardsArticleParser },
 
   // Gallery must come after cards to avoid matching card grids
-  { name: 'gallery', selectors: ['.inverse-section .grid-layout.desktop-3-column:not(:has(.article-card)):not(:has(.feature-card))'], parser: columnsGalleryParser },
+  { name: 'gallery', selectors: ['.inverse-section .grid-layout.desktop-3-column:not(:has(.article-card)):not(:has(.card.card-body))'], parser: columnsGalleryParser },
 
   // Standalone blocks
   { name: 'ticker', selectors: ['.ticker-strip'], parser: tickerParser },

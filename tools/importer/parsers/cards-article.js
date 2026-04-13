@@ -43,11 +43,16 @@ export default function parse(element, { document }) {
       col2.appendChild(descP);
     }
 
+    // Only add utility text if it differs from description (avoids duplicate content)
     const authorDate = card.querySelector('.utility-text-secondary');
     if (authorDate) {
-      const authorP = document.createElement('p');
-      authorP.innerHTML = `<em>${authorDate.textContent.trim()}</em>`;
-      col2.appendChild(authorP);
+      const descText = desc ? desc.textContent.trim() : '';
+      const utilityText = authorDate.textContent.trim();
+      if (utilityText && utilityText !== descText) {
+        const authorP = document.createElement('p');
+        authorP.innerHTML = `<em>${utilityText}</em>`;
+        col2.appendChild(authorP);
+      }
     }
 
     // If the card is a link, wrap in an anchor

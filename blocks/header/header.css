@@ -174,11 +174,6 @@ header .nav-logo-text {
   line-height: 1.2;
 }
 
-header nav .nav-brand img {
-  width: 128px;
-  height: auto;
-}
-
 /* ----------------------------------------------------------------
    Nav sections — mobile (hidden by default)
    ---------------------------------------------------------------- */
@@ -200,100 +195,6 @@ header nav .nav-menu-list {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-/* Nav sections list (boilerplate nav-drop structure) */
-header nav .nav-sections ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-  font-size: 14px;
-  font-family: var(--body-font-family);
-}
-
-header nav .nav-sections ul > li {
-  font-weight: 500;
-  font-family: var(--body-font-family);
-}
-
-header nav .nav-sections ul > li > a {
-  font-family: var(--body-font-family);
-  text-decoration: none;
-}
-
-header nav .nav-sections ul > li > ul {
-  margin-top: 0;
-}
-
-header nav .nav-sections ul > li > ul > li {
-  font-weight: 400;
-}
-
-/* ----------------------------------------------------------------
-   Mobile accordion styles (< 900px) — nav-drop with chevrons
-   ---------------------------------------------------------------- */
-@media (width < 900px) {
-  header nav .nav-sections .default-content-wrapper > ul > li {
-    border-bottom: 1px solid var(--border-color-light);
-  }
-
-  header nav .nav-sections .nav-drop > a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 0;
-    font-size: 16px;
-    font-weight: 600;
-    text-decoration: none;
-    color: var(--text-color);
-  }
-
-  /* Mobile chevron */
-  header nav .nav-sections .nav-drop > a::after {
-    content: '';
-    display: block;
-    width: 8px;
-    height: 8px;
-    border: 0;
-    border-right: 2px solid currentcolor;
-    border-bottom: 2px solid currentcolor;
-    transform: rotate(45deg);
-    transition: transform 0.2s ease;
-    flex-shrink: 0;
-    margin-right: 4px;
-  }
-
-  header nav .nav-sections .nav-drop[aria-expanded='true'] > a::after {
-    transform: rotate(-135deg);
-  }
-
-  /* Mobile sub-menu */
-  header nav .nav-sections .nav-drop > ul {
-    display: none;
-    padding: 0 0 16px;
-  }
-
-  header nav .nav-sections .nav-drop[aria-expanded='true'] > ul {
-    display: block;
-  }
-
-  header nav .nav-sections .nav-drop > ul > li {
-    padding: 0;
-  }
-
-  header nav .nav-sections .nav-drop > ul a {
-    display: block;
-    padding: 10px 16px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--text-color);
-  }
-
-  header nav .nav-sections .nav-drop > ul a:hover {
-    background-color: var(--light-color);
-    border-radius: 8px;
-  }
 }
 
 /* ----------------------------------------------------------------
@@ -429,34 +330,6 @@ header .nav-subscribe:hover {
   text-decoration: none;
 }
 
-/* CTA button (boilerplate generic anchor-driven) */
-header nav .nav-tools a {
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--dark-color);
-  color: var(--background-color);
-  border: 2px solid var(--dark-color);
-  border-radius: var(--button-border-radius);
-  padding: 10px 20px;
-  font-family: var(--button-font-family);
-  font-size: var(--button-font-size);
-  font-weight: var(--button-font-weight);
-  text-decoration: none;
-  letter-spacing: var(--button-letter-spacing);
-  white-space: nowrap;
-  line-height: 1;
-  box-shadow: 3px 3px 0 0 var(--accent-color);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-header nav .nav-tools a:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 0 var(--accent-color);
-  text-decoration: none;
-}
-
 /* ----------------------------------------------------------------
    Desktop overrides (≥ 900px)
    ---------------------------------------------------------------- */
@@ -484,8 +357,7 @@ header nav .nav-tools a:hover {
     visibility: hidden;
   }
 
-  header .nav-subscribe,
-  header nav .nav-tools a {
+  header .nav-subscribe {
     padding: var(--button-padding);
   }
 
@@ -508,19 +380,6 @@ header nav .nav-tools a:hover {
     gap: 8px;
   }
 
-  /* Nav top-level list — flex row (boilerplate nav-drop) */
-  header nav .nav-sections .default-content-wrapper > ul {
-    display: flex;
-    gap: 4px;
-    margin: 0;
-    align-items: center;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li {
-    flex: 0 1 auto;
-    position: static;
-  }
-
   /* Megamenu trigger — pill-shaped hover */
   header .nav-menu-item {
     position: relative;
@@ -535,55 +394,6 @@ header nav .nav-tools a:hover {
   header .nav-megamenu-trigger[aria-expanded='true'],
   header .nav-megamenu-trigger:hover {
     background-color: var(--light-color);
-  }
-
-  /* Nav-drop pill-shaped nav button hover (boilerplate) */
-  header nav .nav-sections .nav-drop {
-    position: static;
-    cursor: pointer;
-  }
-
-  header nav .nav-sections .nav-drop > a {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 12px;
-    font-family: var(--body-font-family);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-color);
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    background: none;
-    border-radius: 8px;
-    white-space: nowrap;
-    transition: background-color 0.15s ease;
-  }
-
-  header nav .nav-sections .nav-drop > a:hover,
-  header nav .nav-sections .nav-drop[aria-expanded='true'] > a {
-    background-color: var(--light-color);
-  }
-
-  /* CSS chevron caret on nav-drop links */
-  header nav .nav-sections .nav-drop > a::after {
-    content: '';
-    display: block;
-    width: 5px;
-    height: 5px;
-    border: 0;
-    border-right: 1.5px solid currentcolor;
-    border-bottom: 1.5px solid currentcolor;
-    transform: rotate(45deg);
-    transition: transform 0.15s ease;
-    flex-shrink: 0;
-    margin-top: -2px;
-  }
-
-  header nav .nav-sections .nav-drop[aria-expanded='true'] > a::after {
-    transform: rotate(-135deg);
-    margin-top: 2px;
   }
 
   /* ----------------------------------------------------------------
