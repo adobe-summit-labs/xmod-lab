@@ -78,7 +78,7 @@
 }
 
 /* tag pill — uses .tag-pill utility from styles.css */
-.cards.cards-article .cards-card-body > .tag-pill {
+.cards.cards-article .cards-card-body .tag-pill {
   width: fit-content;
 }
 
@@ -104,7 +104,7 @@
   text-decoration: none;
 }
 
-.cards.cards-article .cards-card-body p {
+.cards.cards-article .cards-card-body p:not(.tag-pill) {
   color: var(--text-color-muted);
   font-size: var(--body-font-size-s);
   line-height: 1.3;

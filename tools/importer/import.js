@@ -28,36 +28,32 @@ import wkndSectionsTransformer from './transformers/wknd-sections.js';
  * Matched elements are tracked to avoid double-parsing.
  */
 const BLOCK_REGISTRY = [
-  // Hero variants — article-specific first (has .article-byline inside hero)
-  { name: 'hero-article', selectors: ['section.hero-section:has(.article-byline)'], parser: heroArticleParser },
-  { name: 'hero', selectors: ['section.hero-section'], parser: heroParser },
+  // Hero variants — article hero has a byline, generic hero doesn't
+  { name: 'hero-article', selectors: ['.hero-section:has(.article-byline)'], parser: heroArticleParser },
+  { name: 'hero', selectors: ['.hero-section'], parser: heroParser },
 
-  // Tabs — containers first so descendant filter excludes nested cards
-  { name: 'tabs-activity', selectors: ['.tab-container.tab-container--wide'], parser: tabsActivityParser },
+  // Tabs — match by semantic content: tab-menu + profile = team tabs
+  { name: 'tabs-activity', selectors: ['.tab-container--wide'], parser: tabsActivityParser },
   { name: 'tabs-team', selectors: ['section:has(.tab-menu):has(.profile-circle)'], parser: tabsTeamParser },
-  { name: 'tabs', selectors: ['section:has(.tab-menu):not(:has(.tab-container)):not(:has(.profile-circle))'], parser: tabsActivityParser },
+  { name: 'tabs', selectors: ['section:has(.tab-menu):not(:has(.tab-container))'], parser: tabsActivityParser },
 
-  // Featured article (standalone block, was columns-featured)
+  // Semantic standalone blocks — single class, no compounds
   { name: 'featured-article', selectors: ['.featured-article'], parser: featuredArticleParser },
-
-  // Editorial index (standalone block, was columns-numbered)
   { name: 'editorial-index', selectors: ['.editorial-index'], parser: editorialIndexParser },
-
-  // Columns variants
-  { name: 'columns-promo', selectors: ['.grid-layout.grid-layout--2col', '.accent-section .grid-layout.tablet-1-column:has(.card)'], parser: columnsPromoParser },
-  { name: 'columns-pullquote', selectors: ['.secondary-section .grid-layout.desktop-3-column.grid-align-center'], parser: columnsPullquoteParser },
-  { name: 'columns-about', selectors: ['.grid-layout.grid-gap-xl.tablet-1-column'], parser: columnsAboutParser },
-
-  // Cards — before columns-gallery to prevent false matches on .desktop-3-column grids
-  { name: 'cards-feature', selectors: ['.grid-layout.desktop-3-column.grid-gap-lg:has(.card.card-body)'], parser: cardsFeatureParser },
-  { name: 'cards-article', selectors: ['.grid-layout.desktop-3-column:has(.article-card)'], parser: cardsArticleParser },
-
-  // Gallery must come after cards to avoid matching card grids
-  { name: 'gallery', selectors: ['.inverse-section .grid-layout.desktop-3-column:not(:has(.article-card)):not(:has(.card.card-body))'], parser: columnsGalleryParser },
-
-  // Standalone blocks
-  { name: 'ticker', selectors: ['.ticker-strip'], parser: tickerParser },
   { name: 'faq-list', selectors: ['.faq-list'], parser: faqListParser },
+  { name: 'ticker', selectors: ['.ticker-strip'], parser: tickerParser },
+
+  // Columns — detect by semantic content class, scoped to .grid-layout containers
+  { name: 'columns-pullquote', selectors: ['.grid-layout:has(.pull-quote)'], parser: columnsPullquoteParser },
+  { name: 'columns-promo', selectors: ['.grid-layout--2col'], parser: columnsPromoParser },
+  { name: 'columns-about', selectors: ['.tablet-1-column:not(:has(.card))'], parser: columnsAboutParser },
+
+  // Cards — .article-card = image cards, .card-body (no images) = feature cards
+  { name: 'cards-article', selectors: ['.grid-layout:has(.article-card)'], parser: cardsArticleParser },
+  { name: 'cards-feature', selectors: ['.grid-layout:has(.card-body):not(:has(.article-card))'], parser: cardsFeatureParser },
+
+  // Gallery — identified by .gallery-img children
+  { name: 'gallery', selectors: ['.grid-layout:has(.gallery-img)'], parser: columnsGalleryParser },
 ];
 
 /**

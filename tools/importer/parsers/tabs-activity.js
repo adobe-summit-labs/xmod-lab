@@ -8,8 +8,8 @@
  * Selector: .tab-container.tab-container--wide
  */
 export default function parse(element, { document }) {
-  const tabButtons = element.querySelectorAll('.tab-menu-link');
-  const tabPanes = element.querySelectorAll('.tab-pane');
+  const tabButtons = element.querySelectorAll('.tab-menu-link, [role="tab"]');
+  const tabPanes = element.querySelectorAll('.tab-pane, [role="tabpanel"]');
 
   const fragment = document.createDocumentFragment();
 
@@ -17,7 +17,7 @@ export default function parse(element, { document }) {
   // and remove it from the DOM so the sections transformer doesn't duplicate it
   const parentSection = element.closest('.section, section');
   if (parentSection) {
-    const sectionHeading = parentSection.querySelector('.section-heading');
+    const sectionHeading = parentSection.querySelector('.section-heading, .section-title');
     if (sectionHeading) {
       const h2 = document.createElement('h2');
       h2.textContent = sectionHeading.textContent.trim();
@@ -72,7 +72,7 @@ export default function parse(element, { document }) {
         bodyCol.appendChild(h);
       }
 
-      const desc = card.querySelector('.article-card-body > p');
+      const desc = card.querySelector('.article-card-body p');
       if (desc) {
         const p = document.createElement('p');
         p.textContent = desc.textContent.trim();

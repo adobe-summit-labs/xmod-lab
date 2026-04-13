@@ -29,7 +29,7 @@ export default function parse(element, { document }) {
       col2.appendChild(tagP);
     }
 
-    const title = card.querySelector('h3, h5');
+    const title = card.querySelector('h3, h4, h5');
     const href = card.getAttribute('href');
     if (title) {
       const h3 = document.createElement('h3');
@@ -45,7 +45,7 @@ export default function parse(element, { document }) {
       col2.appendChild(h3);
     }
 
-    const desc = card.querySelector('.paragraph-sm');
+    const desc = card.querySelector('.paragraph-sm, .paragraph-md, .paragraph-lg');
     if (desc) {
       const descP = document.createElement('p');
       descP.textContent = desc.textContent.trim();
@@ -53,7 +53,7 @@ export default function parse(element, { document }) {
     }
 
     // Only add utility text if it differs from description (avoids duplicate content)
-    const authorDate = card.querySelector('.utility-text-secondary');
+    const authorDate = card.querySelector('.utility-text-secondary, .text-secondary, .text-muted');
     if (authorDate) {
       const descText = desc ? desc.textContent.trim() : '';
       const utilityText = authorDate.textContent.trim();

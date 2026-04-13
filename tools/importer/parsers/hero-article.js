@@ -42,7 +42,7 @@ export default function parse(element, { document }) {
   }
 
   // Tags
-  const tagEl = element.querySelector('.tag.blog-hero-tag');
+  const tagEl = element.querySelector('.tag');
   if (tagEl) {
     const tagP = document.createElement('p');
     tagP.textContent = tagEl.textContent.trim();
@@ -61,7 +61,7 @@ export default function parse(element, { document }) {
   const byline = element.querySelector('.article-byline');
   if (byline) {
     const bylineDiv = document.createElement('div');
-    const avatar = byline.querySelector('.avatar img');
+    const avatar = byline.querySelector('.avatar img, .article-byline img');
     if (avatar) {
       bylineDiv.appendChild(avatar.cloneNode(true));
     }

@@ -20,7 +20,7 @@
   order: 0;
   overflow: hidden;
   border-radius: var(--card-border-radius);
-  max-height: 20rem;
+  max-height: 30rem;
 }
 
 .featured-article > div > .featured-article-img-col p {
@@ -56,7 +56,7 @@
   margin-top: var(--gap-sm);
 }
 
-.featured-article > div > div:not(.featured-article-img-col) > p {
+.featured-article > div > div:not(.featured-article-img-col) > p:not(.tag-pill) {
   color: var(--text-color-muted);
 }
 
@@ -118,6 +118,6 @@
   }
 
   .featured-article > div > .featured-article-img-col {
-    max-height: 400px;
+    max-height: 600px;
   }
 }

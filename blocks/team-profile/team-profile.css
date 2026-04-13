@@ -19,6 +19,7 @@
 
 /* profile avatar */
 .team-profile img {
+  box-sizing: border-box;
   width: 128px;
   height: 128px;
   border-radius: 50%;
@@ -54,12 +55,18 @@
   .team-profile > div {
     display: flex;
     flex-direction: row;
-    gap: var(--gap-xl);
+    gap: var(--gap-3xl);
     align-items: start;
+  }
+
+  /* Offset by container padding so bio text aligns with narrow sections below */
+  .tabs-container .team-profile > div {
+    padding-left: var(--gap-lg);
   }
 
   .team-profile .team-profile-avatar {
     flex-shrink: 0;
+    width: 128px;
   }
 
   .team-profile .team-profile-text {

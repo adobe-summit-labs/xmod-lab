@@ -14,8 +14,14 @@ export default function transform(hookName, element, payload) {
     // Must run before section splitting so nav/footer elements don't interfere with section selectors
     WebImporter.DOMUtils.remove(element, [
       '.navbar',
+      'nav',
+      'header',
+      '[role="navigation"]',
       '.footer',
+      'footer',
+      '[role="contentinfo"]',
       '.skip-link',
+      '[class*="skip"]',
       'noscript',
       'link',
       'iframe',

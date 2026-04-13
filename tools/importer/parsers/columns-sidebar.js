@@ -10,20 +10,27 @@
 export default function parse(element, { document }) {
   const cells = [];
 
-  // The grid has children divs — first child is gear list, second (span-2) is pull quote
-  const children = element.children;
+  // Detect columns by content (not position)
+  let gearChild = null;
+  let quoteChild = null;
+  [...element.children].forEach((child) => {
+    if (child.querySelector('.pull-quote, blockquote')) {
+      quoteChild = child;
+    } else if (child.querySelector('ul, ol')) {
+      gearChild = child;
+    }
+  });
 
   // Column 1: heading + gear list
   const col1 = document.createElement('div');
-  const firstChild = children[0];
-  if (firstChild) {
-    const heading = firstChild.querySelector('h3');
+  if (gearChild) {
+    const heading = gearChild.querySelector('h2, h3, h4');
     if (heading) {
-      const h3 = document.createElement('h3');
-      h3.textContent = heading.textContent.trim();
-      col1.appendChild(h3);
+      const h = document.createElement(heading.tagName.toLowerCase());
+      h.textContent = heading.textContent.trim();
+      col1.appendChild(h);
     }
-    const list = firstChild.querySelector('ul');
+    const list = gearChild.querySelector('ul, ol');
     if (list) {
       col1.appendChild(list.cloneNode(true));
     }
@@ -31,14 +38,15 @@ export default function parse(element, { document }) {
 
   // Column 2: pull quote with attribution
   const col2 = document.createElement('div');
-  const secondChild = children[1];
-  if (secondChild) {
-    const pullQuote = secondChild.querySelector('.pull-quote');
+  if (quoteChild) {
+    const pullQuote = quoteChild.querySelector('.pull-quote') || quoteChild.querySelector('blockquote');
     if (pullQuote) {
       const blockquote = document.createElement('blockquote');
       const quoteBody = pullQuote.querySelector('.pull-quote-body');
       if (quoteBody) {
         blockquote.textContent = quoteBody.textContent.trim();
+      } else {
+        blockquote.textContent = pullQuote.textContent.trim();
       }
       col2.appendChild(blockquote);
       const attribution = pullQuote.querySelector('.pull-quote-attribution');

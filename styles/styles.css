@@ -498,7 +498,7 @@ main > .section.dark h6 {
   color: var(--background-color);
 }
 
-main > .section.dark p {
+main > .section.dark p:not(.tag-pill) {
   color: var(--text-on-dark);
 }
 

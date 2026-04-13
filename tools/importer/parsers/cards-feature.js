@@ -4,18 +4,18 @@
 /**
  * Parser for cards-feature variant.
  * Base: cards. Source: https://wknd-adventures.com/about.html
- * Selector: .grid-layout.desktop-3-column.grid-gap-lg:has(.card.card-body)
+ * Selector: .grid-layout.desktop-3-column.grid-gap-lg:has(.card)
  * Generated: 2026-03-25
  */
 export default function parse(element, { document }) {
   const cells = [];
 
-  const cards = element.querySelectorAll('.card.card-body');
+  const cards = element.querySelectorAll('.card');
   cards.forEach((card) => {
     const row = document.createElement('div');
 
     // Heading
-    const heading = card.querySelector('h3');
+    const heading = card.querySelector('h2, h3, h4');
     if (heading) {
       const h3 = document.createElement('h3');
       h3.textContent = heading.textContent.trim();

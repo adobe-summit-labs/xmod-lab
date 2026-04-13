@@ -13,8 +13,9 @@ export default function parse(element, { document }) {
 
   // Col 2: Content elements
   const tag = element.querySelector('.tag');
-  const heading = element.querySelector('h2, .h2-heading');
-  const description = element.querySelector('.paragraph-lg');
+  const heading = element.querySelector('h2, h3, .h2-heading, .h3-heading');
+  // Broader description match — fall back to smaller paragraph classes if .paragraph-lg is absent
+  const description = element.querySelector('.paragraph-lg, .paragraph-md, .paragraph-sm');
 
   const contentCol = [];
   if (tag) contentCol.push(tag);

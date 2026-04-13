@@ -21,6 +21,7 @@ const STYLE_MAP = {
 const COMPOUND_MAP = {
   'container--narrow': 'narrow',
   'utility-text-align-center': 'center',
+  'text-center': 'center',
 };
 
 /**
@@ -28,14 +29,12 @@ const COMPOUND_MAP = {
  * Returns null if no style applies, or a string like "dark" or "secondary, narrow".
  */
 function detectSectionStyle(sectionEl) {
-  const classes = sectionEl.className || '';
-
-  // Find base style from section's own classes
+  // Find base style from section's own classes using classList (not string includes)
   let style = null;
   for (const [cssClass, edsStyle] of Object.entries(STYLE_MAP)) {
-    if (classes.includes(cssClass)) {
+    if (sectionEl.classList.contains(cssClass)) {
       style = edsStyle;
-      break; // first match wins (most specific class should be listed first in STYLE_MAP)
+      break;
     }
   }
 
@@ -49,8 +48,10 @@ function detectSectionStyle(sectionEl) {
     }
   }
 
-  if (compounds.length > 0) {
-    return `${style}, ${compounds.join(', ')}`;
+  // Deduplicate modifiers (e.g. two center-detection paths matching the same section)
+  const unique = [...new Set(compounds)];
+  if (unique.length > 0) {
+    return `${style}, ${unique.join(', ')}`;
   }
 
   return style;

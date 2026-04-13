@@ -32,11 +32,11 @@ export default function parse(element, { document }) {
   }
 
   // Heading
-  const heading = element.querySelector('h1, .h1-heading');
+  const heading = element.querySelector('h1, h2, .h1-heading');
   if (heading) contentCell.push(heading);
 
   // Lead paragraph
-  const lead = element.querySelector('.hero-lead, .paragraph-xl');
+  const lead = element.querySelector('.hero-lead, .paragraph-xl, .paragraph-lg');
   if (lead) contentCell.push(lead);
 
   // CTAs: check both .button-group pattern and already-split <p><strong><a> pattern

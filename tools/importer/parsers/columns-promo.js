@@ -24,21 +24,21 @@ export default function parse(element, { document }) {
         col.appendChild(p);
       }
 
-      const heading = card.querySelector('h3');
+      const heading = card.querySelector('h2, h3, h4');
       if (heading) {
         const h3 = document.createElement('h3');
         h3.textContent = heading.textContent.trim();
         col.appendChild(h3);
       }
 
-      const desc = card.querySelector('.paragraph-lg');
+      const desc = card.querySelector('.paragraph-lg, .paragraph-md, p[class*="paragraph"]');
       if (desc) {
         const p = document.createElement('p');
         p.textContent = desc.textContent.trim();
         col.appendChild(p);
       }
 
-      const link = card.querySelector('a[class*="button"]');
+      const link = card.querySelector('a.button, a[class*="button"]');
       if (link) {
         const p = document.createElement('p');
         const a = document.createElement('a');

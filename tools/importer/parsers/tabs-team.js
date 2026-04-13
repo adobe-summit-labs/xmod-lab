@@ -7,14 +7,14 @@
  * Selector: section:has(.tab-menu):has(.profile-circle)
  */
 export default function parse(element, { document }) {
-  const tabButtons = element.querySelectorAll('.tab-menu .tab-menu-link');
-  const tabPanes = element.querySelectorAll('.tab-pane');
+  const tabButtons = element.querySelectorAll('.tab-menu-link, [role="tab"]');
+  const tabPanes = element.querySelectorAll('.tab-pane, [role="tabpanel"]');
 
   const fragment = document.createDocumentFragment();
 
   // Emit the section heading that precedes the tabs (e.g., "The team")
   // and remove it from the DOM so the sections transformer doesn't duplicate it
-  const sectionHeading = element.querySelector('.section-heading');
+  const sectionHeading = element.querySelector('.section-heading, .section-title');
   if (sectionHeading) {
     const h2 = document.createElement('h2');
     h2.textContent = sectionHeading.textContent.trim();
@@ -42,7 +42,7 @@ export default function parse(element, { document }) {
 
     // Avatar column
     const avatarCol = document.createElement('div');
-    const profileImg = pane.querySelector('.profile-circle img');
+    const profileImg = pane.querySelector('.profile-circle img, .avatar img, .profile-image img');
     if (profileImg) {
       avatarCol.appendChild(profileImg.cloneNode(true));
     }
@@ -55,7 +55,9 @@ export default function parse(element, { document }) {
 
     // Text column
     const textCol = document.createElement('div');
-    const role = pane.querySelector('.profile-name + p');
+    const nameEl = pane.querySelector('.profile-name');
+    const role = pane.querySelector('.profile-role, .profile-title')
+      || (nameEl && nameEl.nextElementSibling && nameEl.nextElementSibling.tagName === 'P' ? nameEl.nextElementSibling : null);
     if (role) {
       const em = document.createElement('em');
       em.textContent = role.textContent.trim();

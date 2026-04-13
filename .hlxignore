@@ -5,5 +5,5 @@ LICENSE
 package.json
 package-lock.json
 test/*
-tools/*
+tools/importer/*
 content/*

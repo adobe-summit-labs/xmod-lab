@@ -38,9 +38,9 @@ var CustomImportScript = (() => {
       p.textContent = eyebrow.textContent.trim();
       contentCell.push(p);
     }
-    const heading = element.querySelector("h1, .h1-heading");
+    const heading = element.querySelector("h1, h2, .h1-heading");
     if (heading) contentCell.push(heading);
-    const lead = element.querySelector(".hero-lead, .paragraph-xl");
+    const lead = element.querySelector(".hero-lead, .paragraph-xl, .paragraph-lg");
     if (lead) contentCell.push(lead);
     const btnGroup = element.querySelector(".button-group");
     if (btnGroup) {
@@ -98,7 +98,7 @@ var CustomImportScript = (() => {
       breadcrumbP.innerHTML = parts.join(" ");
       contentWrapper.appendChild(breadcrumbP);
     }
-    const tagEl = element.querySelector(".tag.blog-hero-tag");
+    const tagEl = element.querySelector(".tag");
     if (tagEl) {
       const tagP = document2.createElement("p");
       tagP.textContent = tagEl.textContent.trim();
@@ -113,7 +113,7 @@ var CustomImportScript = (() => {
     const byline = element.querySelector(".article-byline");
     if (byline) {
       const bylineDiv = document2.createElement("div");
-      const avatar = byline.querySelector(".avatar img");
+      const avatar = byline.querySelector(".avatar img, .article-byline img");
       if (avatar) {
         bylineDiv.appendChild(avatar.cloneNode(true));
       }
@@ -143,8 +143,8 @@ var CustomImportScript = (() => {
   function parse3(element, { document: document2 }) {
     const image = element.querySelector(".featured-article-image img, :scope > a img");
     const tag = element.querySelector(".tag");
-    const heading = element.querySelector("h2, .h2-heading");
-    const description = element.querySelector(".paragraph-lg");
+    const heading = element.querySelector("h2, h3, .h2-heading, .h3-heading");
+    const description = element.querySelector(".paragraph-lg, .paragraph-md, .paragraph-sm");
     const contentCol = [];
     if (tag) contentCol.push(tag);
     if (heading) contentCol.push(heading);
@@ -167,7 +167,7 @@ var CustomImportScript = (() => {
 
   // tools/importer/parsers/columns-gallery.js
   function parse4(element, { document: document2 }) {
-    const gridImages = element.querySelectorAll(".gallery-img, :scope > img");
+    const gridImages = element.querySelectorAll(".gallery-img, :scope > img, :scope img");
     const row1 = [];
     gridImages.forEach((img) => {
       row1.push(img);
@@ -178,16 +178,19 @@ var CustomImportScript = (() => {
     }
     const parent = element.parentElement;
     if (parent) {
-      const wideImgWrapper = parent.querySelector(".gallery-img--wide") || parent.querySelector(".utility-margin-top-lg .gallery-img--wide") || parent.querySelector(".utility-margin-top-lg > img");
-      let nextEl = element.nextElementSibling;
-      while (nextEl) {
-        const wideImg = nextEl.querySelector(".gallery-img--wide") || (nextEl.classList && nextEl.classList.contains("gallery-img--wide") ? nextEl : null) || (nextEl.tagName === "IMG" ? nextEl : null);
-        if (wideImg) {
-          cells.push([wideImg]);
-          nextEl.remove();
-          break;
+      const allParentImages = parent.querySelectorAll("img");
+      const gridImageSet = new Set(gridImages);
+      for (const img of allParentImages) {
+        if (gridImageSet.has(img) || element.contains(img)) continue;
+        cells.push([img]);
+        let wrapper = img;
+        while (wrapper.parentElement && wrapper.parentElement !== parent) {
+          wrapper = wrapper.parentElement;
         }
-        nextEl = nextEl.nextElementSibling;
+        if (wrapper !== element && wrapper.parentElement === parent) {
+          wrapper.remove();
+        }
+        break;
       }
     }
     const block = WebImporter.Blocks.createBlock(document2, {
@@ -227,19 +230,19 @@ var CustomImportScript = (() => {
           p.innerHTML = `<em>${eyebrow.textContent.trim()}</em>`;
           col.appendChild(p);
         }
-        const heading = card.querySelector("h3");
+        const heading = card.querySelector("h2, h3, h4");
         if (heading) {
           const h3 = document2.createElement("h3");
           h3.textContent = heading.textContent.trim();
           col.appendChild(h3);
         }
-        const desc = card.querySelector(".paragraph-lg");
+        const desc = card.querySelector('.paragraph-lg, .paragraph-md, p[class*="paragraph"]');
         if (desc) {
           const p = document2.createElement("p");
           p.textContent = desc.textContent.trim();
           col.appendChild(p);
         }
-        const link = card.querySelector('a[class*="button"]');
+        const link = card.querySelector('a.button, a[class*="button"]');
         if (link) {
           const p = document2.createElement("p");
           const a = document2.createElement("a");
@@ -263,30 +266,38 @@ var CustomImportScript = (() => {
   // tools/importer/parsers/columns-sidebar.js
   function parse7(element, { document: document2 }) {
     const cells = [];
-    const children = element.children;
-    const col1 = document2.createElement("div");
-    const firstChild = children[0];
-    if (firstChild) {
-      const heading = firstChild.querySelector("h3");
-      if (heading) {
-        const h3 = document2.createElement("h3");
-        h3.textContent = heading.textContent.trim();
-        col1.appendChild(h3);
+    let gearChild = null;
+    let quoteChild = null;
+    [...element.children].forEach((child) => {
+      if (child.querySelector(".pull-quote, blockquote")) {
+        quoteChild = child;
+      } else if (child.querySelector("ul, ol")) {
+        gearChild = child;
       }
-      const list = firstChild.querySelector("ul");
+    });
+    const col1 = document2.createElement("div");
+    if (gearChild) {
+      const heading = gearChild.querySelector("h2, h3, h4");
+      if (heading) {
+        const h = document2.createElement(heading.tagName.toLowerCase());
+        h.textContent = heading.textContent.trim();
+        col1.appendChild(h);
+      }
+      const list = gearChild.querySelector("ul, ol");
       if (list) {
         col1.appendChild(list.cloneNode(true));
       }
     }
     const col2 = document2.createElement("div");
-    const secondChild = children[1];
-    if (secondChild) {
-      const pullQuote = secondChild.querySelector(".pull-quote");
+    if (quoteChild) {
+      const pullQuote = quoteChild.querySelector(".pull-quote") || quoteChild.querySelector("blockquote");
       if (pullQuote) {
         const blockquote = document2.createElement("blockquote");
         const quoteBody = pullQuote.querySelector(".pull-quote-body");
         if (quoteBody) {
           blockquote.textContent = quoteBody.textContent.trim();
+        } else {
+          blockquote.textContent = pullQuote.textContent.trim();
         }
         col2.appendChild(blockquote);
         const attribution = pullQuote.querySelector(".pull-quote-attribution");
@@ -308,16 +319,24 @@ var CustomImportScript = (() => {
   // tools/importer/parsers/columns-about.js
   function parse8(element, { document: document2 }) {
     const cells = [];
-    const col1 = document2.createElement("div");
-    const children = element.children;
-    if (children[0]) {
-      const heading = children[0].querySelector("h2");
-      if (heading) {
-        const h2 = document2.createElement("h2");
-        h2.textContent = heading.textContent.trim();
-        col1.appendChild(h2);
+    let textChild = null;
+    let imgChild = null;
+    [...element.children].forEach((child) => {
+      if (child.tagName === "IMG" || child.querySelector("img")) {
+        imgChild = child;
+      } else {
+        textChild = child;
       }
-      const paragraphs = children[0].querySelectorAll("p");
+    });
+    const col1 = document2.createElement("div");
+    if (textChild) {
+      const heading = textChild.querySelector("h2, h3, h4");
+      if (heading) {
+        const h = document2.createElement(heading.tagName.toLowerCase());
+        h.textContent = heading.textContent.trim();
+        col1.appendChild(h);
+      }
+      const paragraphs = textChild.querySelectorAll("p");
       paragraphs.forEach((p) => {
         const newP = document2.createElement("p");
         newP.textContent = p.textContent.trim();
@@ -325,8 +344,8 @@ var CustomImportScript = (() => {
       });
     }
     const col2 = document2.createElement("div");
-    if (children[1]) {
-      const img = children[1].tagName === "IMG" ? children[1] : children[1].querySelector("img");
+    if (imgChild) {
+      const img = imgChild.tagName === "IMG" ? imgChild : imgChild.querySelector("img");
       if (img) {
         col2.appendChild(img.cloneNode(true));
       }
@@ -341,12 +360,12 @@ var CustomImportScript = (() => {
 
   // tools/importer/parsers/tabs-activity.js
   function parse9(element, { document: document2 }) {
-    const tabButtons = element.querySelectorAll(".tab-menu-link");
-    const tabPanes = element.querySelectorAll(".tab-pane");
+    const tabButtons = element.querySelectorAll('.tab-menu-link, [role="tab"]');
+    const tabPanes = element.querySelectorAll('.tab-pane, [role="tabpanel"]');
     const fragment = document2.createDocumentFragment();
     const parentSection = element.closest(".section, section");
     if (parentSection) {
-      const sectionHeading = parentSection.querySelector(".section-heading");
+      const sectionHeading = parentSection.querySelector(".section-heading, .section-title");
       if (sectionHeading) {
         const h2 = document2.createElement("h2");
         h2.textContent = sectionHeading.textContent.trim();
@@ -388,7 +407,7 @@ var CustomImportScript = (() => {
           }
           bodyCol.appendChild(h);
         }
-        const desc = card.querySelector(".article-card-body > p");
+        const desc = card.querySelector(".article-card-body p");
         if (desc) {
           const p = document2.createElement("p");
           p.textContent = desc.textContent.trim();
@@ -416,10 +435,10 @@ var CustomImportScript = (() => {
 
   // tools/importer/parsers/tabs-team.js
   function parse10(element, { document: document2 }) {
-    const tabButtons = element.querySelectorAll(".tab-menu .tab-menu-link");
-    const tabPanes = element.querySelectorAll(".tab-pane");
+    const tabButtons = element.querySelectorAll('.tab-menu-link, [role="tab"]');
+    const tabPanes = element.querySelectorAll('.tab-pane, [role="tabpanel"]');
     const fragment = document2.createDocumentFragment();
-    const sectionHeading = element.querySelector(".section-heading");
+    const sectionHeading = element.querySelector(".section-heading, .section-title");
     if (sectionHeading) {
       const h2 = document2.createElement("h2");
       h2.textContent = sectionHeading.textContent.trim();
@@ -437,7 +456,7 @@ var CustomImportScript = (() => {
       section.appendChild(h3);
       const profileCells = [];
       const avatarCol = document2.createElement("div");
-      const profileImg = pane.querySelector(".profile-circle img");
+      const profileImg = pane.querySelector(".profile-circle img, .avatar img, .profile-image img");
       if (profileImg) {
         avatarCol.appendChild(profileImg.cloneNode(true));
       }
@@ -448,7 +467,8 @@ var CustomImportScript = (() => {
         avatarCol.appendChild(nameP);
       }
       const textCol = document2.createElement("div");
-      const role = pane.querySelector(".profile-name + p");
+      const nameEl = pane.querySelector(".profile-name");
+      const role = pane.querySelector(".profile-role, .profile-title") || (nameEl && nameEl.nextElementSibling && nameEl.nextElementSibling.tagName === "P" ? nameEl.nextElementSibling : null);
       if (role) {
         const em = document2.createElement("em");
         em.textContent = role.textContent.trim();
@@ -513,13 +533,17 @@ var CustomImportScript = (() => {
 
   // tools/importer/parsers/faq-list.js
   function parse12(element, { document: document2 }) {
-    const items = element.querySelectorAll(".faq-item");
+    let items = element.querySelectorAll(".faq-item");
+    if (items.length === 0) {
+      items = element.querySelectorAll("details");
+    }
     const cells = [];
     items.forEach((item) => {
-      const question = item.querySelector(".faq-question");
-      const answer = item.querySelector(".faq-answer");
+      const question = item.querySelector(".faq-question, summary");
+      const answer = item.querySelector(".faq-answer, .faq-item > div:last-child");
       cells.push([question || "", answer || ""]);
     });
+    if (cells.length === 0) return;
     const block = WebImporter.Blocks.createBlock(document2, {
       name: "Faq List",
       cells
@@ -544,7 +568,7 @@ var CustomImportScript = (() => {
         tagP.textContent = tag.textContent.trim();
         col2.appendChild(tagP);
       }
-      const title = card.querySelector("h3, h5");
+      const title = card.querySelector("h3, h4, h5");
       const href = card.getAttribute("href");
       if (title) {
         const h3 = document2.createElement("h3");
@@ -558,13 +582,13 @@ var CustomImportScript = (() => {
         }
         col2.appendChild(h3);
       }
-      const desc = card.querySelector(".paragraph-sm");
+      const desc = card.querySelector(".paragraph-sm, .paragraph-md, .paragraph-lg");
       if (desc) {
         const descP = document2.createElement("p");
         descP.textContent = desc.textContent.trim();
         col2.appendChild(descP);
       }
-      const authorDate = card.querySelector(".utility-text-secondary");
+      const authorDate = card.querySelector(".utility-text-secondary, .text-secondary, .text-muted");
       if (authorDate) {
         const descText = desc ? desc.textContent.trim() : "";
         const utilityText = authorDate.textContent.trim();
@@ -586,10 +610,10 @@ var CustomImportScript = (() => {
   // tools/importer/parsers/cards-feature.js
   function parse14(element, { document: document2 }) {
     const cells = [];
-    const cards = element.querySelectorAll(".card.card-body");
+    const cards = element.querySelectorAll(".card");
     cards.forEach((card) => {
       const row = document2.createElement("div");
-      const heading = card.querySelector("h3");
+      const heading = card.querySelector("h2, h3, h4");
       if (heading) {
         const h3 = document2.createElement("h3");
         h3.textContent = heading.textContent.trim();
@@ -623,8 +647,14 @@ var CustomImportScript = (() => {
     if (hookName === TransformHook.beforeTransform) {
       WebImporter.DOMUtils.remove(element, [
         ".navbar",
+        "nav",
+        "header",
+        '[role="navigation"]',
         ".footer",
+        "footer",
+        '[role="contentinfo"]',
         ".skip-link",
+        '[class*="skip"]',
         "noscript",
         "link",
         "iframe"
@@ -687,13 +717,13 @@ var CustomImportScript = (() => {
   };
   var COMPOUND_MAP = {
     "container--narrow": "narrow",
-    "utility-text-align-center": "center"
+    "utility-text-align-center": "center",
+    "text-center": "center"
   };
   function detectSectionStyle(sectionEl) {
-    const classes = sectionEl.className || "";
     let style = null;
     for (const [cssClass, edsStyle] of Object.entries(STYLE_MAP)) {
-      if (classes.includes(cssClass)) {
+      if (sectionEl.classList.contains(cssClass)) {
         style = edsStyle;
         break;
       }
@@ -705,8 +735,9 @@ var CustomImportScript = (() => {
         compounds.push(modifier);
       }
     }
-    if (compounds.length > 0) {
-      return `${style}, ${compounds.join(", ")}`;
+    const unique = [...new Set(compounds)];
+    if (unique.length > 0) {
+      return `${style}, ${unique.join(", ")}`;
     }
     return style;
   }
@@ -733,29 +764,27 @@ var CustomImportScript = (() => {
 
   // tools/importer/import.js
   var BLOCK_REGISTRY = [
-    // Hero variants — article-specific first (has .article-byline inside hero)
-    { name: "hero-article", selectors: ["section.hero-section:has(.article-byline)"], parser: parse2 },
-    { name: "hero", selectors: ["section.hero-section"], parser: parse },
-    // Tabs — containers first so descendant filter excludes nested cards
-    { name: "tabs-activity", selectors: [".tab-container.tab-container--wide"], parser: parse9 },
+    // Hero variants — article hero has a byline, generic hero doesn't
+    { name: "hero-article", selectors: [".hero-section:has(.article-byline)"], parser: parse2 },
+    { name: "hero", selectors: [".hero-section"], parser: parse },
+    // Tabs — match by semantic content: tab-menu + profile = team tabs
+    { name: "tabs-activity", selectors: [".tab-container--wide"], parser: parse9 },
     { name: "tabs-team", selectors: ["section:has(.tab-menu):has(.profile-circle)"], parser: parse10 },
-    { name: "tabs", selectors: ["section:has(.tab-menu):not(:has(.tab-container)):not(:has(.profile-circle))"], parser: parse9 },
-    // Featured article (standalone block, was columns-featured)
+    { name: "tabs", selectors: ["section:has(.tab-menu):not(:has(.tab-container))"], parser: parse9 },
+    // Semantic standalone blocks — single class, no compounds
     { name: "featured-article", selectors: [".featured-article"], parser: parse3 },
-    // Editorial index (standalone block, was columns-numbered)
     { name: "editorial-index", selectors: [".editorial-index"], parser: parse5 },
-    // Columns variants
-    { name: "columns-promo", selectors: [".grid-layout.grid-layout--2col", ".accent-section .grid-layout.tablet-1-column:has(.card)"], parser: parse6 },
-    { name: "columns-pullquote", selectors: [".secondary-section .grid-layout.desktop-3-column.grid-align-center"], parser: parse7 },
-    { name: "columns-about", selectors: [".grid-layout.grid-gap-xl.tablet-1-column"], parser: parse8 },
-    // Cards — before columns-gallery to prevent false matches on .desktop-3-column grids
-    { name: "cards-feature", selectors: [".grid-layout.desktop-3-column.grid-gap-lg:has(.card.card-body)"], parser: parse14 },
-    { name: "cards-article", selectors: [".grid-layout.desktop-3-column:has(.article-card)"], parser: parse13 },
-    // Gallery must come after cards to avoid matching card grids
-    { name: "gallery", selectors: [".inverse-section .grid-layout.desktop-3-column:not(:has(.article-card)):not(:has(.card.card-body))"], parser: parse4 },
-    // Standalone blocks
+    { name: "faq-list", selectors: [".faq-list"], parser: parse12 },
     { name: "ticker", selectors: [".ticker-strip"], parser: parse11 },
-    { name: "faq-list", selectors: [".faq-list"], parser: parse12 }
+    // Columns — detect by semantic content class, scoped to .grid-layout containers
+    { name: "columns-pullquote", selectors: [".grid-layout:has(.pull-quote)"], parser: parse7 },
+    { name: "columns-promo", selectors: [".grid-layout--2col"], parser: parse6 },
+    { name: "columns-about", selectors: [".tablet-1-column:not(:has(.card))"], parser: parse8 },
+    // Cards — .article-card = image cards, .card-body (no images) = feature cards
+    { name: "cards-article", selectors: [".grid-layout:has(.article-card)"], parser: parse13 },
+    { name: "cards-feature", selectors: [".grid-layout:has(.card-body):not(:has(.article-card))"], parser: parse14 },
+    // Gallery — identified by .gallery-img children
+    { name: "gallery", selectors: [".grid-layout:has(.gallery-img)"], parser: parse4 }
   ];
   function isDescendantOfMatched(el, matched) {
     let parent = el.parentElement;
