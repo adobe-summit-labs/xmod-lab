@@ -14,6 +14,7 @@ export default function decorate(block) {
       if (img && col.children.length === 1) {
         col.classList.add('featured-article-img-col');
       } else {
+        col.classList.add('featured-article-content');
         // tag pill — first p in content column
         const tag = col.querySelector(':scope > p:first-child');
         if (tag && !tag.querySelector('a, img')) tag.classList.add('tag-pill');

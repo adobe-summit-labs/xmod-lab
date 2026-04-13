@@ -42,11 +42,11 @@
   gap: var(--gap-lg);
 }
 
-.columns.columns-about > div > div:not(.columns-img-col) h2 {
+.columns.columns-about .columns-text-col h2 {
   margin-bottom: var(--gap-xs);
 }
 
-.columns.columns-about > div > div:not(.columns-img-col) p {
+.columns.columns-about .columns-text-col p {
   color: var(--text-color-muted);
   font-size: var(--body-font-size-m);
   line-height: 1.6;

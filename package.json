@@ -1,8 +1,8 @@
 {
-  "name": "@adobe/aem-boilerplate",
+  "name": "@wknd/adventures-eds",
   "private": true,
-  "version": "1.3.0",
-  "description": "Starter project for Adobe Helix",
+  "version": "1.0.0",
+  "description": "WKND Adventures — AEM Edge Delivery Services",
   "scripts": {
     "lint:js": "eslint .",
     "lint:css": "stylelint \"blocks/**/*.css\" \"styles/*.css\"",

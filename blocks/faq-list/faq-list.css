@@ -86,10 +86,6 @@
 }
 
 /* Reset button styling on links inside FAQ section header */
-.faq-list-container > .default-content-wrapper .button-container {
-  display: inline;
-}
-
 .faq-list-container > .default-content-wrapper a.button:any-link {
   background: none;
   border: none;

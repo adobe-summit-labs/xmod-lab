@@ -1,19 +1,12 @@
 export default function decorate(block) {
-  // setup image columns
   [...block.children].forEach((row) => {
     [...row.children].forEach((col) => {
       const pic = col.querySelector('picture');
-      if (pic) {
-        const picWrapper = pic.closest('div');
-        if (picWrapper && picWrapper.children.length === 1) {
-          picWrapper.classList.add('columns-img-col');
-        }
+      const img = col.querySelector(':scope > p > img');
+      if ((pic && col.children.length === 1) || (img && col.children.length === 1)) {
+        col.classList.add('columns-img-col');
       } else {
-        // handle img not wrapped in picture (e.g. inside a <p>)
-        const img = col.querySelector(':scope > p > img');
-        if (img && col.children.length === 1) {
-          col.classList.add('columns-img-col');
-        }
+        col.classList.add('columns-text-col');
       }
     });
   });

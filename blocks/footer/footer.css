@@ -99,23 +99,23 @@ footer .footer-brand-link:hover {
   color: var(--background-color);
 }
 
-footer .footer-logo-icon {
+footer .nav-logo-icon {
   width: var(--logo-icon-size);
   height: var(--logo-icon-size);
   flex-shrink: 0;
 }
 
-footer .footer-logo-icon svg {
+footer .nav-logo-icon svg {
   display: block;
   color: var(--background-color);
   fill: var(--background-color);
 }
 
-footer .footer-logo-icon img {
+footer .nav-logo-icon img {
   filter: brightness(0) invert(1);
 }
 
-footer .footer-logo-text {
+footer .nav-logo-text {
   font-family: var(--heading-font-family);
   font-size: var(--body-font-size-xs);
   font-weight: 700;
