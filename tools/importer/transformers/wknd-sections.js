@@ -38,8 +38,6 @@ function detectSectionStyle(sectionEl) {
     }
   }
 
-  if (!style) return null;
-
   // Check for compound modifiers from child elements
   const compounds = [];
   for (const [childClass, modifier] of Object.entries(COMPOUND_MAP)) {
@@ -48,13 +46,13 @@ function detectSectionStyle(sectionEl) {
     }
   }
 
-  // Deduplicate modifiers (e.g. two center-detection paths matching the same section)
   const unique = [...new Set(compounds)];
-  if (unique.length > 0) {
+  if (style && unique.length > 0) {
     return `${style}, ${unique.join(', ')}`;
   }
-
-  return style;
+  if (style) return style;
+  if (unique.length > 0) return unique.join(', ');
+  return null;
 }
 
 export default function transform(hookName, element, payload) {

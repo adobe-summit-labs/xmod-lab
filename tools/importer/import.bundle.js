@@ -749,7 +749,6 @@ var CustomImportScript = (() => {
         break;
       }
     }
-    if (!style) return null;
     const compounds = [];
     for (const [childClass, modifier] of Object.entries(COMPOUND_MAP)) {
       if (sectionEl.querySelector(`.${childClass}`)) {
@@ -757,10 +756,12 @@ var CustomImportScript = (() => {
       }
     }
     const unique = [...new Set(compounds)];
-    if (unique.length > 0) {
+    if (style && unique.length > 0) {
       return `${style}, ${unique.join(", ")}`;
     }
-    return style;
+    if (style) return style;
+    if (unique.length > 0) return unique.join(", ");
+    return null;
   }
   function transform2(hookName, element, payload) {
     if (hookName !== "beforeTransform") return;
