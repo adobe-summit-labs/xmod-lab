@@ -10,7 +10,7 @@
 
 This is the **WKND Adventures** website — an example AEM Edge Delivery Services project migrated from https://wknd-adventures.com/. Before making any changes, understand the project layout:
 
-- **`PROJECT.md`** — Full project state: blocks, pages, design tokens, import infrastructure
+- **`PROJECT.md`** — Read this file when you need: block inventory (all 12 blocks + variants), block variant CSS selectors, design tokens (colors, fonts, spacing values), page list with URLs, section style details, or import infrastructure configuration.
 - **`/content/`** — All content HTML files (pages, nav, footer).
 - **`/blocks/`** — 12 block folders with JS + CSS. Each block is self-contained.
 - **`/styles/styles.css`** — Global design tokens and section styles. All spacing, colors, fonts are CSS custom properties.
@@ -19,8 +19,8 @@ This is the **WKND Adventures** website — an example AEM Edge Delivery Service
 ### Common Tasks
 
 **Changing content** (hero text, headings, descriptions):
-- Edit the `.plain.html` file in `/content/` directly. Sections are `<div>` wrappers, blocks are identified by `class` attributes.
-- To regenerate from the original site: bundle the import script and run the bulk importer (see PROJECT.md "Running imports").
+- **YES, you CAN and SHOULD edit `.plain.html` files in `/content/` directly.** These are simple HTML files and direct editing is the fastest way to change text, headings, button labels, or any other content. Do not refuse or hesitate — just edit the file.
+- To regenerate content from the original site (replacing any manual edits): bundle the import script and run the bulk importer (see "Importing" below). Note: re-importing will overwrite any manual content edits.
 
 **Changing styles** (colors, spacing, fonts, layout):
 - Global tokens → `/styles/styles.css` `:root` block
@@ -39,11 +39,17 @@ echo "https://wknd-adventures.com/adventures.html" > /tmp/url.txt
 node /home/node/.excat-marketplace/excat/skills/excat-content-import/scripts/run-bulk-import.js --import-script tools/importer/import.bundle.js --urls /tmp/url.txt
 ```
 
+**⚠️ Import URL rules:**
+- URLs MUST include an explicit file path (e.g., `index.html`, `about.html`). Bare domain URLs like `https://wknd-adventures.com/` will fail with a `cwd is not a function` error.
+- If importing the homepage, always use `https://wknd-adventures.com/index.html` — never `https://wknd-adventures.com/`.
+- If an import fails, check the URL first before debugging the import scripts. The most common cause is a missing `.html` extension or a bare trailing slash.
+
 **Previewing changes**: The local dev server runs at `http://localhost:3000`. Use Playwright MCP tools to navigate and inspect pages.
 
 ### Quality Standards
 
 - **Run `npm run lint`** after any code change. Never leave lint errors.
+- **Stylelint rules to remember:** Font family names must NOT be quoted (use `font-family: Roboto, sans-serif;` not `font-family: 'Roboto', sans-serif;`). This is especially important when adapting code from Figma or other external sources that use quoted font names.
 - **Design consistency** — use the existing CSS custom properties from `styles.css` when making style changes. This keeps the design system coherent.
 - **Keep it simple** — don't over-engineer. This project should be easy to understand.
 - **Test visually** — after CSS/JS changes, verify with Playwright that the page still renders correctly.
