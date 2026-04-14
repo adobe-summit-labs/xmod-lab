@@ -34,8 +34,8 @@ footer a:hover {
 
 /* Reset section styling inside footer (boilerplate fragment structure) */
 footer .section {
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
 }
 
 footer .section > div {

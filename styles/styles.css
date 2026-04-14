@@ -549,7 +549,7 @@ main > .section.accent p {
   color: var(--dark-color);
 }
 
-main > .section.accent > div > p {
+main > .section.accent > div > p:not(.tag-pill) {
   font-size: 20px;
 }
 
@@ -596,7 +596,7 @@ main .section.accent .tag-pill {
 }
 
 /* Body paragraphs in dark/narrow sections */
-main .section.dark.narrow p {
+main .section.dark.narrow p:not(.tag-pill) {
   font-size: var(--body-font-size-m);
   line-height: 1.6;
 }
