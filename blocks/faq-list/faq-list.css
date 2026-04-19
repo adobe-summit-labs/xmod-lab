@@ -107,13 +107,12 @@
   background: none;
 }
 
-/* --- FAQ item (details element) — rounded pill with shadow --- */
+/* --- FAQ item (details element) — rounded pill with hover accent --- */
 .faq-list details {
   border: 1px solid var(--faq-border-color);
-  border-radius: 25px;
+  border-radius: 16px;
   overflow: hidden;
-  margin-bottom: var(--gap-md);
-  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+  margin-bottom: var(--gap-xs);
   transition: border-color 0.15s ease;
 }
 
@@ -129,7 +128,7 @@
   margin: 0;
 }
 
-/* --- Question (summary) — flex layout with chevron icon --- */
+/* --- Question (summary) — flex layout with plus icon --- */
 .faq-list details summary {
   position: relative;
   display: flex;
@@ -145,8 +144,6 @@
   letter-spacing: normal;
   line-height: 1.6;
   color: var(--dark-color);
-  background-color: var(--faq-hover-bg);
-  border-radius: 25px;
   transition: background-color 0.15s ease;
 }
 
@@ -154,31 +151,30 @@
   display: none;
 }
 
-/* Hover: slightly darker background */
+/* Hover: warm background on question row */
 .faq-list details summary:hover {
-  background-color: #e8e3d9;
+  background-color: var(--faq-hover-bg);
 }
 
-/* Open state: peach/salmon background on summary */
+/* Open state: keep hover background on summary */
 .faq-list details[open] summary {
-  background-color: #f4c9b1;
-  border-radius: 25px 25px 0 0;
+  background-color: var(--faq-hover-bg);
+  border-radius: 15px 15px 0 0;
 }
 
-/* Chevron icon — points down when closed, up when open */
+/* Plus icon → rotates 45° to × when open */
 .faq-list details summary::after {
-  content: "\276F";
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--dark-color);
+  content: "+";
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--faq-accent-color);
   margin-left: var(--gap-md, 16px);
   flex-shrink: 0;
-  transform: rotate(90deg);
   transition: transform 0.3s ease;
 }
 
 .faq-list details[open] summary::after {
-  transform: rotate(-90deg);
+  transform: rotate(45deg);
 }
 
 /* --- Answer body — smooth reveal --- */
@@ -187,7 +183,6 @@
   color: var(--faq-answer-color);
   font-family: var(--body-font-family);
   line-height: 1.7;
-  background-color: var(--faq-hover-bg);
 }
 
 .faq-list details .faq-list-item-body a {
@@ -197,4 +192,5 @@
 
 .faq-list details[open] .faq-list-item-body {
   border-top: 1px solid var(--faq-border-color);
+  background-color: var(--background-color);
 }
