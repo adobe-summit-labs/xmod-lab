@@ -117,9 +117,86 @@ main > .hero-container {
   margin-right: 0;
 }
 
+/* Vegas shimmer — gradient sweep on hover */
+@keyframes vegas-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Neon border glow cycle on hover */
+@keyframes vegas-border-glow {
+  0% {
+    border-color: #ff3264;
+    box-shadow:
+      0 0 8px rgb(255 50 100 / 50%),
+      0 0 20px rgb(255 50 100 / 25%),
+      0 0 40px rgb(255 50 100 / 12%),
+      5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  }
+
+  33% {
+    border-color: #ffb400;
+    box-shadow:
+      0 0 8px rgb(255 180 0 / 50%),
+      0 0 20px rgb(255 180 0 / 25%),
+      0 0 40px rgb(255 180 0 / 12%),
+      5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  }
+
+  66% {
+    border-color: #e8651a;
+    box-shadow:
+      0 0 8px rgb(232 101 26 / 50%),
+      0 0 20px rgb(232 101 26 / 25%),
+      0 0 40px rgb(232 101 26 / 12%),
+      5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  }
+
+  100% {
+    border-color: #ff3264;
+    box-shadow:
+      0 0 8px rgb(255 50 100 / 50%),
+      0 0 20px rgb(255 50 100 / 25%),
+      0 0 40px rgb(255 50 100 / 12%),
+      5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  }
+}
+
+/* Secondary neon border cycle */
+@keyframes vegas-outline-glow {
+  0% {
+    border-color: #ff3264;
+    box-shadow:
+      0 0 6px rgb(255 50 100 / 40%),
+      0 0 16px rgb(255 50 100 / 20%),
+      5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  }
+
+  50% {
+    border-color: #ffb400;
+    box-shadow:
+      0 0 6px rgb(255 180 0 / 40%),
+      0 0 16px rgb(255 180 0 / 20%),
+      5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  }
+
+  100% {
+    border-color: #ff3264;
+    box-shadow:
+      0 0 6px rgb(255 50 100 / 40%),
+      0 0 16px rgb(255 50 100 / 20%),
+      5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  }
+}
+
 /*
- * Hero buttons — must override the global reset (main a.button:any-link)
- * which strips padding, border-radius, box-shadow, font-size, etc.
+ * Hero buttons — Vegas hover style
+ * Must override the global reset (main a.button:any-link)
  * Specificity of reset: 0,2,1 — we use main .hero a.button:any-link (0,3,1)
  */
 main .hero a.button:any-link {
@@ -138,32 +215,46 @@ main .hero a.button:any-link {
   white-space: nowrap;
   cursor: pointer;
   box-shadow: 3px 3px 0 0 var(--btn-shadow, var(--dark-color));
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease,
+    background-color 0.25s ease,
+    background-position 0.3s ease,
+    border-color 0.25s ease,
+    color 0.2s ease,
+    filter 0.25s ease,
+    text-shadow 0.25s ease;
 }
 
 main .hero a.button:any-link:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  transform: translate(-3px, -3px) scale(1.12);
   text-decoration: none;
 }
 
 main .hero a.button:any-link:active {
-  transform: translateY(0);
+  transform: translateY(2px) scale(0.95);
   box-shadow: 0 0 0 var(--btn-shadow, var(--dark-color));
+  filter: brightness(0.85);
+  animation: none;
 }
 
-/* primary button on hero — accent bg, dark text */
+/* primary button — hot gradient, neon glow cycle + shimmer on hover */
 main .hero a.button.primary:any-link {
-  background: var(--accent-color);
-  border: 2px solid var(--accent-color);
-  color: var(--dark-color);
+  background: linear-gradient(90deg, #e8651a, #ff3264, #ffb400, #ff3264, #e8651a);
+  background-size: 200% 100%;
+  background-position: 0% center;
+  border: 2px solid #e8651a;
+  color: #fff;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 40%);
 }
 
 main .hero a.button.primary:any-link:hover {
-  filter: brightness(0.9);
+  animation: vegas-shimmer 0.6s linear infinite, vegas-border-glow 1.2s ease-in-out infinite;
+  filter: brightness(1.15) saturate(1.2);
+  text-shadow: 0 0 8px rgb(255 255 255 / 60%), 0 0 16px rgb(255 180 0 / 30%);
 }
 
-/* secondary button on hero — white outline, dark shadow */
+/* secondary button — neon outline glow cycle + fill on hover */
 main .hero a.button.secondary:any-link {
   background: transparent;
   border: 2px solid rgb(255 255 255 / 50%);
@@ -171,9 +262,10 @@ main .hero a.button.secondary:any-link {
 }
 
 main .hero a.button.secondary:any-link:hover {
-  border-color: var(--background-color);
-  background-color: var(--accent-color);
-  color: var(--dark-color);
+  background: linear-gradient(90deg, rgb(255 50 100 / 15%), rgb(232 101 26 / 15%));
+  color: #fff;
+  text-shadow: 0 0 8px rgb(255 255 255 / 50%);
+  animation: vegas-outline-glow 1.5s ease-in-out infinite;
 }
 
 @media (width < 768px) {
