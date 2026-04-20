@@ -117,9 +117,31 @@ main > .hero-container {
   margin-right: 0;
 }
 
+/* --- Vegas Poker Chip Button Animations --- */
+@keyframes chip-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes neon-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgb(255 0 100 / 60%), 0 0 20px rgb(255 0 100 / 30%), inset 0 0 8px rgb(255 255 255 / 10%); }
+  50% { box-shadow: 0 0 14px rgb(255 0 100 / 80%), 0 0 36px rgb(255 0 100 / 45%), inset 0 0 12px rgb(255 255 255 / 15%); }
+}
+
+@keyframes neon-pulse-gold {
+  0%, 100% { box-shadow: 0 0 8px rgb(255 200 0 / 60%), 0 0 20px rgb(255 200 0 / 30%), inset 0 0 8px rgb(255 255 255 / 10%); }
+  50% { box-shadow: 0 0 14px rgb(255 200 0 / 80%), 0 0 36px rgb(255 200 0 / 45%), inset 0 0 12px rgb(255 255 255 / 15%); }
+}
+
+@keyframes chip-spin-in {
+  0% { transform: rotateY(90deg) scale(0.7); opacity: 0; }
+  60% { transform: rotateY(-10deg) scale(1.05); opacity: 1; }
+  100% { transform: rotateY(0deg) scale(1); opacity: 1; }
+}
+
 /*
- * Hero buttons — must override the global reset (main a.button:any-link)
- * which strips padding, border-radius, box-shadow, font-size, etc.
+ * Hero buttons — Vegas poker chip style
+ * Must override the global reset (main a.button:any-link)
  * Specificity of reset: 0,2,1 — we use main .hero a.button:any-link (0,3,1)
  */
 main .hero a.button:any-link {
@@ -127,8 +149,8 @@ main .hero a.button:any-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--button-border-radius);
-  padding: var(--button-padding);
+  border-radius: 50px;
+  padding: 15px 36px 13px;
   font-family: var(--button-font-family);
   font-size: var(--button-font-size);
   font-weight: var(--button-font-weight);
@@ -137,43 +159,57 @@ main .hero a.button:any-link {
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: 3px 3px 0 0 var(--btn-shadow, var(--dark-color));
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  text-transform: uppercase;
+  position: relative;
+  border: 3px dashed rgb(255 255 255 / 70%);
+  outline: 3px solid transparent;
+  outline-offset: -7px;
+  transition: transform 0.25s ease, filter 0.2s ease;
+  animation: chip-spin-in 0.6s ease-out both;
+  perspective: 600px;
 }
 
 main .hero a.button:any-link:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  transform: translateY(-4px) scale(1.06);
+  filter: brightness(1.15);
   text-decoration: none;
 }
 
 main .hero a.button:any-link:active {
-  transform: translateY(0);
-  box-shadow: 0 0 0 var(--btn-shadow, var(--dark-color));
+  transform: translateY(1px) scale(0.97);
+  filter: brightness(0.95);
 }
 
-/* primary button on hero — accent bg, dark text */
+/* primary button on hero — hot pink neon poker chip */
 main .hero a.button.primary:any-link {
-  background: var(--accent-color);
-  border: 2px solid var(--accent-color);
-  color: var(--dark-color);
+  background: linear-gradient(135deg, #ff1060 0%, #ff4080 40%, #ff1060 100%);
+  background-size: 200% 100%;
+  border-color: rgb(255 255 255 / 80%);
+  outline-color: rgb(255 200 255 / 30%);
+  color: #fff;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 40%);
+  box-shadow: 0 0 8px rgb(255 0 100 / 60%), 0 0 20px rgb(255 0 100 / 30%), inset 0 0 8px rgb(255 255 255 / 10%);
+  animation: chip-spin-in 0.6s ease-out both, neon-pulse 2s ease-in-out infinite, chip-shimmer 3s ease-in-out infinite;
 }
 
 main .hero a.button.primary:any-link:hover {
-  filter: brightness(0.9);
+  box-shadow: 0 0 18px rgb(255 0 100 / 90%), 0 0 48px rgb(255 0 100 / 50%), inset 0 0 14px rgb(255 255 255 / 20%);
 }
 
-/* secondary button on hero — white outline, dark shadow */
+/* secondary button on hero — gold neon poker chip */
 main .hero a.button.secondary:any-link {
-  background: transparent;
-  border: 2px solid rgb(255 255 255 / 50%);
-  color: var(--background-color);
+  background: linear-gradient(135deg, #c8a200 0%, #ffd700 40%, #c8a200 100%);
+  background-size: 200% 100%;
+  border-color: rgb(255 255 255 / 80%);
+  outline-color: rgb(255 230 100 / 30%);
+  color: #1a0a00;
+  text-shadow: 0 1px 2px rgb(255 255 255 / 30%);
+  box-shadow: 0 0 8px rgb(255 200 0 / 60%), 0 0 20px rgb(255 200 0 / 30%), inset 0 0 8px rgb(255 255 255 / 10%);
+  animation: chip-spin-in 0.6s 0.15s ease-out both, neon-pulse-gold 2s 0.5s ease-in-out infinite, chip-shimmer 3s 0.5s ease-in-out infinite;
 }
 
 main .hero a.button.secondary:any-link:hover {
-  border-color: var(--background-color);
-  background-color: var(--accent-color);
-  color: var(--dark-color);
+  box-shadow: 0 0 18px rgb(255 200 0 / 90%), 0 0 48px rgb(255 200 0 / 50%), inset 0 0 14px rgb(255 255 255 / 20%);
 }
 
 @media (width < 768px) {
