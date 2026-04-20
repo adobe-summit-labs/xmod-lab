@@ -121,3 +121,50 @@
     font-size: 20px;
   }
 }
+
+/* ===== Skyline section style ===== */
+
+main > .section.skyline {
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+/* background image layer */
+main > .section.skyline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url('/content/media_13f721df562523f0924be582404e750aaffab42e1.jpg?width=2000&format=jpg&optimize=medium') center / cover no-repeat;
+  filter: brightness(0.18) saturate(1.4);
+}
+
+/* subtle warm gradient overlay for depth */
+main > .section.skyline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgb(15 10 30 / 60%) 0%,
+    rgb(15 10 30 / 30%) 40%,
+    rgb(232 101 26 / 10%) 100%
+  );
+  pointer-events: none;
+}
+
+/* keep content above overlay layers */
+main > .section.skyline > div {
+  position: relative;
+  z-index: 2;
+}
+
+@media (width >= 768px) {
+  main > .section.skyline {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+}
