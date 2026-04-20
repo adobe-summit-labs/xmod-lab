@@ -123,12 +123,12 @@ main .hero a.button:any-link {
   white-space: nowrap;
   cursor: pointer;
   box-shadow: none;
-  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  transition: box-shadow 0.25s ease, transform 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 main .hero a.button:any-link:hover {
   transform: translateY(-1px);
-  box-shadow: none;
   text-decoration: none;
 }
 
@@ -137,7 +137,7 @@ main .hero a.button:any-link:active {
   box-shadow: none;
 }
 
-/* primary button on hero — green bg, dark text */
+/* primary button on hero — green bg, glow on hover */
 main .hero a.button.primary:any-link {
   background: var(--hero-accent);
   border: 2px solid var(--hero-accent);
@@ -145,7 +145,7 @@ main .hero a.button.primary:any-link {
 }
 
 main .hero a.button.primary:any-link:hover {
-  filter: brightness(1.1);
+  box-shadow: 0 0 16px rgb(98 168 20 / 60%), 0 0 40px rgb(98 168 20 / 25%);
 }
 
 /* secondary button on hero — subtle outline */
@@ -156,8 +156,8 @@ main .hero a.button.secondary:any-link {
 }
 
 main .hero a.button.secondary:any-link:hover {
-  border-color: var(--hero-accent);
-  color: var(--hero-accent);
+  border-color: rgb(255 255 255 / 70%);
+  box-shadow: 0 0 16px rgb(255 255 255 / 20%), 0 0 40px rgb(255 255 255 / 8%);
 }
 
 @media (width < 768px) {

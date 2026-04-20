@@ -2,10 +2,20 @@
 
 /* Featured Article block — image + content side-by-side layout */
 
+/* Remove section padding so block goes edge-to-edge */
+main > .featured-article-container {
+  padding: 0;
+}
+
+.featured-article-container .featured-article-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
 .featured-article > div {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-lg);
+  gap: 0;
 }
 
 .featured-article img {
@@ -19,7 +29,7 @@
 .featured-article .featured-article-img-col {
   order: 0;
   overflow: hidden;
-  border-radius: var(--card-border-radius);
+  border-radius: 0;
   max-height: 30rem;
 }
 
@@ -39,11 +49,21 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap-xs);
+  background-color: #191b22;
+  padding: var(--gap-lg);
+  color: #fff;
 }
 
-/* tag pill — uses .tag-pill utility from styles.css */
+/* tag pill — green accent, no background */
 .featured-article .tag-pill {
   width: fit-content;
+  color: #62a814;
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 /* also support em tag pills */
@@ -54,45 +74,47 @@
 
 .featured-article h2 {
   margin-top: var(--gap-sm);
+  color: #fff;
 }
 
 .featured-article .featured-article-content p:not(.tag-pill) {
-  color: var(--text-color-muted);
+  color: rgb(255 255 255 / 70%);
 }
 
-/* button paragraph — separator line + right-aligned on desktop */
+/* button paragraph — subtle top border */
 .featured-article .featured-article-content p:last-child {
   margin-top: var(--gap-sm);
   padding-top: var(--gap-xs);
-  border-top: 1px solid var(--border-color-light);
+  border-top: 1px solid rgb(255 255 255 / 12%);
 }
 
-/* style link as dark button */
+/* style link as button with glow hover */
 .featured-article .featured-article-content p:last-child a:any-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--heading-font-family);
+  font-family: var(--body-font-family);
   font-size: var(--body-font-size-s);
-  font-weight: 700;
-  letter-spacing: 0.98px;
+  font-weight: 600;
+  letter-spacing: normal;
   text-decoration: none;
-  padding: var(--gap-xs) var(--gap-xl);
-  background-color: var(--dark-color);
-  color: var(--background-color);
-  border-radius: var(--button-border-radius);
-  box-shadow: 3px 3px 0 var(--accent-color);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  padding: 10px 24px;
+  background-color: #62a814;
+  color: #fff;
+  border: 2px solid #62a814;
+  border-radius: 0.8rem;
+  box-shadow: none;
+  transition: box-shadow 0.25s ease, transform 0.15s ease;
 }
 
 .featured-article .featured-article-content p:last-child a:hover {
-  transform: translateY(-2px);
-  box-shadow: 5px 5px 0 var(--accent-color);
+  transform: translateY(-1px);
+  box-shadow: 0 0 16px rgb(98 168 20 / 60%), 0 0 40px rgb(98 168 20 / 25%);
 }
 
 .featured-article .featured-article-content p:last-child a:active {
   transform: translateY(0);
-  box-shadow: 0 0 0 var(--accent-color);
+  box-shadow: none;
 }
 
 @media (width >= 768px) {
@@ -107,8 +129,8 @@
   .featured-article > div {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: var(--gap-2xl);
+    align-items: stretch;
+    gap: 0;
   }
 
   .featured-article > div > div {
@@ -116,6 +138,11 @@
   }
 
   .featured-article .featured-article-img-col {
-    max-height: 600px;
+    max-height: none;
+  }
+
+  .featured-article .featured-article-content {
+    padding: var(--gap-xl) var(--gap-2xl);
+    justify-content: center;
   }
 }
