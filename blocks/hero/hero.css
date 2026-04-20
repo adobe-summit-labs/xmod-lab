@@ -118,62 +118,124 @@ main > .hero-container {
 }
 
 /*
- * Hero buttons — must override the global reset (main a.button:any-link)
- * which strips padding, border-radius, box-shadow, font-size, etc.
- * Specificity of reset: 0,2,1 — we use main .hero a.button:any-link (0,3,1)
+ * Hero buttons — Vegas neon style
+ * Vibrant glowing animations inspired by the Las Vegas strip
  */
+
+/* neon glow pulse */
+@keyframes vegas-glow-primary {
+  0%, 100% {
+    box-shadow:
+      0 0 8px #ff2d95,
+      0 0 20px #ff2d95,
+      0 0 40px rgb(255 45 149 / 50%),
+      inset 0 0 12px rgb(255 45 149 / 15%);
+  }
+
+  50% {
+    box-shadow:
+      0 0 12px #ffb800,
+      0 0 30px #ffb800,
+      0 0 60px rgb(255 184 0 / 50%),
+      inset 0 0 16px rgb(255 184 0 / 20%);
+  }
+}
+
+@keyframes vegas-glow-secondary {
+  0%, 100% {
+    box-shadow:
+      0 0 8px #00e5ff,
+      0 0 20px #00e5ff,
+      0 0 40px rgb(0 229 255 / 40%),
+      inset 0 0 12px rgb(0 229 255 / 10%);
+  }
+
+  50% {
+    box-shadow:
+      0 0 12px #c050ff,
+      0 0 30px #c050ff,
+      0 0 60px rgb(192 80 255 / 40%),
+      inset 0 0 16px rgb(192 80 255 / 15%);
+  }
+}
+
+@keyframes vegas-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
 main .hero a.button:any-link {
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: var(--button-border-radius);
-  padding: var(--button-padding);
+  padding: 15px 36px 13px;
   font-family: var(--button-font-family);
-  font-size: var(--button-font-size);
+  font-size: 15px;
   font-weight: var(--button-font-weight);
-  letter-spacing: var(--button-letter-spacing);
+  letter-spacing: 1.2px;
   line-height: 1.25;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: 3px 3px 0 0 var(--btn-shadow, var(--dark-color));
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 main .hero a.button:any-link:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  transform: translateY(-3px) scale(1.04);
   text-decoration: none;
+  filter: brightness(1.15);
 }
 
 main .hero a.button:any-link:active {
-  transform: translateY(0);
-  box-shadow: 0 0 0 var(--btn-shadow, var(--dark-color));
+  transform: translateY(0) scale(0.98);
 }
 
-/* primary button on hero — accent bg, dark text */
+/* primary button — hot pink/gold neon glow */
 main .hero a.button.primary:any-link {
-  background: var(--accent-color);
-  border: 2px solid var(--accent-color);
-  color: var(--dark-color);
+  background:
+    linear-gradient(
+      110deg,
+      transparent 25%,
+      rgb(255 255 255 / 25%) 37%,
+      transparent 50%
+    )
+    -200% center / 200% auto no-repeat,
+    linear-gradient(135deg, #ff2d95, #ff6b35, #ffb800);
+  background-size: 200% auto, 100% 100%;
+  border: 2px solid rgb(255 255 255 / 30%);
+  color: #fff;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 40%);
+  animation: vegas-glow-primary 2s ease-in-out infinite, vegas-shimmer 3s linear infinite;
 }
 
 main .hero a.button.primary:any-link:hover {
-  filter: brightness(0.9);
+  box-shadow:
+    0 0 16px #ff2d95,
+    0 0 40px #ffb800,
+    0 0 80px rgb(255 107 53 / 60%);
+  animation: vegas-shimmer 1.5s linear infinite;
 }
 
-/* secondary button on hero — white outline, dark shadow */
+/* secondary button — cyan/purple neon glow */
 main .hero a.button.secondary:any-link {
   background: transparent;
-  border: 2px solid rgb(255 255 255 / 50%);
-  color: var(--background-color);
+  border: 2px solid #00e5ff;
+  color: #fff;
+  text-shadow: 0 0 8px rgb(0 229 255 / 60%);
+  animation: vegas-glow-secondary 2.5s ease-in-out infinite;
 }
 
 main .hero a.button.secondary:any-link:hover {
-  border-color: var(--background-color);
-  background-color: var(--accent-color);
-  color: var(--dark-color);
+  background: linear-gradient(135deg, rgb(0 229 255 / 20%), rgb(192 80 255 / 20%));
+  border-color: #c050ff;
+  box-shadow:
+    0 0 16px #c050ff,
+    0 0 40px #00e5ff,
+    0 0 80px rgb(192 80 255 / 50%);
+  color: #fff;
 }
 
 @media (width < 768px) {
