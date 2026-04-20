@@ -6,18 +6,18 @@
  */
 
 :root {
-  /* colors */
-  --background-color: #fff;
-  --text-color: #0f1a14;
-  --text-color-muted: #7a8a80;
-  --text-color-subtle: #3d4f45;
-  --accent-color: #e8651a;
-  --light-color: #f0ece4;
-  --dark-color: #0f1a14;
-  --cream-color: #f5f0e8;
-  --forest-color: #1a3a2e;
-  --border-color: #c8c2b8;
-  --border-color-light: #ddd8cf;
+  /* colors — bluish gray theme */
+  --background-color: #f8f9fb;
+  --text-color: #1a1e2e;
+  --text-color-muted: #7b8394;
+  --text-color-subtle: #3d4558;
+  --accent-color: #4a7cbc;
+  --light-color: #e8ecf2;
+  --dark-color: #1a1e2e;
+  --cream-color: #edf0f5;
+  --forest-color: #2a3650;
+  --border-color: #bfc5d0;
+  --border-color-light: #d5dae3;
 
   /* fonts */
   --body-font-family: 'Instrument Sans', instrument-sans-fallback, sans-serif;
@@ -64,8 +64,8 @@
   --btn-shadow: var(--accent-color);
 
   /* links */
-  --link-color: #e8651a;
-  --link-hover-color: #c9530e;
+  --link-color: #4a7cbc;
+  --link-hover-color: #365d94;
 
   /* transitions */
   --transition-fast: 0.15s;
@@ -93,7 +93,7 @@
   --brand-letter-spacing: 0.6px;
 
   /* footer */
-  --footer-link-color: #999;
+  --footer-link-color: #8a92a3;
 
   /* dark section / overlay text */
   --text-on-dark: rgb(255 255 255 / 85%);
