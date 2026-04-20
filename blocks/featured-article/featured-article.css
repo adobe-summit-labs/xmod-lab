@@ -1,5 +1,21 @@
 /* stylelint-disable no-descending-specificity */
 
+/* Featured Article block — Himalayan mountain theme */
+
+/* Section override: cool slate background instead of warm beige */
+.section.featured-article-container {
+  background-color: #f1f5f9;
+}
+
+.featured-article h2 {
+  color: #1e293b;
+}
+
+.featured-article .featured-article-content p:first-child {
+  color: #6ea8c9;
+  font-weight: 700;
+}
+
 /* Featured Article block — image + content side-by-side layout */
 
 .featured-article > div {
@@ -21,6 +37,7 @@
   overflow: hidden;
   border-radius: var(--card-border-radius);
   max-height: 30rem;
+  box-shadow: 0 8px 32px rgb(30 41 59 / 18%);
 }
 
 .featured-article .featured-article-img-col p {
@@ -64,10 +81,10 @@
 .featured-article .featured-article-content p:last-child {
   margin-top: var(--gap-sm);
   padding-top: var(--gap-xs);
-  border-top: 1px solid var(--border-color-light);
+  border-top: 1px solid #cbd5e1;
 }
 
-/* style link as dark button */
+/* style link as mountain-inspired button — deep slate with icy blue accent */
 .featured-article .featured-article-content p:last-child a:any-link {
   display: flex;
   align-items: center;
@@ -78,21 +95,23 @@
   letter-spacing: 0.98px;
   text-decoration: none;
   padding: var(--gap-xs) var(--gap-xl);
-  background-color: var(--dark-color);
-  color: var(--background-color);
+  background-color: #1e293b;
+  color: #e2e8f0;
   border-radius: var(--button-border-radius);
-  box-shadow: 3px 3px 0 var(--accent-color);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: 3px 3px 0 #6ea8c9;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .featured-article .featured-article-content p:last-child a:hover {
   transform: translateY(-2px);
-  box-shadow: 5px 5px 0 var(--accent-color);
+  box-shadow: 5px 5px 0 #6ea8c9;
+  background-color: #334155;
 }
 
 .featured-article .featured-article-content p:last-child a:active {
   transform: translateY(0);
-  box-shadow: 0 0 0 var(--accent-color);
+  box-shadow: 0 0 0 #6ea8c9;
 }
 
 @media (width >= 768px) {
