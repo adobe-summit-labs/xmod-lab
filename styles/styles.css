@@ -6,18 +6,18 @@
  */
 
 :root {
-  /* colors */
-  --background-color: #fff;
-  --text-color: #0f1a14;
-  --text-color-muted: #7a8a80;
-  --text-color-subtle: #3d4f45;
-  --accent-color: #e8651a;
-  --light-color: #f0ece4;
-  --dark-color: #0f1a14;
+  /* colors — Christmas holiday theme */
+  --background-color: #fdf8f0;
+  --text-color: #1a2e1a;
+  --text-color-muted: #567856;
+  --text-color-subtle: #2d5a2d;
+  --accent-color: #b5182f;
+  --light-color: #eaf2ea;
+  --dark-color: #14331a;
   --cream-color: #f5f0e8;
-  --forest-color: #1a3a2e;
-  --border-color: #c8c2b8;
-  --border-color-light: #ddd8cf;
+  --forest-color: #14331a;
+  --border-color: #b8c8b8;
+  --border-color-light: #d0ddd0;
 
   /* fonts */
   --body-font-family: 'Instrument Sans', instrument-sans-fallback, sans-serif;
@@ -64,8 +64,8 @@
   --btn-shadow: var(--accent-color);
 
   /* links */
-  --link-color: #e8651a;
-  --link-hover-color: #c9530e;
+  --link-color: #b5182f;
+  --link-hover-color: #8e1325;
 
   /* transitions */
   --transition-fast: 0.15s;
@@ -93,11 +93,11 @@
   --brand-letter-spacing: 0.6px;
 
   /* footer */
-  --footer-link-color: #999;
+  --footer-link-color: #8faa8f;
 
   /* dark section / overlay text */
-  --text-on-dark: rgb(255 255 255 / 85%);
-  --text-on-dark-muted: rgb(255 255 255 / 55%);
+  --text-on-dark: rgb(255 255 255 / 90%);
+  --text-on-dark-muted: rgb(255 255 255 / 60%);
 
   /* glass card (dark section) */
   --glass-bg: rgb(255 255 255 / 6%);
@@ -145,6 +145,7 @@ body {
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   line-height: 1.7;
+  scrollbar-gutter: stable;
 }
 
 body.appear {
@@ -500,7 +501,7 @@ main > .section.dark p:not(.tag-pill) {
 }
 
 main > .section.dark a:any-link:not(.button) {
-  color: var(--accent-color);
+  color: #f0c040;
 }
 
 /* dark section: primary button inverts to white fill + amber shadow */
@@ -528,10 +529,10 @@ main > .section.dark *:focus-visible {
   outline-color: var(--background-color);
 }
 
-/* Accent: orange bg, dark text */
+/* Accent: Christmas red bg, white text */
 main > .section.accent {
   background-color: var(--accent-color);
-  color: var(--dark-color);
+  color: #fff;
 
   --btn-shadow: var(--background-color);
 }
@@ -542,27 +543,27 @@ main > .section.accent h3,
 main > .section.accent h4,
 main > .section.accent h5,
 main > .section.accent h6 {
-  color: var(--dark-color);
+  color: #fff;
 }
 
 main > .section.accent p {
-  color: var(--dark-color);
+  color: #fff;
 }
 
 main > .section.accent > div > p:not(.tag-pill) {
   font-size: 20px;
 }
 
-/* accent section: primary button uses black fill + white shadow */
+/* accent section: primary button uses white fill + dark shadow */
 main > .section.accent a.button.primary {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--background-color);
+  border-color: #fff;
+  background-color: #fff;
+  color: var(--accent-color);
 }
 
 main > .section.accent a.button.secondary {
-  border-color: var(--dark-color);
-  color: var(--dark-color);
+  border-color: rgb(255 255 255 / 60%);
+  color: #fff;
   background-color: transparent;
 }
 
