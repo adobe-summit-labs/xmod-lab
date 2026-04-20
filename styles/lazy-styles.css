@@ -121,3 +121,28 @@
     font-size: 20px;
   }
 }
+
+/* ===== Flashing buttons — dark narrow section ===== */
+
+@keyframes flash-primary {
+  0%, 100% { background-color: var(--background-color); border-color: var(--background-color); color: var(--dark-color); }
+  50% { background-color: var(--accent-color); border-color: var(--accent-color); color: var(--dark-color); }
+}
+
+@keyframes flash-secondary {
+  0%, 100% { border-color: rgb(255 255 255 / 50%); color: var(--background-color); }
+  50% { border-color: var(--accent-color); color: var(--accent-color); }
+}
+
+main > .section.dark.narrow a.button.primary {
+  animation: flash-primary 1.5s ease-in-out infinite;
+}
+
+main > .section.dark.narrow a.button.secondary {
+  animation: flash-secondary 1.5s ease-in-out 0.75s infinite;
+}
+
+main > .section.dark.narrow a.button.primary:hover,
+main > .section.dark.narrow a.button.secondary:hover {
+  animation: none;
+}
