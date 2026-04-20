@@ -22,6 +22,22 @@ export default function decorate(block) {
     }
   }
 
+  // Inject flamingo feathers and Vegas glitz particles
+  const FEATHER_COUNT = 6;
+  const GLITZ_COUNT = 9;
+  for (let i = 0; i < FEATHER_COUNT; i += 1) {
+    const feather = document.createElement('span');
+    feather.classList.add('hero-feather');
+    feather.setAttribute('aria-hidden', 'true');
+    block.append(feather);
+  }
+  for (let i = 0; i < GLITZ_COUNT; i += 1) {
+    const glitz = document.createElement('span');
+    glitz.classList.add('hero-glitz');
+    glitz.setAttribute('aria-hidden', 'true');
+    block.append(glitz);
+  }
+
   // Tag pills: eyebrow p and em-wrapped tags
   const contentDiv = block.querySelector(':scope > div');
   if (contentDiv) {

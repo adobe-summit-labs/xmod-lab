@@ -36,10 +36,120 @@ main > .hero-container {
   box-sizing: border-box;
 }
 
+/* --- Flamingo feather & Vegas glitz animations --- */
+@keyframes feather-fall {
+  0% { transform: translate(0, -20px) rotate(0deg) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translate(40px, 40vh) rotate(180deg) scale(0.9); }
+  100% { transform: translate(-20px, 100vh) rotate(360deg) scale(0.7); opacity: 0; }
+}
+
+@keyframes feather-fall-alt {
+  0% { transform: translate(0, -20px) rotate(-30deg) scale(0.8); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translate(-50px, 45vh) rotate(150deg) scale(1); }
+  100% { transform: translate(30px, 100vh) rotate(340deg) scale(0.6); opacity: 0; }
+}
+
+@keyframes glitz-sparkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  20% { opacity: 1; transform: scale(1) rotate(90deg); }
+  50% { opacity: 0.7; transform: scale(1.3) rotate(180deg); }
+  80% { opacity: 1; transform: scale(0.8) rotate(270deg); }
+}
+
+@keyframes glitz-drift {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(30px); }
+}
+
+@keyframes hero-color-pulse {
+  0% { filter: grayscale(100%) brightness(0.8); }
+  100% { filter: grayscale(0%) brightness(1) saturate(1.3); }
+}
+
 .hero img {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  filter: grayscale(100%) brightness(0.8);
+  transition: filter 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero:hover img {
+  filter: grayscale(0%) brightness(1) saturate(1.3);
+}
+
+/* --- Feather particles --- */
+.hero-feather {
+  position: absolute;
+  z-index: 3;
+  width: 28px;
+  height: 50px;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(ellipse 40% 100% at 50% 50%, rgb(255 80 130 / 90%) 0%, rgb(255 20 80 / 70%) 40%, transparent 70%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: inset 0 0 6px rgb(255 180 200 / 50%);
+  filter: blur(0.5px);
+}
+
+/* feather spine — thin line down the center */
+.hero-feather::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  width: 1px;
+  height: 80%;
+  background: linear-gradient(to bottom, rgb(255 200 210 / 80%), rgb(255 100 140 / 40%));
+  transform: translateX(-50%);
+}
+
+.hero-feather:nth-child(1) { left: 8%; top: -20px; animation: feather-fall 6s 0.5s ease-in-out infinite; }
+.hero-feather:nth-child(2) { left: 25%; top: -20px; animation: feather-fall-alt 7s 1.2s ease-in-out infinite; width: 22px; height: 42px; }
+.hero-feather:nth-child(3) { left: 55%; top: -20px; animation: feather-fall 8s 2s ease-in-out infinite; width: 32px; height: 56px; }
+.hero-feather:nth-child(4) { left: 75%; top: -20px; animation: feather-fall-alt 6.5s 0.8s ease-in-out infinite; width: 20px; height: 38px; }
+.hero-feather:nth-child(5) { left: 90%; top: -20px; animation: feather-fall 7.5s 3s ease-in-out infinite; width: 26px; height: 48px; }
+.hero-feather:nth-child(6) { left: 42%; top: -20px; animation: feather-fall-alt 9s 1.8s ease-in-out infinite; width: 24px; height: 44px; }
+
+/* --- Glitz sparkle particles --- */
+.hero-glitz {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  width: 6px;
+  height: 6px;
+  opacity: 0;
+}
+
+/* 4-point star shape via clip-path */
+.hero-glitz::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  background: radial-gradient(circle, #fff 0%, rgb(255 215 0) 50%, transparent 70%);
+  clip-path: polygon(50% 0%, 60% 35%, 100% 50%, 60% 65%, 50% 100%, 40% 65%, 0% 50%, 40% 35%);
+}
+
+.hero-glitz:nth-child(7) { left: 12%; top: 20%; animation: glitz-sparkle 2.5s 0.3s ease-in-out infinite, glitz-drift 4s 0.3s ease-in-out infinite alternate; }
+.hero-glitz:nth-child(8) { left: 30%; top: 55%; animation: glitz-sparkle 3s 1s ease-in-out infinite, glitz-drift 5s 1s ease-in-out infinite alternate; width: 8px; height: 8px; }
+.hero-glitz:nth-child(9) { left: 50%; top: 15%; animation: glitz-sparkle 2s 0.6s ease-in-out infinite, glitz-drift 3.5s 0.6s ease-in-out infinite alternate; }
+.hero-glitz:nth-child(10) { left: 68%; top: 40%; animation: glitz-sparkle 2.8s 1.5s ease-in-out infinite, glitz-drift 4.5s 1.5s ease-in-out infinite alternate; width: 10px; height: 10px; }
+.hero-glitz:nth-child(11) { left: 85%; top: 25%; animation: glitz-sparkle 3.2s 0.1s ease-in-out infinite, glitz-drift 5.5s 0.1s ease-in-out infinite alternate; }
+.hero-glitz:nth-child(12) { left: 20%; top: 70%; animation: glitz-sparkle 2.2s 2s ease-in-out infinite, glitz-drift 3s 2s ease-in-out infinite alternate; width: 5px; height: 5px; }
+.hero-glitz:nth-child(13) { left: 60%; top: 75%; animation: glitz-sparkle 2.6s 0.8s ease-in-out infinite, glitz-drift 4s 0.8s ease-in-out infinite alternate; }
+.hero-glitz:nth-child(14) { left: 45%; top: 35%; animation: glitz-sparkle 3.5s 2.5s ease-in-out infinite, glitz-drift 6s 2.5s ease-in-out infinite alternate; width: 9px; height: 9px; }
+.hero-glitz:nth-child(15) { left: 78%; top: 60%; animation: glitz-sparkle 2.4s 1.2s ease-in-out infinite, glitz-drift 3.8s 1.2s ease-in-out infinite alternate; }
+
+/* Boost glitz and feather visibility as color returns on hover */
+.hero:hover .hero-feather {
+  filter: blur(0.3px) drop-shadow(0 0 6px rgb(255 80 150 / 50%));
+}
+
+.hero:hover .hero-glitz::before {
+  background: radial-gradient(circle, #fff 0%, rgb(255 230 50) 40%, transparent 70%);
 }
 
 /* overlay gradient — bottom-to-top for text readability */
