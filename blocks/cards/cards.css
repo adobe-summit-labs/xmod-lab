@@ -54,13 +54,14 @@
   border-radius: var(--card-border-radius);
   overflow: hidden;
   background-color: var(--background-color);
-  transition: var(--card-hover-transition);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background-color 0.35s ease;
 }
 
 .cards.cards-article > ul > li:hover {
   background-color: var(--cream-color);
-  border-color: var(--border-color);
-  box-shadow: var(--card-hover-shadow);
+  border-color: #4a7c59;
+  box-shadow: 0 6px 24px rgb(74 124 89 / 25%), 0 0 0 2px rgb(74 124 89 / 15%);
+  transform: translateY(-4px) rotate(-0.3deg);
 }
 
 .cards.cards-article .cards-card-image {
@@ -78,7 +79,11 @@
 .cards.cards-article > ul > li img {
   aspect-ratio: 16 / 10;
   object-fit: cover;
-  transition: transform var(--transition-normal);
+  transition: transform 0.5s ease;
+}
+
+.cards.cards-article > ul > li:hover img {
+  transform: scale(1.06);
 }
 
 .cards.cards-article .cards-card-body {
@@ -89,9 +94,11 @@
   margin: 0;
 }
 
-/* tag pill — uses .tag-pill utility from styles.css */
+/* tag pill — nature-flair: earthy forest green */
 .cards.cards-article .cards-card-body .tag-pill {
   width: fit-content;
+  background-color: var(--forest-color);
+  color: #d4e8c2;
 }
 
 /* secondary tag text — em wrapper (region: Americas, Europe) */
