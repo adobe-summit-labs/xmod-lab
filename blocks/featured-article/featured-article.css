@@ -30,7 +30,7 @@ main > .featured-article-container {
   order: 0;
   overflow: hidden;
   border-radius: 0;
-  max-height: 30rem;
+  max-height: 300px;
 }
 
 .featured-article .featured-article-img-col p {
@@ -138,7 +138,7 @@ main > .featured-article-container {
   }
 
   .featured-article .featured-article-img-col {
-    max-height: none;
+    max-height: 300px;
   }
 
   .featured-article .featured-article-content {
