@@ -10,6 +10,12 @@ main > .hero-container {
 .hero-container .hero-wrapper {
   max-width: unset;
   padding: 0;
+  filter: grayscale(100%);
+  transition: filter 0.5s ease;
+}
+
+.hero-container .hero-wrapper:hover {
+  filter: grayscale(0%);
 }
 
 /* ===== Base hero (full-bleed overlay with gradient) ===== */
