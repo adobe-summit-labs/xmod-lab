@@ -1,6 +1,10 @@
+/* stylelint-disable no-descending-specificity */
+
+/* Columns — base layout */
 .columns > div {
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
 
 .columns img {
@@ -17,17 +21,54 @@
 
 .columns > div > .columns-img-col img {
   display: block;
+  border-radius: var(--radius-card);
 }
 
 @media (width >= 900px) {
   .columns > div {
     align-items: center;
-    flex-direction: unset;
-    gap: 24px;
+    flex-direction: row;
+    gap: 48px;
   }
 
   .columns > div > div {
     flex: 1;
     order: unset;
   }
+}
+
+/* Columns (columns-promo) — promotional side-by-side */
+.columns.columns-promo > div {
+  gap: 32px;
+}
+
+.columns.columns-promo h2 {
+  margin-top: 0;
+}
+
+.columns.columns-promo p {
+  color: var(--dark-color);
+  line-height: 1.7;
+}
+
+@media (width >= 900px) {
+  .columns.columns-promo > div {
+    gap: 64px;
+  }
+}
+
+/* Columns (columns-pullquote) — quote highlight */
+.columns.columns-pullquote blockquote {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 700;
+  line-height: 1.3;
+  border-left: 3px solid var(--accent-color);
+  padding-left: 24px;
+  margin: 0;
+}
+
+/* Columns (columns-about) — about/team layout */
+.columns.columns-about > div > .columns-img-col img {
+  border-radius: var(--radius-lg);
 }

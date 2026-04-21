@@ -1,3 +1,5 @@
+/* stylelint-disable no-descending-specificity */
+
 /* header and nav layout */
 header .nav-wrapper {
   background-color: var(--background-color);
@@ -143,9 +145,14 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 header .nav-brand {
   grid-area: brand;
   flex-basis: 128px;
+  font-family: var(--heading-font-family);
   font-size: var(--heading-font-size-s);
   font-weight: 700;
   line-height: 1;
+}
+
+header .nav-brand a {
+  text-decoration: none;
 }
 
 header nav .nav-brand img {
@@ -266,7 +273,22 @@ header nav .nav-sections ul > li > ul > li {
   }
 }
 
-/* tools */
+/* tools — subscribe pill */
 header nav .nav-tools {
   grid-area: tools;
+}
+
+header nav .nav-tools a.button:any-link {
+  font-size: 12px;
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--text-color);
+  box-shadow: none;
+}
+
+header nav .nav-tools a.button:any-link:hover {
+  transform: none;
+  opacity: 0.9;
 }

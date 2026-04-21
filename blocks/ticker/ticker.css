@@ -1,8 +1,19 @@
+/* Ticker — scrolling activity tags */
+.ticker-container {
+  padding: 0;
+  margin: 0;
+}
+
+.ticker-container .ticker-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
 .ticker {
   overflow: hidden;
   padding: 16px 0;
-  border-top: 1px solid #dadada;
-  border-bottom: 1px solid #dadada;
+  border-top: 1px solid var(--accent-color);
+  border-bottom: 1px solid var(--accent-color);
 }
 
 .ticker .ticker-inner {
@@ -18,19 +29,19 @@
 }
 
 .ticker .ticker-item {
-  padding: 0 24px;
+  padding: 0 16px;
   font-family: var(--heading-font-family);
-  font-size: var(--body-font-size-s);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   white-space: nowrap;
+  color: var(--text-color);
 }
 
 .ticker .ticker-item::after {
-  content: '·';
-  margin-left: 24px;
-  color: var(--dark-color);
+  content: "\b7";
+  margin-left: 16px;
+  color: var(--color-gray-300);
 }
 
 @keyframes ticker-scroll {

@@ -1,3 +1,12 @@
+/* stylelint-disable no-descending-specificity */
+
+/* Hero — full-bleed overlay */
+.hero-container {
+  padding: 0;
+  margin: 0;
+  max-width: unset;
+}
+
 .hero-container .hero-wrapper {
   max-width: unset;
   padding: 0;
@@ -19,6 +28,14 @@
   line-height: 0;
 }
 
+.hero .hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 65%) 0%, rgb(0 0 0 / 20%) 60%, transparent 100%);
+  z-index: 1;
+}
+
 .hero .hero-bg img,
 .hero .hero-bg picture img {
   width: 100%;
@@ -28,37 +45,88 @@
 
 .hero .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
   color: var(--background-color);
 }
 
+.hero .hero-content p:first-child {
+  font-family: var(--heading-font-family);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 85%);
+  margin-bottom: 8px;
+}
+
 .hero .hero-content h1 {
   color: var(--background-color);
-  margin-top: 0.4em;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  max-width: 700px;
 }
 
 .hero .hero-content p {
-  color: var(--background-color);
+  color: rgb(255 255 255 / 85%);
   max-width: 600px;
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+}
+
+.hero .hero-content .button-wrapper {
+  display: inline-flex;
+  margin-right: 12px;
 }
 
 .hero .hero-content a.button.primary {
-  background-color: var(--background-color);
-  border-color: var(--background-color);
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
   color: var(--text-color);
+  box-shadow: var(--btn-shadow-offset) var(--text-color);
+}
+
+.hero .hero-content a.button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--btn-shadow-hover-offset) var(--text-color);
 }
 
 .hero .hero-content a.button.secondary {
-  border-color: var(--background-color);
+  border-color: rgb(255 255 255 / 50%);
+  background-color: transparent;
   color: var(--background-color);
+  box-shadow: var(--btn-shadow-offset) var(--text-color);
+}
+
+.hero .hero-content a.button.secondary:hover {
+  border-color: var(--background-color);
+  transform: translateY(-2px);
+  box-shadow: var(--btn-shadow-hover-offset) var(--text-color);
 }
 
 @media (width >= 900px) {
   .hero {
     min-height: 600px;
-    padding: 64px 32px;
+    padding: 80px 32px;
+  }
+}
+
+/* Hero (article) variant — blog article header */
+.hero.article {
+  min-height: 320px;
+  align-items: center;
+  padding: 32px 24px;
+}
+
+.hero.article .hero-content h1 {
+  font-size: var(--heading-font-size-xl);
+}
+
+@media (width >= 900px) {
+  .hero.article {
+    min-height: 400px;
+    padding: 48px 32px;
   }
 }

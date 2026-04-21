@@ -1,74 +1,12 @@
-/* Section style variants */
-main .section.dark {
-  background-color: var(--text-color);
-  color: var(--background-color);
-  margin: 0;
-  padding: 40px 0;
+/* stylelint-disable no-descending-specificity */
+
+/* Tabs — section-style tabbed container */
+main .section.tabs-wrapper {
+  padding: 0;
 }
 
-main .section.dark h1,
-main .section.dark h2,
-main .section.dark h3,
-main .section.dark h4 {
-  color: var(--background-color);
-}
-
-main .section.dark a:any-link {
-  color: var(--background-color);
-}
-
-main .section.dark a.button.primary {
-  background-color: var(--background-color);
-  border-color: var(--background-color);
-  color: var(--text-color);
-}
-
-main .section.dark a.button.secondary {
-  border-color: var(--background-color);
-  color: var(--background-color);
-}
-
-main .section.secondary {
-  background-color: var(--light-color);
-  margin: 0;
-  padding: 40px 0;
-}
-
-main .section.accent {
-  background-color: var(--link-color);
-  color: var(--background-color);
-  margin: 0;
-  padding: 40px 0;
-}
-
-main .section.accent h1,
-main .section.accent h2,
-main .section.accent h3 {
-  color: var(--background-color);
-}
-
-main .section.accent a.button.primary {
-  background-color: var(--background-color);
-  border-color: var(--background-color);
-  color: var(--link-color);
-}
-
-main .section.accent a.button.secondary {
-  border-color: var(--background-color);
-  color: var(--background-color);
-}
-
-main .section.narrow > div {
-  max-width: 800px;
-}
-
-main .section.center {
-  text-align: center;
-}
-
-/* Tabs */
 main .section.tabs-wrapper > div {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -76,25 +14,23 @@ main .section.tabs-wrapper > div {
 .tabs-nav {
   display: flex;
   gap: 0;
-  border-bottom: 2px solid #dadada;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
 .tabs-tab {
-  padding: 12px 24px;
+  padding: 8px 32px 8px 0;
   border: none;
   background: none;
   font-family: var(--heading-font-family);
-  font-size: var(--body-font-size-s);
-  font-weight: 600;
-  color: var(--dark-color);
+  font-size: var(--heading-font-size-l);
+  font-weight: 700;
+  color: var(--color-gray-300);
   cursor: pointer;
   white-space: nowrap;
-  border-bottom: 3px solid transparent;
-  margin-bottom: -2px;
-  transition: color 0.2s, border-color 0.2s;
+  letter-spacing: -0.01em;
+  transition: color var(--transition-fast);
 }
 
 .tabs-tab:hover {
@@ -103,7 +39,6 @@ main .section.tabs-wrapper > div {
 
 .tabs-tab[aria-selected="true"] {
   color: var(--text-color);
-  border-bottom-color: var(--text-color);
 }
 
 .tabs-panel[hidden] {
