@@ -401,23 +401,23 @@ a.button:active {
 }
 
 
-/* Primary: dark bg, white text */
+/* Primary: purple Vegas style */
 a.button.primary {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--background-color);
+  border-color: #7b2ff7;
+  background-color: #7b2ff7;
+  color: #fff;
 }
 
-/* Secondary/Ghost: transparent bg, border matches context */
+/* Secondary/Ghost: yellow Vegas style */
 a.button.secondary {
-  border-color: var(--dark-color);
+  border-color: #ffd700;
   background-color: transparent;
-  color: var(--dark-color);
+  color: #ffd700;
 }
 
 a.button.secondary:hover {
-  background-color: var(--dark-color);
-  color: var(--background-color);
+  background-color: #ffd700;
+  color: var(--dark-color);
 }
 
 /* Accent: orange bg, dark text (hero) */
@@ -503,23 +503,23 @@ main > .section.dark a:any-link:not(.button) {
   color: var(--accent-color);
 }
 
-/* dark section: primary button inverts to white fill + amber shadow */
+/* dark section: primary button — purple Vegas style */
 main > .section.dark a.button.primary {
-  border-color: var(--background-color);
-  background-color: var(--background-color);
-  color: var(--dark-color);
+  border-color: #7b2ff7;
+  background-color: #7b2ff7;
+  color: #fff;
 }
 
-/* dark section: ghost button uses white outline */
+/* dark section: ghost button — yellow Vegas style */
 main > .section.dark a.button.secondary {
-  border-color: rgb(255 255 255 / 50%);
+  border-color: #ffd700;
   background-color: transparent;
-  color: var(--background-color);
+  color: #ffd700;
 }
 
 main > .section.dark a.button.secondary:hover {
-  background-color: var(--background-color);
-  border-color: var(--background-color);
+  background-color: #ffd700;
+  border-color: #ffd700;
   color: var(--dark-color);
 }
 
@@ -553,16 +553,16 @@ main > .section.accent > div > p:not(.tag-pill) {
   font-size: 20px;
 }
 
-/* accent section: primary button uses black fill + white shadow */
+/* accent section: primary button — purple Vegas style */
 main > .section.accent a.button.primary {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--background-color);
+  border-color: #7b2ff7;
+  background-color: #7b2ff7;
+  color: #fff;
 }
 
 main > .section.accent a.button.secondary {
-  border-color: var(--dark-color);
-  color: var(--dark-color);
+  border-color: #ffd700;
+  color: #ffd700;
   background-color: transparent;
 }
 
