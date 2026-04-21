@@ -2,3 +2,4 @@
 export default function decorate(block) {
   // CSS-only block
 }
+

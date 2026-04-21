@@ -16,3 +16,4 @@ export default function decorate(block) {
     textCol.classList.add('team-profile-text');
   });
 }
+

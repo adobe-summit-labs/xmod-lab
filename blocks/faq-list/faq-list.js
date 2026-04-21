@@ -67,3 +67,4 @@ export default function decorate(block) {
     animateAccordion(details, summary);
   });
 }
+

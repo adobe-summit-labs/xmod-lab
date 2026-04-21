@@ -98,3 +98,4 @@ export default function parse(element, { document }) {
 
   element.replaceWith(fragment);
 }
+
