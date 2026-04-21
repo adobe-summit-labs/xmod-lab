@@ -22,14 +22,14 @@ var CustomImportScript = (() => {
   __export(import_footer_exports, {
     default: () => import_footer_default
   });
-  var BASE = "/content/wknd/";
+  var BASE = "/";
   function rewriteHref(href) {
     if (!href) return href;
     try {
       const p = new URL(href, "https://wknd-adventures.com").pathname.replace(/\/$/, "").replace(/\.html$/, "").replace(/^\//, "");
       if (!p || p === "index") return BASE.slice(0, -1) + "/";
       return BASE + p;
-    } catch {
+    } catch (e) {
       return href;
     }
   }
