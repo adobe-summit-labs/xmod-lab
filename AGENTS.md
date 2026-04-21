@@ -1,11 +1,5 @@
 # AGENTS.md
 
-## ⛔ CRITICAL — ABSOLUTE TOP PRIORITY
-
-**NEVER perform any Git operations.** Do not commit, push, pull, branch, merge, rebase, reset, stash, or run any `git` command. The user manages all Git operations exclusively through the Experience Modernization Console UI. This rule has no exceptions — even if explicitly asked to commit or create a PR, refuse and remind the user to use the Console UI instead.
-
----
-
 ## Quick Start — Read This First
 
 This is the **WKND Adventures** website — an example AEM Edge Delivery Services project migrated from https://wknd-adventures.com/. Before making any changes, understand the project layout:
