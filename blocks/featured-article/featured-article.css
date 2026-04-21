@@ -2,20 +2,10 @@
 
 /* Featured Article block — image + content side-by-side layout */
 
-/* Remove section padding so block goes edge-to-edge */
-main > .featured-article-container {
-  padding: 0;
-}
-
-.featured-article-container .featured-article-wrapper {
-  max-width: unset;
-  padding: 0;
-}
-
 .featured-article > div {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: var(--gap-lg);
 }
 
 .featured-article img {
@@ -29,8 +19,8 @@ main > .featured-article-container {
 .featured-article .featured-article-img-col {
   order: 0;
   overflow: hidden;
-  border-radius: 0;
-  max-height: 300px;
+  border-radius: var(--card-border-radius);
+  max-height: 30rem;
 }
 
 .featured-article .featured-article-img-col p {
@@ -49,21 +39,11 @@ main > .featured-article-container {
   display: flex;
   flex-direction: column;
   gap: var(--gap-xs);
-  background-color: #191b22;
-  padding: var(--gap-lg);
-  color: #fff;
 }
 
-/* tag pill — green accent, no background */
+/* tag pill — uses .tag-pill utility from styles.css */
 .featured-article .tag-pill {
   width: fit-content;
-  color: #62a814;
-  background: none;
-  border: none;
-  padding: 0;
-  font-weight: 600;
-  letter-spacing: normal;
-  text-transform: none;
 }
 
 /* also support em tag pills */
@@ -74,47 +54,45 @@ main > .featured-article-container {
 
 .featured-article h2 {
   margin-top: var(--gap-sm);
-  color: #fff;
 }
 
 .featured-article .featured-article-content p:not(.tag-pill) {
-  color: rgb(255 255 255 / 70%);
+  color: var(--text-color-muted);
 }
 
-/* button paragraph — subtle top border */
+/* button paragraph — separator line + right-aligned on desktop */
 .featured-article .featured-article-content p:last-child {
   margin-top: var(--gap-sm);
   padding-top: var(--gap-xs);
-  border-top: 1px solid rgb(255 255 255 / 12%);
+  border-top: 1px solid var(--border-color-light);
 }
 
-/* style link as button with glow hover */
+/* style link as dark button */
 .featured-article .featured-article-content p:last-child a:any-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--body-font-family);
+  font-family: var(--heading-font-family);
   font-size: var(--body-font-size-s);
-  font-weight: 600;
-  letter-spacing: normal;
+  font-weight: 700;
+  letter-spacing: 0.98px;
   text-decoration: none;
-  padding: 10px 24px;
-  background-color: #62a814;
-  color: #fff;
-  border: 2px solid #62a814;
-  border-radius: 0.8rem;
-  box-shadow: none;
-  transition: box-shadow 0.25s ease, transform 0.15s ease;
+  padding: var(--gap-xs) var(--gap-xl);
+  background-color: var(--dark-color);
+  color: var(--background-color);
+  border-radius: var(--button-border-radius);
+  box-shadow: 3px 3px 0 var(--accent-color);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .featured-article .featured-article-content p:last-child a:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 16px rgb(98 168 20 / 60%), 0 0 40px rgb(98 168 20 / 25%);
+  transform: translateY(-2px);
+  box-shadow: 5px 5px 0 var(--accent-color);
 }
 
 .featured-article .featured-article-content p:last-child a:active {
   transform: translateY(0);
-  box-shadow: none;
+  box-shadow: 0 0 0 var(--accent-color);
 }
 
 @media (width >= 768px) {
@@ -129,8 +107,8 @@ main > .featured-article-container {
   .featured-article > div {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: stretch;
-    gap: 0;
+    align-items: center;
+    gap: var(--gap-2xl);
   }
 
   .featured-article > div > div {
@@ -138,11 +116,6 @@ main > .featured-article-container {
   }
 
   .featured-article .featured-article-img-col {
-    max-height: 300px;
-  }
-
-  .featured-article .featured-article-content {
-    padding: var(--gap-xl) var(--gap-2xl);
-    justify-content: center;
+    max-height: 600px;
   }
 }

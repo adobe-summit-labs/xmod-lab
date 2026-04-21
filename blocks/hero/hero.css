@@ -12,23 +12,28 @@ main > .hero-container {
   padding: 0;
 }
 
-/* ===== Base hero (stacked: image top, content below on dark bg) ===== */
+/* ===== Base hero (full-bleed overlay with gradient) ===== */
 
+/* Set hero button shadow color — black on hero (over image) */
 .hero {
-  --hero-content-bg: #191b22;
-  --hero-accent: #62a814;
+  --btn-shadow: var(--dark-color);
 
+  position: relative;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: min(65vh, 400px);
+  padding: var(--gap-2xl) var(--gap-lg);
   overflow: hidden;
-  color: #fff;
+  color: var(--text-on-dark);
 }
 
 .hero picture {
-  display: block;
-  width: 100%;
-  max-height: 300px;
-  overflow: hidden;
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  object-fit: cover;
+  box-sizing: border-box;
 }
 
 .hero img {
@@ -37,11 +42,23 @@ main > .hero-container {
   height: 100%;
 }
 
+/* overlay gradient — bottom-to-top for text readability */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(0deg, rgb(0 0 0 / 75%) 0%, rgb(0 0 0 / 45%) 40%, rgb(0 0 0 / 25%));
+  pointer-events: none;
+}
+
 .hero > div {
-  background-color: var(--hero-content-bg);
-  padding: var(--gap-lg);
+  position: relative;
+  z-index: 2;
+  max-width: var(--container-max-width);
   width: 100%;
-  box-sizing: border-box;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .hero h1,
@@ -50,47 +67,43 @@ main > .hero-container {
 .hero h4,
 .hero h5,
 .hero h6 {
-  color: #fff;
-  margin-bottom: var(--gap-sm);
-  font-weight: 600;
-  line-height: 1.2;
+  color: var(--background-color);
+  margin-bottom: var(--gap-lg);
+  text-shadow: 0 1px 3px rgb(0 0 0 / 35%);
 }
 
 .hero h1 {
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: 700;
+  line-height: 1.1;
   letter-spacing: -0.02em;
+  max-width: 608px;
 }
 
 .hero p:not(.tag-pill) {
-  color: rgb(255 255 255 / 80%);
+  color: var(--text-on-dark);
   font-size: var(--body-font-size-m);
   line-height: 1.6;
+  max-width: 608px;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 35%);
 }
 
-/* eyebrow pill — green accent text, no background */
+/* eyebrow pill — uses .tag-pill utility, adds hero-specific overrides */
 .hero .tag-pill {
-  color: var(--hero-accent);
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: var(--body-font-size-s);
-  font-weight: 600;
-  letter-spacing: normal;
-  text-transform: none;
-  margin-bottom: var(--gap-xs);
+  margin-bottom: var(--gap-md);
+  text-shadow: none;
 }
 
 /* lead paragraph — after h1 */
 .hero > div > h1 + p {
-  font-size: var(--body-font-size-m);
+  font-size: 20px;
   font-weight: 400;
   line-height: 1.6;
-  color: rgb(255 255 255 / 80%);
+  color: var(--text-on-dark);
+  max-width: 608px;
   margin-bottom: var(--gap-lg);
 }
 
-/* button group — left-aligned */
+/* button group — higher specificity to override .section.dark .button-group centering */
 .section .hero .button-group {
   justify-content: flex-start;
 }
@@ -105,59 +118,62 @@ main > .hero-container {
 }
 
 /*
- * Hero buttons — Arbory-inspired: clean rounded style, green accent
+ * Hero buttons — must override the global reset (main a.button:any-link)
+ * which strips padding, border-radius, box-shadow, font-size, etc.
+ * Specificity of reset: 0,2,1 — we use main .hero a.button:any-link (0,3,1)
  */
 main .hero a.button:any-link {
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.8rem;
-  padding: 10px 24px;
-  font-family: var(--body-font-family);
-  font-size: var(--body-font-size-s);
-  font-weight: 600;
-  letter-spacing: normal;
+  border-radius: var(--button-border-radius);
+  padding: var(--button-padding);
+  font-family: var(--button-font-family);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  letter-spacing: var(--button-letter-spacing);
   line-height: 1.25;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: none;
-  transition: box-shadow 0.25s ease, transform 0.15s ease, background-color 0.15s ease,
-    border-color 0.15s ease;
+  box-shadow: 3px 3px 0 0 var(--btn-shadow, var(--dark-color));
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 main .hero a.button:any-link:hover {
-  transform: translateY(-1px);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 0 var(--btn-shadow, var(--dark-color));
   text-decoration: none;
 }
 
 main .hero a.button:any-link:active {
   transform: translateY(0);
-  box-shadow: none;
+  box-shadow: 0 0 0 var(--btn-shadow, var(--dark-color));
 }
 
-/* primary button on hero — green bg, glow on hover */
+/* primary button on hero — accent bg, dark text */
 main .hero a.button.primary:any-link {
-  background: var(--hero-accent);
-  border: 2px solid var(--hero-accent);
-  color: #fff;
+  background: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  color: var(--dark-color);
 }
 
 main .hero a.button.primary:any-link:hover {
-  box-shadow: 0 0 16px rgb(98 168 20 / 60%), 0 0 40px rgb(98 168 20 / 25%);
+  filter: brightness(0.9);
 }
 
-/* secondary button on hero — subtle outline */
+/* secondary button on hero — white outline, dark shadow */
 main .hero a.button.secondary:any-link {
   background: transparent;
-  border: 2px solid rgb(255 255 255 / 30%);
-  color: #fff;
+  border: 2px solid rgb(255 255 255 / 50%);
+  color: var(--background-color);
 }
 
 main .hero a.button.secondary:any-link:hover {
-  border-color: rgb(255 255 255 / 70%);
-  box-shadow: 0 0 16px rgb(255 255 255 / 20%), 0 0 40px rgb(255 255 255 / 8%);
+  border-color: var(--background-color);
+  background-color: var(--accent-color);
+  color: var(--dark-color);
 }
 
 @media (width < 768px) {
@@ -178,12 +194,13 @@ main .hero a.button.secondary:any-link:hover {
 }
 
 @media (width >= 768px) {
-  .hero > div {
-    padding: var(--gap-xl) var(--gap-2xl);
+  .hero {
+    min-height: 65vh;
+    padding: var(--gap-3xl) var(--gap-xl);
   }
 
   .hero p:not(.tag-pill) {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .hero h1 {

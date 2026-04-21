@@ -1,21 +1,18 @@
 /* stylelint-disable no-descending-specificity -- section header + block selectors */
 
-/* FAQ List — Accordion with rounded pill borders, accent header on open */
+/* FAQ List — Expandable FAQ items with rounded pill borders */
 
 .faq-list {
   --faq-max-width: 768px;
   --faq-question-font-size: var(--body-font-size-m, 18px);
   --faq-question-font-weight: 600;
-  --faq-answer-color: rgb(255 255 255 / 70%);
-  --faq-border-color: rgb(255 255 255 / 15%);
-  --faq-accent-color: #62a814;
-  --faq-hover-bg: rgb(255 255 255 / 6%);
+  --faq-answer-color: var(--text-color-subtle, #3d4f45);
+  --faq-border-color: var(--border-color-light, #ddd8cf);
+  --faq-accent-color: var(--accent-color, #e8651a);
+  --faq-hover-bg: var(--light-color, #f0ece4);
   --faq-question-padding: var(--gap-md) var(--gap-lg);
-  --faq-answer-padding: var(--gap-lg);
+  --faq-answer-padding: 0 var(--gap-lg) var(--gap-md);
   --faq-heading-margin-bottom: var(--gap-xl);
-  --faq-radius: 9999px;
-  --faq-open-radius: 16px;
-  --faq-body-bg: rgb(255 255 255 / 4%);
 
   max-width: var(--faq-max-width);
   margin: 0 auto;
@@ -110,22 +107,16 @@
   background: none;
 }
 
-/* --- FAQ item (details element) — rounded pill, accent on open --- */
+/* --- FAQ item (details element) — rounded pill with hover accent --- */
 .faq-list details {
   border: 1px solid var(--faq-border-color);
-  border-radius: var(--faq-radius);
+  border-radius: 16px;
   overflow: hidden;
   margin-bottom: var(--gap-xs);
-  transition: border-color 0.2s ease, border-radius 0.2s ease;
+  transition: border-color 0.15s ease;
 }
 
 .faq-list details:hover {
-  border-color: var(--faq-accent-color);
-}
-
-/* When open: switch to smaller radius for card shape */
-.faq-list details[open] {
-  border-radius: var(--faq-open-radius);
   border-color: var(--faq-accent-color);
 }
 
@@ -137,7 +128,7 @@
   margin: 0;
 }
 
-/* --- Question (summary) — flex layout with plus/x icon --- */
+/* --- Question (summary) — flex layout with plus icon --- */
 .faq-list details summary {
   position: relative;
   display: flex;
@@ -152,65 +143,54 @@
   text-transform: none;
   letter-spacing: normal;
   line-height: 1.6;
-  color: #fff;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  color: var(--dark-color);
+  transition: background-color 0.15s ease;
 }
 
 .faq-list details summary::-webkit-details-marker {
   display: none;
 }
 
-/* Hover: subtle bg */
+/* Hover: warm background on question row */
 .faq-list details summary:hover {
   background-color: var(--faq-hover-bg);
 }
 
-/* Open state: green accent header */
+/* Open state: keep hover background on summary */
 .faq-list details[open] summary {
-  background-color: var(--faq-accent-color);
-  color: #fff;
+  background-color: var(--faq-hover-bg);
+  border-radius: 15px 15px 0 0;
 }
 
-.faq-list details[open] summary:hover {
-  background-color: #56920f;
-}
-
-/* Plus icon → × when open */
+/* Plus icon → rotates 45° to × when open */
 .faq-list details summary::after {
   content: "+";
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 400;
   color: var(--faq-accent-color);
   margin-left: var(--gap-md, 16px);
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease, color 0.2s ease;
+  transition: transform 0.3s ease;
 }
 
 .faq-list details[open] summary::after {
-  content: "\00d7";
-  color: #fff;
-  transform: none;
+  transform: rotate(45deg);
 }
 
-/* --- Answer body — card body below green header --- */
+/* --- Answer body — smooth reveal --- */
 .faq-list details .faq-list-item-body {
   padding: var(--faq-answer-padding);
   color: var(--faq-answer-color);
   font-family: var(--body-font-family);
   line-height: 1.7;
-  background-color: var(--faq-body-bg);
-}
-
-.faq-list details .faq-list-item-body p:last-child {
-  margin-bottom: 0;
 }
 
 .faq-list details .faq-list-item-body a {
   color: var(--faq-accent-color);
   text-decoration: underline;
+}
+
+.faq-list details[open] .faq-list-item-body {
+  border-top: 1px solid var(--faq-border-color);
+  background-color: var(--background-color);
 }

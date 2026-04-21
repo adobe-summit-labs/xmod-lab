@@ -7,17 +7,17 @@
 
 :root {
   /* colors */
-  --background-color: #0d1a14;
-  --text-color: #e8efe8;
-  --text-color-muted: #9ab3a0;
-  --text-color-subtle: #7a9a82;
-  --accent-color: #62a814;
-  --light-color: rgb(255 255 255 / 6%);
-  --dark-color: #0a0f0c;
-  --cream-color: rgb(255 255 255 / 4%);
+  --background-color: #fff;
+  --text-color: #0f1a14;
+  --text-color-muted: #7a8a80;
+  --text-color-subtle: #3d4f45;
+  --accent-color: #e8651a;
+  --light-color: #f0ece4;
+  --dark-color: #0f1a14;
+  --cream-color: #f5f0e8;
   --forest-color: #1a3a2e;
-  --border-color: rgb(255 255 255 / 15%);
-  --border-color-light: rgb(255 255 255 / 10%);
+  --border-color: #c8c2b8;
+  --border-color-light: #ddd8cf;
 
   /* fonts */
   --body-font-family: 'Instrument Sans', instrument-sans-fallback, sans-serif;
@@ -57,15 +57,15 @@
   --button-font-size: 14px;
   --button-font-weight: 700;
   --button-letter-spacing: 0.98px;
-  --button-border-radius: 0.8rem;
+  --button-border-radius: 9999px;
   --button-padding: 13px 32px 11px;
   --button-transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s,
     color 0.15s, border-color 0.15s;
   --btn-shadow: var(--accent-color);
 
   /* links */
-  --link-color: #62a814;
-  --link-hover-color: #7bc41e;
+  --link-color: #e8651a;
+  --link-hover-color: #c9530e;
 
   /* transitions */
   --transition-fast: 0.15s;
@@ -141,11 +141,6 @@ body {
   display: none;
   margin: 0;
   background-color: var(--background-color);
-  background-image:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgb(16 80 50 / 40%) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 50%, rgb(10 60 40 / 30%) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 40% at 50% 90%, rgb(20 90 55 / 25%) 0%, transparent 50%);
-  background-attachment: fixed;
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
@@ -390,50 +385,46 @@ a.button:any-link {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  box-shadow: none;
-  transition: box-shadow 0.25s ease, transform 0.15s ease, background-color 0.15s ease,
-    border-color 0.15s ease;
+  box-shadow: 3px 3px 0 0 var(--btn-shadow, var(--accent-color));
+  transition: var(--button-transition);
 }
 
 a.button:hover {
-  transform: translateY(-1px);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 0 var(--btn-shadow, var(--accent-color));
   text-decoration: none;
 }
 
 a.button:active {
-  transform: translateY(0);
-  box-shadow: none;
+  transform: translate(0, 0);
+  box-shadow: 0 0 0 0 var(--btn-shadow, var(--accent-color));
 }
 
 
-/* Primary: green accent bg, white text */
+/* Primary: dark bg, white text */
 a.button.primary {
-  border-color: var(--accent-color);
-  background-color: var(--accent-color);
-  color: #fff;
+  border-color: var(--dark-color);
+  background-color: var(--dark-color);
+  color: var(--background-color);
 }
 
-a.button.primary:hover {
-  box-shadow: 0 0 16px rgb(98 168 20 / 60%), 0 0 40px rgb(98 168 20 / 25%);
-}
-
-/* Secondary/Ghost: subtle outline, white text */
+/* Secondary/Ghost: transparent bg, border matches context */
 a.button.secondary {
-  border-color: rgb(255 255 255 / 30%);
+  border-color: var(--dark-color);
   background-color: transparent;
-  color: #fff;
+  color: var(--dark-color);
 }
 
 a.button.secondary:hover {
-  border-color: rgb(255 255 255 / 70%);
-  box-shadow: 0 0 16px rgb(255 255 255 / 15%), 0 0 40px rgb(255 255 255 / 6%);
+  background-color: var(--dark-color);
+  color: var(--background-color);
 }
 
-/* Accent: green bg, white text */
+/* Accent: orange bg, dark text (hero) */
 a.button.accent {
   border-color: var(--accent-color);
   background-color: var(--accent-color);
-  color: #fff;
+  color: var(--dark-color);
 }
 
 
@@ -458,8 +449,7 @@ main > .section {
 
 main > .section > div {
   max-width: var(--container-max-width);
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   padding: var(--container-padding);
 }
 
@@ -482,21 +472,68 @@ main > .section:not(:has(> *)) {
 
 /* --- SECTION METADATA STYLES --- */
 
-/* Highlight / Light: subtle lighter panel */
+/* Highlight / Light: beige bg */
 main .section.light,
 main .section.highlight {
-  background-color: rgb(255 255 255 / 4%);
+  background-color: var(--light-color);
 }
 
-/* Dark: slightly deeper panel */
+/* Dark: dark bg, white text */
 main > .section.dark {
-  background-color: rgb(0 0 0 / 20%);
+  background-color: var(--dark-color);
+  color: var(--background-color);
+
+  --btn-shadow: var(--accent-color);
 }
 
-/* Accent: emerald accent panel */
+main > .section.dark h1,
+main > .section.dark h2,
+main > .section.dark h3,
+main > .section.dark h4,
+main > .section.dark h5,
+main > .section.dark h6 {
+  color: var(--background-color);
+}
+
+main > .section.dark p:not(.tag-pill) {
+  color: var(--text-on-dark);
+}
+
+main > .section.dark a:any-link:not(.button) {
+  color: var(--accent-color);
+}
+
+/* dark section: primary button inverts to white fill + amber shadow */
+main > .section.dark a.button.primary {
+  border-color: var(--background-color);
+  background-color: var(--background-color);
+  color: var(--dark-color);
+}
+
+/* dark section: ghost button uses white outline */
+main > .section.dark a.button.secondary {
+  border-color: rgb(255 255 255 / 50%);
+  background-color: transparent;
+  color: var(--background-color);
+}
+
+main > .section.dark a.button.secondary:hover {
+  background-color: var(--background-color);
+  border-color: var(--background-color);
+  color: var(--dark-color);
+}
+
+/* dark section: focus ring uses white */
+main > .section.dark *:focus-visible {
+  outline-color: var(--background-color);
+}
+
+/* Accent: orange bg, dark text */
 main > .section.accent {
-  background-color: #62a814;
-  color: #fff;
+  background-color: var(--accent-color);
+  color: var(--dark-color);
+
+  --btn-shadow: var(--background-color);
 }
 
 main > .section.accent h1,
@@ -505,33 +542,33 @@ main > .section.accent h3,
 main > .section.accent h4,
 main > .section.accent h5,
 main > .section.accent h6 {
-  color: #fff;
+  color: var(--dark-color);
 }
 
 main > .section.accent p {
-  color: rgb(255 255 255 / 90%);
+  color: var(--dark-color);
 }
 
 main > .section.accent > div > p:not(.tag-pill) {
   font-size: 20px;
 }
 
-/* accent section: primary button — dark fill */
+/* accent section: primary button uses black fill + white shadow */
 main > .section.accent a.button.primary {
-  border-color: var(--background-color);
-  background-color: var(--background-color);
-  color: #fff;
+  border-color: var(--dark-color);
+  background-color: var(--dark-color);
+  color: var(--background-color);
 }
 
 main > .section.accent a.button.secondary {
-  border-color: rgb(255 255 255 / 50%);
-  color: #fff;
+  border-color: var(--dark-color);
+  color: var(--dark-color);
   background-color: transparent;
 }
 
-/* Secondary: subtle lighter panel */
+/* Secondary: light bg (kept for backward compatibility) */
 main > .section.secondary {
-  background-color: rgb(255 255 255 / 4%);
+  background-color: var(--light-color);
 }
 
 /* Narrow: constrains content to narrow max-width */
