@@ -44,6 +44,112 @@ async function loadFonts() {
 }
 
 /**
+ * Groups consecutive sections with style "tabs" into a tabbed interface.
+ * Each tab section should have an h3 as the tab label, followed by content.
+ * @param {Element} main The main element
+ */
+function buildTabs(main) {
+  const sections = [...main.querySelectorAll('.section.tabs')];
+  if (!sections.length) return;
+
+  // Group consecutive tab sections
+  const groups = [];
+  let current = [];
+  sections.forEach((section) => {
+    if (current.length && section.previousElementSibling !== current[current.length - 1]) {
+      groups.push(current);
+      current = [];
+    }
+    current.push(section);
+  });
+  if (current.length) groups.push(current);
+
+  groups.forEach((group) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'section tabs-wrapper';
+
+    // Insert wrapper before the first tab section (while it's still in the DOM)
+    group[0].parentElement.insertBefore(wrapper, group[0]);
+
+    const tabList = document.createElement('div');
+    tabList.className = 'tabs-nav';
+    tabList.setAttribute('role', 'tablist');
+
+    const panels = document.createElement('div');
+    panels.className = 'tabs-panels';
+
+    group.forEach((section, i) => {
+      const heading = section.querySelector('.default-content-wrapper h3')
+        || section.querySelector('h3');
+      const label = heading ? heading.textContent.trim() : `Tab ${i + 1}`;
+
+      const btn = document.createElement('button');
+      btn.className = 'tabs-tab';
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      btn.setAttribute('aria-controls', `tab-panel-${i}`);
+      btn.setAttribute('tabindex', i === 0 ? '0' : '-1');
+      btn.textContent = label;
+      tabList.append(btn);
+
+      const panel = document.createElement('div');
+      panel.className = 'tabs-panel';
+      panel.setAttribute('role', 'tabpanel');
+      panel.id = `tab-panel-${i}`;
+      panel.hidden = i !== 0;
+
+      // Move section content into panel, skip section-metadata
+      [...section.children].forEach((child) => {
+        if (!child.classList.contains('section-metadata')) {
+          panel.append(child);
+        }
+      });
+      // Remove the heading used as tab label
+      if (heading) {
+        const headingWrapper = heading.closest('.default-content-wrapper');
+        if (headingWrapper) headingWrapper.remove();
+        else heading.remove();
+      }
+      panels.append(panel);
+      section.remove();
+    });
+
+    // Tab click handler
+    tabList.addEventListener('click', (e) => {
+      const tab = e.target.closest('.tabs-tab');
+      if (!tab) return;
+      tabList.querySelectorAll('.tabs-tab').forEach((t) => {
+        t.setAttribute('aria-selected', 'false');
+        t.setAttribute('tabindex', '-1');
+      });
+      tab.setAttribute('aria-selected', 'true');
+      tab.setAttribute('tabindex', '0');
+      panels.querySelectorAll('.tabs-panel').forEach((p) => { p.hidden = true; });
+      const target = panels.querySelector(`#${tab.getAttribute('aria-controls')}`);
+      if (target) target.hidden = false;
+    });
+
+    // Keyboard navigation
+    tabList.addEventListener('keydown', (e) => {
+      const tabs = [...tabList.querySelectorAll('.tabs-tab')];
+      const idx = tabs.indexOf(document.activeElement);
+      let next;
+      if (e.key === 'ArrowRight') next = tabs[(idx + 1) % tabs.length];
+      else if (e.key === 'ArrowLeft') next = tabs[(idx - 1 + tabs.length) % tabs.length];
+      if (next) {
+        e.preventDefault();
+        next.focus();
+        next.click();
+      }
+    });
+
+    const inner = document.createElement('div');
+    inner.append(tabList, panels);
+    wrapper.append(inner);
+  });
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
@@ -124,6 +230,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  buildTabs(main);
 }
 
 /**
