@@ -1,0 +1,12 @@
+{
+  "templates": [
+    {
+      "name": "default",
+      "description": "Default page template for wknd-adventures.com",
+      "urls": [
+        "https://wknd-adventures.com/index.html"
+      ],
+      "blocks": []
+    }
+  ]
+}
