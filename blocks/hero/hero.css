@@ -152,54 +152,28 @@ main .hero a.button:any-link:active {
   box-shadow: 0 0 0 var(--btn-shadow, var(--dark-color));
 }
 
-/* Vegas neon glow keyframes */
-@keyframes vegas-glow-primary {
-  0%, 100% { box-shadow: 0 0 8px #ff6b00, 0 0 20px #ff6b00, 3px 3px 0 0 var(--dark-color); }
-  50% { box-shadow: 0 0 16px #ffae00, 0 0 40px #ff6b00, 0 0 60px #ff6b0040, 3px 3px 0 0 var(--dark-color); }
-}
-
-@keyframes vegas-glow-secondary {
-  0%, 100% { box-shadow: 0 0 8px #e040fb, 0 0 20px #e040fb40, 3px 3px 0 0 var(--dark-color); }
-  50% { box-shadow: 0 0 16px #e040fb, 0 0 40px #e040fb80, 0 0 60px #e040fb40, 3px 3px 0 0 var(--dark-color); }
-}
-
-@keyframes vegas-shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-/* primary button on hero — Vegas gold neon */
+/* primary button on hero — accent bg, dark text */
 main .hero a.button.primary:any-link {
-  background: linear-gradient(90deg, #ff6b00, #ffae00, #ff6b00);
-  background-size: 200% auto;
-  border: 2px solid #ffae00;
+  background: var(--accent-color);
+  border: 2px solid var(--accent-color);
   color: var(--dark-color);
-  text-shadow: 0 1px 1px rgb(255 255 255 / 20%);
-  animation: vegas-glow-primary 2s ease-in-out infinite, vegas-shimmer 3s linear infinite;
 }
 
 main .hero a.button.primary:any-link:hover {
-  filter: brightness(1.15);
-  transform: translate(-2px, -2px) scale(1.05);
-  box-shadow: 0 0 24px #ffae00, 0 0 48px #ff6b00, 5px 5px 0 0 var(--dark-color);
+  filter: brightness(0.9);
 }
 
-/* secondary button on hero — Vegas neon pink */
+/* secondary button on hero — white outline, dark shadow */
 main .hero a.button.secondary:any-link {
   background: transparent;
-  border: 2px solid #e040fb;
-  color: #f0b0ff;
-  text-shadow: 0 0 8px #e040fb80;
-  animation: vegas-glow-secondary 2s ease-in-out infinite 0.5s;
+  border: 2px solid rgb(255 255 255 / 50%);
+  color: var(--background-color);
 }
 
 main .hero a.button.secondary:any-link:hover {
-  border-color: #f0b0ff;
-  background: linear-gradient(90deg, #e040fb, #ab47bc, #e040fb);
-  background-size: 200% auto;
-  color: #fff;
-  animation: vegas-glow-secondary 1s ease-in-out infinite, vegas-shimmer 2s linear infinite;
-  transform: translate(-2px, -2px) scale(1.05);
+  border-color: var(--background-color);
+  background-color: var(--accent-color);
+  color: var(--dark-color);
 }
 
 @media (width < 768px) {
