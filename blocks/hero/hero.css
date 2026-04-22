@@ -123,13 +123,13 @@ main > .hero-container {
  */
 
 @keyframes vegas-neon-pulse {
-  0%, 100% { box-shadow: 0 0 8px #ff2d95, 0 0 20px #ff2d95, 0 0 40px #ff2d9580; }
-  50% { box-shadow: 0 0 12px #ff2d95, 0 0 30px #ff2d95, 0 0 60px #ff2d95a0, 0 0 80px #ff2d9540; }
+  0%, 100% { box-shadow: 0 0 6px #e8651a80, 0 0 16px #e8651a50, 0 0 32px #e8651a30; }
+  50% { box-shadow: 0 0 10px #e8651aa0, 0 0 24px #e8651a70, 0 0 48px #e8651a40; }
 }
 
 @keyframes vegas-gold-pulse {
-  0%, 100% { box-shadow: 0 0 8px #ffd700, 0 0 20px #ffd70080; }
-  50% { box-shadow: 0 0 12px #ffd700, 0 0 30px #ffd700, 0 0 50px #ffd70060; }
+  0%, 100% { box-shadow: 0 0 6px #5b8a7240, 0 0 14px #5b8a7230; }
+  50% { box-shadow: 0 0 10px #5b8a7260, 0 0 22px #5b8a7240, 0 0 36px #5b8a7220; }
 }
 
 main .hero a.button:any-link {
@@ -159,34 +159,34 @@ main .hero a.button:any-link:active {
   transform: scale(0.97);
 }
 
-/* primary button — hot pink neon glow */
+/* primary button — warm amber glow (matches dawn sky) */
 main .hero a.button.primary:any-link {
-  background: linear-gradient(135deg, #ff2d95, #ff6b35);
-  border: 2px solid #ff2d95;
+  background: linear-gradient(135deg, #e8651a, #c9530e);
+  border: 2px solid #e8651a;
   color: #fff;
   animation: vegas-neon-pulse 2s ease-in-out infinite;
 }
 
 main .hero a.button.primary:any-link:hover {
-  background: linear-gradient(135deg, #ff6b35, #ff2d95);
-  box-shadow: 0 0 16px #ff2d95, 0 0 40px #ff2d95, 0 0 80px #ff2d95a0;
+  background: linear-gradient(135deg, #c9530e, #e8651a);
+  box-shadow: 0 0 12px #e8651a, 0 0 28px #e8651a80, 0 0 48px #e8651a50;
   animation: none;
 }
 
-/* secondary button — gold neon outline */
+/* secondary button — cool mountain teal outline */
 main .hero a.button.secondary:any-link {
   background: transparent;
-  border: 2px solid #ffd700;
-  color: #ffd700;
+  border: 2px solid rgb(255 255 255 / 45%);
+  color: rgb(255 255 255 / 85%);
   animation: vegas-gold-pulse 2.5s ease-in-out infinite;
 }
 
 main .hero a.button.secondary:any-link:hover {
-  background: #ffd700;
-  border-color: #ffd700;
-  color: #0f1a14;
+  background: rgb(255 255 255 / 15%);
+  border-color: rgb(255 255 255 / 70%);
+  color: #fff;
   animation: none;
-  box-shadow: 0 0 16px #ffd700, 0 0 40px #ffd700, 0 0 60px #ffd70080;
+  box-shadow: 0 0 10px rgb(255 255 255 / 20%), 0 0 24px rgb(255 255 255 / 10%);
 }
 
 @media (width < 768px) {
