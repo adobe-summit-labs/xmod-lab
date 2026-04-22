@@ -11,7 +11,7 @@
   --faq-accent-color: var(--accent-color, #e8651a);
   --faq-hover-bg: var(--light-color, #f0ece4);
   --faq-question-padding: var(--gap-md) var(--gap-lg);
-  --faq-answer-padding: 0 var(--gap-lg) var(--gap-md);
+  --faq-answer-padding: var(--gap-md) var(--gap-lg);
   --faq-heading-margin-bottom: var(--gap-xl);
 
   max-width: var(--faq-max-width);
@@ -120,8 +120,12 @@
   border-color: var(--dark-color);
 }
 
-.faq-list details p {
-  margin-bottom: 0.8em;
+.faq-list details .faq-list-item-body p {
+  margin: 0;
+}
+
+.faq-list details .faq-list-item-body p + p {
+  margin-top: 0.8em;
 }
 
 .faq-list details summary p {
