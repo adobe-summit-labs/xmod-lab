@@ -152,28 +152,83 @@ main .hero a.button:any-link:active {
   box-shadow: 0 0 0 var(--btn-shadow, var(--dark-color));
 }
 
-/* primary button on hero — accent bg, dark text */
+/* === Roulette-themed hero buttons === */
+
+/* primary button — roulette red with gold border */
 main .hero a.button.primary:any-link {
-  background: var(--accent-color);
-  border: 2px solid var(--accent-color);
-  color: var(--dark-color);
+  background: #c41e3a;
+  border: 2px solid #d4af37;
+  color: #fff;
+  box-shadow: 3px 3px 0 0 #d4af37;
+  position: relative;
+  overflow: hidden;
+}
+
+main .hero a.button.primary:any-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    #c41e3a 0deg, #1a1a1a 36deg,
+    #c41e3a 72deg, #1a1a1a 108deg,
+    #c41e3a 144deg, #1a1a1a 180deg,
+    #c41e3a 216deg, #1a1a1a 252deg,
+    #c41e3a 288deg, #1a1a1a 324deg,
+    #c41e3a 360deg
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 1s ease;
+  z-index: 0;
+}
+
+main .hero a.button.primary:any-link:hover::before {
+  opacity: 0.35;
+  transform: rotate(360deg);
 }
 
 main .hero a.button.primary:any-link:hover {
-  filter: brightness(0.9);
+  box-shadow: 5px 5px 0 0 #d4af37;
+  background: #a8162f;
+  border-color: #f0cc5b;
 }
 
-/* secondary button on hero — white outline, dark shadow */
+/* secondary button — roulette black with gold accents */
 main .hero a.button.secondary:any-link {
-  background: transparent;
-  border: 2px solid rgb(255 255 255 / 50%);
-  color: var(--background-color);
+  background: #1a1a1a;
+  border: 2px solid #d4af37;
+  color: #d4af37;
+  box-shadow: 3px 3px 0 0 #d4af37;
+  position: relative;
+  overflow: hidden;
+}
+
+main .hero a.button.secondary:any-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    #1a1a1a 0deg, #c41e3a 36deg,
+    #1a1a1a 72deg, #c41e3a 108deg,
+    #1a1a1a 144deg, #c41e3a 180deg,
+    #1a1a1a 216deg, #c41e3a 252deg,
+    #1a1a1a 288deg, #c41e3a 324deg,
+    #1a1a1a 360deg
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 1s ease;
+  z-index: 0;
+}
+
+main .hero a.button.secondary:any-link:hover::before {
+  opacity: 0.35;
+  transform: rotate(360deg);
 }
 
 main .hero a.button.secondary:any-link:hover {
-  border-color: var(--background-color);
-  background-color: var(--accent-color);
-  color: var(--dark-color);
+  border-color: #f0cc5b;
+  background: #2a2a2a;
+  color: #f0cc5b;
+  box-shadow: 5px 5px 0 0 #f0cc5b;
 }
 
 @media (width < 768px) {
