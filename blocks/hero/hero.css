@@ -152,28 +152,53 @@ main .hero a.button:any-link:active {
   box-shadow: 0 0 0 var(--btn-shadow, var(--dark-color));
 }
 
-/* primary button on hero — accent bg, dark text */
+/* primary button on hero — Vegas neon glow */
 main .hero a.button.primary:any-link {
-  background: var(--accent-color);
-  border: 2px solid var(--accent-color);
-  color: var(--dark-color);
+  background: linear-gradient(135deg, #ff2d55, #e8651a, #ffcc00);
+  background-size: 200% 200%;
+  border: 2px solid #ffcc00;
+  color: #fff;
+  text-shadow: 0 0 8px rgb(255 204 0 / 60%);
+  animation: vegas-shimmer 3s ease infinite, vegas-glow-primary 2s ease-in-out infinite alternate;
 }
 
 main .hero a.button.primary:any-link:hover {
-  filter: brightness(0.9);
+  filter: brightness(1.2);
+  animation: vegas-shimmer 1.5s ease infinite, vegas-glow-primary 1s ease-in-out infinite alternate;
 }
 
-/* secondary button on hero — white outline, dark shadow */
+/* secondary button on hero — Vegas neon outline */
 main .hero a.button.secondary:any-link {
   background: transparent;
-  border: 2px solid rgb(255 255 255 / 50%);
-  color: var(--background-color);
+  border: 2px solid #ff2d55;
+  color: #fff;
+  text-shadow: 0 0 6px rgb(255 45 85 / 50%);
+  animation: vegas-glow-secondary 2s ease-in-out infinite alternate;
 }
 
 main .hero a.button.secondary:any-link:hover {
-  border-color: var(--background-color);
-  background-color: var(--accent-color);
-  color: var(--dark-color);
+  border-color: #ffcc00;
+  background: linear-gradient(135deg, rgb(255 45 85 / 20%), rgb(255 204 0 / 20%));
+  color: #ffcc00;
+  text-shadow: 0 0 12px rgb(255 204 0 / 80%);
+  animation: vegas-glow-secondary 1s ease-in-out infinite alternate;
+}
+
+/* Vegas keyframes */
+@keyframes vegas-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes vegas-glow-primary {
+  from { box-shadow: 0 0 8px rgb(255 204 0 / 40%), 0 0 20px rgb(232 101 26 / 30%), 3px 3px 0 0 rgb(255 204 0 / 60%); }
+  to { box-shadow: 0 0 16px rgb(255 204 0 / 70%), 0 0 40px rgb(255 45 85 / 40%), 3px 3px 0 0 rgb(255 204 0 / 80%); }
+}
+
+@keyframes vegas-glow-secondary {
+  from { box-shadow: 0 0 8px rgb(255 45 85 / 30%), 0 0 20px rgb(255 45 85 / 15%), 3px 3px 0 0 rgb(255 45 85 / 40%); }
+  to { box-shadow: 0 0 16px rgb(255 45 85 / 60%), 0 0 40px rgb(255 45 85 / 30%), 3px 3px 0 0 rgb(255 45 85 / 60%); }
 }
 
 @media (width < 768px) {
