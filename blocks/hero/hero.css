@@ -117,6 +117,29 @@ main > .hero-container {
   margin-right: 0;
 }
 
+/* Vegas neon glow keyframes */
+@keyframes vegas-neon-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgb(232 101 26 / 60%), 0 0 20px rgb(232 101 26 / 30%), 3px 3px 0 0 var(--btn-shadow, var(--dark-color));
+  }
+
+  50% {
+    box-shadow: 0 0 16px rgb(232 101 26 / 80%), 0 0 40px rgb(232 101 26 / 40%), 0 0 60px rgb(232 101 26 / 20%), 3px 3px 0 0 var(--btn-shadow, var(--dark-color));
+  }
+}
+
+@keyframes vegas-neon-secondary {
+  0%, 100% {
+    box-shadow: 0 0 8px rgb(255 255 255 / 30%), 0 0 20px rgb(232 101 26 / 15%), 3px 3px 0 0 var(--btn-shadow, var(--dark-color));
+    border-color: rgb(255 255 255 / 50%);
+  }
+
+  50% {
+    box-shadow: 0 0 14px rgb(255 255 255 / 50%), 0 0 35px rgb(232 101 26 / 25%), 3px 3px 0 0 var(--btn-shadow, var(--dark-color));
+    border-color: rgb(255 255 255 / 80%);
+  }
+}
+
 /*
  * Hero buttons — must override the global reset (main a.button:any-link)
  * which strips padding, border-radius, box-shadow, font-size, etc.
@@ -138,42 +161,47 @@ main .hero a.button:any-link {
   white-space: nowrap;
   cursor: pointer;
   box-shadow: 3px 3px 0 0 var(--btn-shadow, var(--dark-color));
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, filter 0.3s ease;
 }
 
 main .hero a.button:any-link:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  transform: translate(-2px, -2px) scale(1.05);
   text-decoration: none;
 }
 
 main .hero a.button:any-link:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.97);
   box-shadow: 0 0 0 var(--btn-shadow, var(--dark-color));
 }
 
-/* primary button on hero — accent bg, dark text */
+/* primary button on hero — Vegas neon glow */
 main .hero a.button.primary:any-link {
   background: var(--accent-color);
   border: 2px solid var(--accent-color);
   color: var(--dark-color);
+  animation: vegas-neon-pulse 2s ease-in-out infinite;
 }
 
 main .hero a.button.primary:any-link:hover {
-  filter: brightness(0.9);
+  filter: brightness(1.15);
+  animation: none;
+  box-shadow: 0 0 20px rgb(232 101 26 / 90%), 0 0 50px rgb(232 101 26 / 50%), 0 0 80px rgb(232 101 26 / 25%), 5px 5px 0 0 var(--btn-shadow, var(--dark-color));
 }
 
-/* secondary button on hero — white outline, dark shadow */
+/* secondary button on hero — Vegas neon outline glow */
 main .hero a.button.secondary:any-link {
   background: transparent;
   border: 2px solid rgb(255 255 255 / 50%);
   color: var(--background-color);
+  animation: vegas-neon-secondary 2.5s ease-in-out infinite;
 }
 
 main .hero a.button.secondary:any-link:hover {
   border-color: var(--background-color);
   background-color: var(--accent-color);
   color: var(--dark-color);
+  animation: none;
+  box-shadow: 0 0 20px rgb(255 255 255 / 60%), 0 0 50px rgb(232 101 26 / 40%), 5px 5px 0 0 var(--btn-shadow, var(--dark-color));
 }
 
 @media (width < 768px) {
