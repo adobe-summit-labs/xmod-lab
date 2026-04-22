@@ -1,0 +1,117 @@
+/* Feature Split Block */
+.feature-split-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.feature-split {
+  --fs-bg-color: #f5edd6;
+  --fs-text-color: rgb(43, 16, 10);
+  --fs-btn-bg: rgb(43, 16, 10);
+  --fs-btn-color: rgb(255, 251, 238);
+  --fs-padding: 70px 0;
+
+  background-color: var(--fs-bg-color);
+  background-image: url('/drafts/images/texture-beige.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: var(--fs-text-color);
+  padding: var(--fs-padding);
+}
+
+.feature-split > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.feature-split .image-col {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.feature-split .image-col img {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+}
+
+.feature-split .text-col {
+  text-align: left;
+}
+
+.feature-split .badge-img {
+  margin-bottom: 8px;
+}
+
+.feature-split .badge-img img {
+  width: 114px;
+  height: auto;
+}
+
+.feature-split h2 {
+  font-family: var(--heading-font-family, serif);
+  font-size: var(--heading-font-size-xl, 44px);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  color: var(--fs-text-color);
+}
+
+.feature-split p {
+  font-size: var(--body-font-size-m, 18px);
+  line-height: 1.5;
+  color: var(--fs-text-color);
+  margin-bottom: 12px;
+}
+
+/* Button overrides */
+main .feature-split .button-wrapper {
+  margin-top: 20px;
+}
+
+main .feature-split a.button:any-link {
+  display: inline-block;
+  background: var(--fs-btn-bg);
+  color: var(--fs-btn-color);
+  border: 3px solid var(--fs-btn-bg);
+  border-radius: 0;
+  padding: 8px 24px;
+  font-family: var(--heading-font-family, serif);
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+main .feature-split a.button:any-link:hover {
+  opacity: 0.9;
+}
+
+@media (width >= 900px) {
+  .feature-split > div {
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+    padding: 0 32px;
+  }
+
+  .feature-split .image-col {
+    flex: 0 0 42%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .feature-split .text-col {
+    flex: 1;
+  }
+}

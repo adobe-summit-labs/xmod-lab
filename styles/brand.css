@@ -1,0 +1,12 @@
+:root {
+  --heading-font-family: "brothers", serif;
+  --body-font-family: "avenir-lt-pro", sans-serif;
+  --background-color: rgb(255, 255, 255);
+  --text-color: rgb(103, 103, 103);
+  --link-color: rgb(43, 16, 10);
+  --link-hover-color: inherit;
+  --section-padding: 0;
+  --nav-height: 90px;
+}
+
+html, body { overflow: auto !important; }

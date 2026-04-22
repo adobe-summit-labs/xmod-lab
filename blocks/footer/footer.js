@@ -13,8 +13,44 @@ export default async function decorate(block) {
 
   // decorate footer DOM
   block.textContent = '';
-  const footer = document.createElement('div');
-  while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
+  const footerContent = document.createElement('div');
+  while (fragment.firstElementChild) footerContent.append(fragment.firstElementChild);
 
-  block.append(footer);
+  // Find the content wrapper inside the section
+  const dcw = footerContent.querySelector('.default-content-wrapper');
+  if (dcw) {
+    const lists = dcw.querySelectorAll('ul');
+
+    // Mark social links list and add aria-labels
+    if (lists.length >= 1) {
+      lists[0].classList.add('footer-social');
+      lists[0].querySelectorAll('a').forEach((a) => {
+        const name = a.textContent.trim();
+        a.setAttribute('aria-label', name);
+        a.textContent = '';
+        const abbr = document.createElement('span');
+        abbr.className = 'social-icon';
+        abbr.textContent = name.charAt(0);
+        abbr.setAttribute('aria-hidden', 'true');
+        a.append(abbr);
+      });
+    }
+
+    // Mark nav links list
+    if (lists.length >= 2) {
+      lists[1].classList.add('footer-nav');
+    }
+
+    // Build bottom bar with nav links + copyright
+    const lastP = dcw.querySelector(':scope > p:last-of-type');
+    if (lists.length >= 2 && lastP) {
+      const bottomBar = document.createElement('div');
+      bottomBar.className = 'footer-bottom';
+      bottomBar.append(lists[1]);
+      bottomBar.append(lastP);
+      dcw.append(bottomBar);
+    }
+  }
+
+  block.append(footerContent);
 }

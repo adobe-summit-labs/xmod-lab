@@ -1,0 +1,190 @@
+/* Recipe Cards Block */
+.recipe-cards {
+  --rc-bg: rgb(43, 16, 10);
+  --rc-text: rgb(255, 251, 238);
+  --rc-card-bg: rgb(255, 241, 199);
+  --rc-card-title-color: rgb(255, 241, 199);
+  --rc-meta-color: rgb(43, 16, 10);
+  --rc-btn-bg: rgb(255, 212, 0);
+  --rc-btn-color: rgb(43, 16, 10);
+  --rc-gap: 22px;
+  --rc-card-content-padding: 24px;
+}
+
+/* Full-width section override */
+.recipe-cards-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* Section background */
+.recipe-cards-wrapper .section {
+  background: none;
+}
+
+.recipe-cards {
+  background-color: var(--rc-bg);
+  background-image: url('/drafts/images/texture-darkbrown.jpg');
+  background-size: cover;
+  background-repeat: repeat;
+  color: var(--rc-text);
+  padding: 48px 32px;
+  text-align: center;
+}
+
+/* Heading */
+.recipe-cards h2 {
+  font-family: var(--heading-font-family, 'brothers', serif);
+  font-size: 44px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--rc-text);
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+/* Subtitle */
+.recipe-cards h2 + p {
+  color: var(--rc-text);
+  font-size: 18px;
+  margin-bottom: 32px;
+}
+
+/* Cards grid container */
+.recipe-cards .cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rc-gap);
+  justify-content: center;
+  margin-bottom: 32px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Individual card */
+.recipe-cards .card {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 calc(25% - var(--rc-gap));
+  max-width: 280px;
+  min-width: 220px;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+
+/* Card image */
+.recipe-cards .card-image {
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%;
+  overflow: hidden;
+  position: relative;
+}
+
+.recipe-cards .card-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recipe-cards .card-image picture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.recipe-cards .card-image picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Card content */
+.recipe-cards .card-content {
+  background-color: var(--rc-card-bg);
+  background-image: url('/drafts/images/texture-lightbeige.jpg');
+  background-size: cover;
+  padding: 16px 16px 20px;
+  text-align: left;
+  flex: 1;
+}
+
+.recipe-cards .card-content h3 {
+  font-family: var(--heading-font-family, 'brothers', serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--rc-meta-color);
+  margin: 0 0 6px 0;
+  line-height: 1.2;
+}
+
+.recipe-cards .card-content .meta {
+  font-size: 12px;
+  color: var(--rc-meta-color);
+  margin: 0;
+}
+
+/* CTA Button */
+.recipe-cards .cta-button {
+  display: inline-block;
+  background-color: var(--rc-btn-bg);
+  color: var(--rc-btn-color);
+  border: 3px solid var(--rc-btn-bg);
+  padding: 8px 12px;
+  font-family: var(--heading-font-family, 'brothers', serif);
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-decoration: none;
+  min-width: 340px;
+  text-align: center;
+}
+
+.recipe-cards .cta-button:hover {
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+/* Override EDS button styles for links inside cards */
+main .recipe-cards a.button:any-link {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  white-space: normal;
+  text-align: left;
+}
+
+main .recipe-cards .button-container {
+  display: inline;
+}
+
+/* Responsive */
+@media (max-width: 899px) {
+  .recipe-cards .cards-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .recipe-cards .card {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .recipe-cards .cta-button {
+    min-width: 0;
+    width: 100%;
+    max-width: 340px;
+  }
+}
