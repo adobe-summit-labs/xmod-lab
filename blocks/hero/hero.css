@@ -118,10 +118,26 @@ main > .hero-container {
 }
 
 /*
- * Hero buttons — must override the global reset (main a.button:any-link)
- * which strips padding, border-radius, box-shadow, font-size, etc.
- * Specificity of reset: 0,2,1 — we use main .hero a.button:any-link (0,3,1)
+ * Hero buttons — Vegas neon style with glow + shimmer animations
+ * Overrides the global reset (main a.button:any-link) specificity 0,2,1
+ * We use main .hero a.button:any-link (0,3,1)
  */
+
+@keyframes neon-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgb(232 101 26 / 60%), 0 0 24px rgb(232 101 26 / 30%); }
+  50% { box-shadow: 0 0 16px rgb(232 101 26 / 80%), 0 0 40px rgb(232 101 26 / 50%), 0 0 60px rgb(232 101 26 / 20%); }
+}
+
+@keyframes neon-pulse-magenta {
+  0%, 100% { box-shadow: 0 0 8px rgb(255 0 128 / 50%), 0 0 24px rgb(255 0 128 / 25%); }
+  50% { box-shadow: 0 0 16px rgb(255 0 128 / 70%), 0 0 40px rgb(255 0 128 / 40%), 0 0 60px rgb(255 0 128 / 15%); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
 main .hero a.button:any-link {
   box-sizing: border-box;
   display: inline-flex;
@@ -137,43 +153,49 @@ main .hero a.button:any-link {
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: 3px 3px 0 0 var(--btn-shadow, var(--dark-color));
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease, border-color 0.25s ease;
 }
 
 main .hero a.button:any-link:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  transform: translateY(-3px) scale(1.05);
   text-decoration: none;
 }
 
 main .hero a.button:any-link:active {
-  transform: translateY(0);
-  box-shadow: 0 0 0 var(--btn-shadow, var(--dark-color));
+  transform: translateY(0) scale(0.98);
 }
 
-/* primary button on hero — accent bg, dark text */
+/* primary button on hero — neon gold/orange with glow pulse + shimmer */
 main .hero a.button.primary:any-link {
-  background: var(--accent-color);
-  border: 2px solid var(--accent-color);
-  color: var(--dark-color);
+  background: linear-gradient(135deg, #e8651a, #ff8c42, #ffd700, #ff8c42, #e8651a);
+  background-size: 200% auto;
+  border: 2px solid #ffd700;
+  color: #0f1a14;
+  animation: neon-pulse 2s ease-in-out infinite, shimmer 3s linear infinite;
+  text-shadow: 0 0 2px rgb(255 215 0 / 30%);
 }
 
 main .hero a.button.primary:any-link:hover {
-  filter: brightness(0.9);
+  filter: brightness(1.2);
+  border-color: #fff;
+  box-shadow: 0 0 20px rgb(255 215 0 / 80%), 0 0 50px rgb(232 101 26 / 50%), 0 0 80px rgb(255 215 0 / 25%);
+  animation: shimmer 1.5s linear infinite;
 }
 
-/* secondary button on hero — white outline, dark shadow */
+/* secondary button on hero — neon magenta outline with glow */
 main .hero a.button.secondary:any-link {
   background: transparent;
-  border: 2px solid rgb(255 255 255 / 50%);
+  border: 2px solid rgb(255 0 128 / 70%);
   color: var(--background-color);
+  animation: neon-pulse-magenta 2.5s ease-in-out infinite;
+  text-shadow: 0 0 6px rgb(255 0 128 / 40%);
 }
 
 main .hero a.button.secondary:any-link:hover {
-  border-color: var(--background-color);
-  background-color: var(--accent-color);
-  color: var(--dark-color);
+  border-color: #ff0080;
+  background: linear-gradient(135deg, rgb(255 0 128 / 20%), rgb(138 43 226 / 20%));
+  box-shadow: 0 0 20px rgb(255 0 128 / 70%), 0 0 50px rgb(255 0 128 / 40%), 0 0 80px rgb(138 43 226 / 20%);
+  animation: none;
 }
 
 @media (width < 768px) {
