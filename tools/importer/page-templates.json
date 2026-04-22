@@ -1,0 +1,95 @@
+{
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://growninidaho.com/"
+      ],
+      "description": "Homepage template for Grown in Idaho - main landing page",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [
+            ".wpb_row.top-level.first-section"
+          ]
+        },
+        {
+          "name": "feature-split",
+          "instances": [
+            ".wpb_row.gii-divider-beige"
+          ]
+        },
+        {
+          "name": "product-slider",
+          "instances": [
+            "#slick-product-slider"
+          ]
+        },
+        {
+          "name": "recipe-cards",
+          "instances": [
+            ".wpb_row.gii-divider-brown"
+          ]
+        },
+        {
+          "name": "social-feed",
+          "instances": [
+            ".wpb_row.instagram-section"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero Section",
+          "selector": ".wpb_row.top-level.first-section",
+          "style": null,
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Feature Split Section",
+          "selector": ".wpb_row.gii-divider-beige",
+          "style": "beige",
+          "blocks": [
+            "feature-split"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-3",
+          "name": "Product Slider Section",
+          "selector": "#slick-product-slider",
+          "style": "light-beige",
+          "blocks": [
+            "product-slider"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-4",
+          "name": "Recipe Cards Section",
+          "selector": ".wpb_row.gii-divider-brown",
+          "style": "dark-brown",
+          "blocks": [
+            "recipe-cards"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-5",
+          "name": "Social Feed Section",
+          "selector": ".wpb_row.instagram-section",
+          "style": "light-beige",
+          "blocks": [
+            "social-feed"
+          ],
+          "defaultContent": []
+        }
+      ]
+    }
+  ]
+}

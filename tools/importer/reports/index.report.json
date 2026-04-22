@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://growninidaho.com/",
+  "path": "index",
+  "timestamp": "2026-04-22T00:45:24.878Z",
+  "title": "Grown in Idaho® - Real Idaho® Fries and Frozen Potatoes",
+  "template": "homepage",
+  "blocks": [
+    "hero",
+    "feature-split",
+    "feature-split",
+    "product-slider",
+    "recipe-cards",
+    "social-feed"
+  ]
+}

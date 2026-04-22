@@ -1,4 +1,5 @@
 {
   "type": "da",
-  "contentHostUrl": "https://content.da.live/gabrielwalt/wknd-import/"
+  "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json",
+  "contentHostUrl": "https://content.da.live/adobe-summit-labs/l335-00-xmod-lab/"
 }
